@@ -23,6 +23,8 @@ import main.java.LuckyLanes;
 /**
  * FXML Controller class
  *
+ * This class handles the interaction from the user in the Administration scene.
+ * 
  * @author Mario
  */
 public class AdminController implements Initializable {
@@ -36,15 +38,23 @@ public class AdminController implements Initializable {
     Button btnTesting;
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
+    /**
+     *
+     * @param app
+     */
     public void setApp(LuckyLanes app) {
         this.app = app;
     }
+    
+    
     @FXML
     private void showNewAthlete(ActionEvent event){
         AnchorPane root;

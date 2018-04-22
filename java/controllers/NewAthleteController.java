@@ -21,12 +21,17 @@ import javafx.stage.WindowEvent;
 /**
  * FXML Controller class
  *
+ * This is the controller for the creation of an athlete. It gives the user
+ * the option to choose between a list of specific athletes.
+ * 
  * @author Mario
  */
 public class NewAthleteController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

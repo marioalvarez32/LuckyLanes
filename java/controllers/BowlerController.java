@@ -22,6 +22,11 @@ import javafx.scene.control.TextField;
 /**
  * FXML Controller class
  *
+ * This class handles the interaction from the user in the bowler.fxml file.
+ * 
+ * It shows the forms needed to register a new bowler. Athlete information,
+ * FMS Score Sheet, etc.
+ * 
  * @author Mario
  */
 public class BowlerController implements Initializable {
@@ -73,7 +78,7 @@ public class BowlerController implements Initializable {
     @FXML
     TextField txfZip;
 
-    
+    //THis is used to change the Tabs in the gui.
     SingleSelectionModel<Tab> selectionModel;
     
     @FXML
@@ -82,6 +87,8 @@ public class BowlerController implements Initializable {
     private Tab currentTab;
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

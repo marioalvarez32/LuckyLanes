@@ -27,6 +27,7 @@ import main.java.LuckyLanes;
 /**
  * FXML Controller class
  *
+ * This class handles the interaction from the user in the Administration scene.
  * @author Mario
  */
 public class LoginController implements Initializable {
@@ -52,6 +53,9 @@ public class LoginController implements Initializable {
     @FXML
     PasswordField txfPassword;
 
+    /**
+     *
+     */
     public void createListeners() {
         Stage stage = (Stage) root.getScene().getWindow();
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -73,6 +77,8 @@ public class LoginController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -96,6 +102,10 @@ public class LoginController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param app
+     */
     public void setApp(LuckyLanes app) {
         this.app = app;
     }

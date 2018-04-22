@@ -6,9 +6,13 @@
 package main.java;
 
 /**
- *
- * @author Mario
- */
+* FMS Test Object Model
+* 
+* This is the representation of all the physical tests for the FMS Score Sheet.
+* 
+* Note: Some tests only require one raw score.
+* 
+*/
 public class FMSTest {
     private String testName;
     private int rawScoreL;
@@ -16,6 +20,10 @@ public class FMSTest {
     private int finalScore;
     private String comments;
     
+    /**
+     *
+     * @param testName
+     */
     public FMSTest(String testName){
         this.testName = testName;
         this.rawScoreL=0;
@@ -23,6 +31,15 @@ public class FMSTest {
         this.comments="";
     }
      
+    /**Constructor
+     * 
+     * Creates a test using both left and right raw score.
+     * 
+     * @param testName
+     * @param rawScoreL
+     * @param rawScoreR
+     * @param comments
+     */
     public FMSTest(String testName,int rawScoreL, int rawScoreR, String comments){
         this.testName = testName;
         this.rawScoreL=rawScoreL;
@@ -30,6 +47,14 @@ public class FMSTest {
         this.comments="";
     }
     
+    /**Constructor
+     * 
+     * Creates a test using only one raw score.
+     *
+     * @param testName
+     * @param rawScore
+     * @param comments
+     */
     public FMSTest(String testName,int rawScore,String comments){
         this.testName = testName;
         this.rawScoreL=rawScore;

@@ -6,9 +6,16 @@
 package main.java;
 
 /**
- *
- * @author Mario
- */
+* FMS Score Sheet Model Object.
+* 
+* It represents the form used to score each athlete. 
+* 
+* It contains a total of 7 tests and uses their final score 
+* to generate a final report or score.
+* 
+* 
+*  
+*/
 public class FMS {
 
     private FMSTest deepSquat;
@@ -19,6 +26,9 @@ public class FMS {
     private FMSCompositeTest trunkAndExtension;
     private FMSCompositeTest rotaryAndFlexion;
 
+    /**
+     *
+     */
     public FMS() {
         this.deepSquat = new FMSTest("Deep Squat");
         this.hurdleStep = new FMSTest("Hurdle Step");

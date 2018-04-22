@@ -22,6 +22,9 @@ public class Bowler {
     private int age;
     private double weight;
     
+    /**
+     *
+     */
     public Bowler(){
         this.name = "";
         this.address="";
@@ -33,7 +36,7 @@ public class Bowler {
         this.age = 0;
         this.weight=0;
     }
-
+    
     /**
      * @return the name
      */
