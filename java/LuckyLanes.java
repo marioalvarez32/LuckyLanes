@@ -55,7 +55,8 @@ public class LuckyLanes extends Application {
                 }
             });
             //Replace the content of the stage.
-            gotoLogin();
+           //gotoLogin();
+           gotoAdmin();
             primaryStage.initStyle(StageStyle.DECORATED);
             //Starts the application.
             primaryStage.show();

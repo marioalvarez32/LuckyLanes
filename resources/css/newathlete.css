@@ -5,3 +5,7 @@
 .mainFxmlClass {
 
 }
+
+#test{
+    -fx-backgound-color:red;
+}
