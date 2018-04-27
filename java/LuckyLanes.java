@@ -20,7 +20,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 /**
  * This is the main class to start the application.
  * 
@@ -35,7 +34,6 @@ public class LuckyLanes extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-        
         try {
             //Sets the data field to the primaryStage of the application.
             stage = primaryStage;
