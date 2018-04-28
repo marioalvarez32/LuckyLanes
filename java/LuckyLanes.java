@@ -20,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import main.formObjects.*;
 /**
  * This is the main class to start the application.
  * 
@@ -34,6 +35,12 @@ public class LuckyLanes extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception {
+        /*
+        testing Aerobic class
+        Aerobic ar = new Aerobic(19, "male");
+        ar.setBenchRating(125, "menHB.txt");
+        System.out.println(ar.getBenchRating());
+        */
         try {
             //Sets the data field to the primaryStage of the application.
             stage = primaryStage;

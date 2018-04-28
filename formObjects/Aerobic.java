@@ -24,11 +24,9 @@ public class Aerobic {
         this.age = age;
         if(sex == "male") this.sexInt = 1;
         else this.sexInt = 0;
-        //this.age = age;
-        this.sex = sex;
     }
     
-    //sets the v02max for the benchtest.
+    //sets the v02max for the benchtest.(15 second test)
     public void setBench(int heartRate){
         this.v02bench = (-0.9675 * heartRate) + 76.710;
     }
@@ -38,17 +36,19 @@ public class Aerobic {
         return this.v02bench;
     }
     
-    //implements bench test
+    //determines the bench rating. Ex: poor, very poor, excellent, etc.
     public void setBenchRating(int heartRate, String fileName) throws FileNotFoundException{
         int[] ageRange = {18, 26, 36, 46, 56, 65};
         int ageGroup = this.calcIndex(this.age, ageRange);
+        System.out.println("age group: " + ageGroup);
         String[] rating = {
             "Excellent", "Excellent/Good", "Good", "Good/Above Average", "Above Average",
-            "Above Average/Average", "Average", "Average/Below Average", "Poor/Very Poor", "Poor"
+            "Above Average/Average", "Average", "Average/Below Average", "Below Average", "Below Average/Poor", "Poor", "Poor/Very Poor", " Very Poor"
         };
         HeartBeatFileReader reader = new HeartBeatFileReader(fileName);
         int[] heartArr = reader.getArr(ageGroup);
         int heartGroup = this.calcIndex(heartRate, heartArr);
+        System.out.println("Heart Rate Group: " + heartGroup);
         this.benchRating = rating[heartGroup];
     }
     
@@ -112,9 +112,6 @@ public class Aerobic {
     //method takes in 3 numbers: mid, low  high; method returns
     // if mid is >= low and < high.
     private boolean compareNums(int mid, int low, int high){
-        return low >= mid && mid < high;
+        return low <= mid && mid < high;
     }
-    
-    
-    
 }
