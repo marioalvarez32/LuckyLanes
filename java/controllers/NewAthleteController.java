@@ -54,7 +54,7 @@ public class NewAthleteController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader();
             InputStream in = LuckyLanes.class.getResourceAsStream(fxml);
-
+            
             loader.setBuilderFactory(new JavaFXBuilderFactory());
             loader.setLocation(LuckyLanes.class.getResource(fxml));
 
@@ -77,7 +77,7 @@ public class NewAthleteController implements Initializable {
                 ((Stage) (((Node) (event.getSource())).getScene().getWindow())).show();
             });
             // Hide this current window (if this is what you want)
-            ((Node) (event.getSource())).getScene().getWindow().hide();
+            //((Node) (event.getSource())).getScene().getWindow().hide();
         } catch (IOException e) {
             e.printStackTrace();
         }
