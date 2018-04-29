@@ -87,10 +87,10 @@ public class Aerobic {
         this.v02walk = (distance - 504.9)/44.73;
     }
     
-   //returns the v02max for the 12 min walk test
-   public double get12minWalk(){
-       return this.v02walk;
-   }
+    //returns the v02max for the 12 min walk test
+    public double get12minWalk(){
+        return this.v02walk;
+    }
     
     //helper method: calculates the age demographic of an athlete to determine
     //appropriate range of heart beats for a given score.
