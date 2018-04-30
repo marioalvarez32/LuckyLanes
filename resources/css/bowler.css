@@ -1,6 +1,10 @@
 /*
  * Empty Stylesheet file.
  */
+.tab-pane .scroll-bar:vertical {
+    -fx-unit-increment: 10;
+    -fx-block-increment: 10;
+}
 
 .tab-pane .tab-valid{
     -fx-background-color:rgba(26, 238, 11,.3);

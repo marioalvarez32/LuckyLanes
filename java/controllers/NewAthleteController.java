@@ -41,6 +41,7 @@ public class NewAthleteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
     }    
     public void setStage(Stage stage){
         this.stage=stage;

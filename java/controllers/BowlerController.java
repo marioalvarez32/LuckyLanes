@@ -12,6 +12,8 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,16 +25,23 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import main.java.LuckyLanes;
 import main.java.scene.control.TextFieldRequired;
-
+import javafx.beans.binding.StringBinding;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import java.text.DecimalFormat;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleButton;
 /**
  * FXML Controller class
  *
@@ -44,55 +53,106 @@ import main.java.scene.control.TextFieldRequired;
  * @author Mario
  */
 public class BowlerController implements Initializable {
-
-    @FXML
-    Button btnBack;
-    @FXML
-    Button btnNext;
-    @FXML
-    ComboBox cbState;
-    @FXML
-    DatePicker dpDate;
-    @FXML
-    Label lblDate;
-    @FXML
-    Tab tabFMSScore;
-    @FXML
-    Tab tabBowlerInformation;
-    @FXML
-    TextField txfAddress;
-    @FXML
-    TextField txfCity;
-    @FXML
-    TextField txfGender;
-    @FXML
-    TextField txfHeight;
-    @FXML
-    TextField txfLegDominance;
-    @FXML
-    TextField txfName;
-    @FXML
-    TextField txfPhone;
-    @FXML
-    TextField PrimaryPosition;
-    @FXML
-    TextField txfPrimarySport;
-    @FXML
-    TextField txfSchool;
-    @FXML
-    TextField txfWeight;
-    @FXML
-    TextField txfZip;
-    //FMS SCORE SHEET TAB
-    @FXML
-    TextField txfDeepSquat;
-    @FXML
-    ScrollPane spDataSheet;
+    
+    /**
+     * *************************************************************************
+     *                                                                         *
+     * Root Injected Objects
+     ***************************************************************************
+     */
+    @FXML TabPane tabPane;
+    @FXML Button btnBack;
+    @FXML Button btnNext;
+    
+    /**
+     * *************************************************************************
+     *                                                                         *
+     * Bowler Information Tab Injected Objects
+     ***************************************************************************
+     */
+    @FXML TextField txfName;
+    @FXML Label lblDate;
+    @FXML DatePicker dpDate;
+    @FXML TextField txfAddress;
+    @FXML TextField txfCity;
+    @FXML ComboBox cbState;
+    @FXML TextField txfZip;
+    @FXML TextField txfPhone;
+    @FXML TextField txfSchool;
+    @FXML TextField txfAge;
+    @FXML TextField txfHeight;
+    @FXML TextField txfWeight;
+    @FXML TextField txfGender;
+    @FXML TextField PrimaryPosition;
+    @FXML TextField txfPrimarySport;
+    @FXML ToggleGroup gender;
+    @FXML RadioButton radMale;
+    @FXML RadioButton radFemale;
+    /**
+     * *************************************************************************
+     *                                                                         *
+     * Y-Balance Test Injected Objects
+     ***************************************************************************
+     */
+    @FXML TextField txfRightLimbLength;
+    @FXML TextField txfA1Right;
+    @FXML TextField txfA2Right;
+    @FXML TextField txfA3Right;
+    @FXML TextField txfA1Left;
+    @FXML TextField txfA2Left;
+    @FXML TextField txfA3Left;
+    @FXML TextField txfPM1Right;
+    @FXML TextField txfPM2Right;
+    @FXML TextField txfPM3Right;
+    @FXML TextField txfPL1Right;
+    @FXML TextField txfPL2Right;
+    @FXML TextField txfPL3Right;
+    @FXML TextField txfPM1Left;
+    @FXML TextField txfPM2Left;
+    @FXML TextField txfPM3Left;
+    @FXML TextField txfPL1Left;
+    @FXML TextField txfPL2Left;
+    @FXML TextField txfPL3Left;
+    @FXML Label lblARight;
+    @FXML Label lblALeft;
+    @FXML Label lblPMRight;
+    @FXML Label lblPLRight;
+    @FXML Label lblPMLeft;
+    @FXML Label lblPLLeft;
+    @FXML Label lblADif;
+    @FXML Label lblPMDif;
+    @FXML Label lblPLDif;
+    @FXML Label lblCompositeLeft;
+    @FXML Label lblCompositeRight;
+    
+    /**
+     * *************************************************************************
+     *                                                                         *
+     * FMS Score Sheet Injected Objects
+     ***************************************************************************
+     */
+    @FXML TextField txfDeepSquat;
+    @FXML ScrollPane spDataSheet;
+    @FXML ToggleGroup tgHurdleStepR;
+    @FXML ToggleGroup tgHurdleStepL;
+    @FXML TextField txfHurdleStep;
+    /**
+     * *************************************************************************
+     *                                                                         *
+     * Fitness Testing Data Sheet Injected Objects
+     ***************************************************************************
+     */
+    @FXML TextField txfAge2;
+    @FXML TextField txfHeight2;
+    @FXML TextField txfWeight2;
+    @FXML ToggleGroup gender2;
+    @FXML RadioButton radMale2;
+    @FXML RadioButton radFemale2;
+    
+    @FXML ScrollPane scrollPane;
+    
     //THis is used to change the Tabs in the gui.
     SingleSelectionModel<Tab> selectionModel;
-    
-    @FXML
-    TabPane tabPane;
     private int NUM_TAB = 5;
     private Stage stage;
     private boolean[] errors;
@@ -118,8 +178,61 @@ public class BowlerController implements Initializable {
         txfAddress.setValidationRegex("^[a-zA-Z0-9 #.,;:'°]{3,}$");
         txfWeight.setValidationRegex("^[0-9]+$");
         txfHeight.setValidationRegex("^[0-9]+$");
-        */
-
+         */
+        ObservableList<String> options = FXCollections.observableArrayList(
+                "Wisconsin",
+                "Alabama",
+                "Alaska",
+                "Arizon",
+                "Arkansas",
+                "Californi",
+                "Colorado",
+                "Connecticut",
+                "Delaware",
+                "Florida",
+                "Georgia",
+                "Hawaii",
+                "Idaho",
+                "Illinois",
+                "Indiana",
+                "Iowa",
+                "Kansas",
+                "Kentucky",
+                "Louisiana",
+                "Maine",
+                "Maryland",
+                "Massachusetts",
+                "Michigan",
+                "Minnesota",
+                "Mississippi",
+                "Missouri",
+                "Montana",
+                "Nebraska",
+                "Nevada",
+                "New Hampshire",
+                "New Jersey",
+                "New Mexico",
+                "New York",
+                "North Carolina",
+                "North Dakota",
+                "Ohio",
+                "Oklahoma",
+                "Oregon",
+                "Pennsylvania",
+                "Rhode Island",
+                "South Carolina",
+                "South Dakota",
+                "Tennessee",
+                "Texas",
+                "Utah",
+                "Vermont",
+                "Virginia",
+                "Washington,",
+                "West Virginia",
+                "Wyomin"
+        );
+        cbState.getItems().setAll(options);
+        
     }
     
     public void setStage(Stage stage) {
@@ -128,7 +241,18 @@ public class BowlerController implements Initializable {
 
     public void createListeners() {
         this.stage.titleProperty().bind(txfName.textProperty());
-
+        txfAge.textProperty().bindBidirectional(txfAge2.textProperty());
+        
+        txfHeight.textProperty().bindBidirectional(txfHeight2.textProperty());
+        txfWeight.textProperty().bindBidirectional(txfWeight2.textProperty());
+        //Y-Balance Test Bindings.
+        
+        setYBalanceHandlers();
+        setFMSScoreSheetHandlers();
+        
+        radMale.selectedProperty().bindBidirectional(radMale2.selectedProperty());
+        radFemale.selectedProperty().bindBidirectional(radFemale2.selectedProperty());
+        
         selectionModel.selectedIndexProperty().addListener((observable, oldVal, newVal) -> {
             validateTabs(oldVal.intValue());
         });
@@ -143,6 +267,7 @@ public class BowlerController implements Initializable {
      */
     @FXML
     private void nextTab(ActionEvent event) {
+        
         //validateTabs();
         
         if (!validateTabs(selectionModel.getSelectedIndex()) && !errors[selectionModel.getSelectedIndex()]) {
@@ -202,6 +327,193 @@ public class BowlerController implements Initializable {
      * Auxiliary methods
      *************************************************************************
      */
+    private String maxValue(String t1, String t2, String t3){
+        double a, b, c;
+            try{
+                a=Double.parseDouble(t1);
+                b=Double.parseDouble(t2);
+                c=Double.parseDouble(t3);
+                if(a>=b && a>=c){
+                    return ""+a;
+                }else if(b>=a && b >=c){
+                    return ""+b;
+                }else{
+                    return ""+c;
+                }
+            }catch(Exception e){
+                return "";
+            }
+    }
+     private String maxValue(String t1, String t2){
+        double a, b;
+            try{
+                a=Double.parseDouble(t1);
+                b=Double.parseDouble(t2);
+                
+                if(a>=b){
+                    return ""+(int)a;
+                }else{
+                    return ""+(int)b;
+                }
+            }catch(Exception e){
+                return "";
+            }
+    }
+    private String difValue(String t1, String t2){
+        double a, b;
+            try{
+                a=Double.parseDouble(t1);
+                b=Double.parseDouble(t2);
+               return ""+ Math.abs(a-b);
+            }catch(Exception e){
+                return "";
+            }
+    }
+    private String compositeValue(String rightLimbLength,String t1, String t2,String t3){
+        double a, b,c,dblRightLimbLength;
+            try{
+                a=Double.parseDouble(t1);
+                b=Double.parseDouble(t2);
+                c=Double.parseDouble(t3);
+                dblRightLimbLength=Double.parseDouble(rightLimbLength);
+                DecimalFormat decFor = new DecimalFormat("###.##");
+                //Anterior +POsteromedial+Posterolateral / 3* RIght Limb Length *100
+                return "" + decFor.format(((a+b+c)/(3*dblRightLimbLength)) *100);
+            }catch(Exception e){
+                return "";
+            }
+    }
+    private void setYBalanceHandlers(){
+        //Composite Scores
+        
+        lblARight.textProperty().addListener((observer,oldVal,newVal)->{
+            lblCompositeRight.setText(compositeValue(txfRightLimbLength.getText(),newVal,lblPMRight.getText(),lblPLRight.getText()));
+        });
+        lblPMRight.textProperty().addListener((observer,oldVal,newVal)->{
+            lblCompositeRight.setText(compositeValue(txfRightLimbLength.getText(),newVal,lblARight.getText(),lblPLRight.getText()));
+        });
+        lblPLRight.textProperty().addListener((observer,oldVal,newVal)->{
+            lblCompositeRight.setText(compositeValue(txfRightLimbLength.getText(),newVal,lblPMRight.getText(),lblARight.getText()));
+        });
+        
+        lblALeft.textProperty().addListener((observer,oldVal,newVal)->{
+            lblCompositeLeft.setText(compositeValue(txfRightLimbLength.getText(),newVal,lblPMLeft.getText(),lblPLLeft.getText()));
+        });
+        lblPMLeft.textProperty().addListener((observer,oldVal,newVal)->{
+            lblCompositeLeft.setText(compositeValue(txfRightLimbLength.getText(),newVal,lblALeft.getText(),lblPLLeft.getText()));
+        });
+        lblPLLeft.textProperty().addListener((observer,oldVal,newVal)->{
+            lblCompositeLeft.setText(compositeValue(txfRightLimbLength.getText(),newVal,lblPMLeft.getText(),lblALeft.getText()));
+        });
+        
+        txfRightLimbLength.textProperty().addListener((observer,oldVal,newVal)->{
+            lblCompositeLeft.setText(compositeValue(newVal,lblPMLeft.getText(),lblPLLeft.getText(),lblALeft.getText()));
+            lblCompositeRight.setText(compositeValue(newVal,lblPMRight.getText(),lblPLRight.getText(),lblARight.getText()));
+        });
+        /************************************/
+        lblARight.textProperty().addListener((observable,oldVal,newVal)->{
+            lblADif.setText(difValue(newVal,lblALeft.getText()));
+        });
+        lblALeft.textProperty().addListener((observable,oldVal,newVal)->{
+            lblADif.setText(difValue(newVal,lblARight.getText()));
+        });
+        
+        lblPMRight.textProperty().addListener((observable,oldVal,newVal)->{
+            lblPMDif.setText(difValue(newVal,lblPMLeft.getText()));
+        });
+        lblPMLeft.textProperty().addListener((observable,oldVal,newVal)->{
+            lblPMDif.setText(difValue(newVal,lblPMRight.getText()));
+        });
+        
+        lblPLRight.textProperty().addListener((observable,oldVal,newVal)->{
+            lblPLDif.setText(difValue(newVal,lblPLLeft.getText()));
+        });
+        lblPLLeft.textProperty().addListener((observable,oldVal,newVal)->{
+            lblPLDif.setText(difValue(newVal,lblPLRight.getText()));
+        });
+        
+        txfA1Right.textProperty().addListener((observable,oldval,newVal)->{
+            lblARight.setText(maxValue(newVal,txfA2Right.getText(),txfA3Right.getText()));
+        });
+        txfA2Right.textProperty().addListener((observable,oldval,newVal)->{
+            lblARight.setText(maxValue(newVal,txfA1Right.getText(),txfA3Right.getText()));
+        });
+        txfA3Right.textProperty().addListener((observable,oldval,newVal)->{
+            lblARight.setText(maxValue(newVal,txfA2Right.getText(),txfA1Right.getText()));
+        });
+        
+        txfA1Left.textProperty().addListener((observable,oldval,newVal)->{
+            lblALeft.setText(maxValue(newVal,txfA2Left.getText(),txfA3Left.getText()));
+        });
+        txfA2Left.textProperty().addListener((observable,oldval,newVal)->{
+            lblALeft.setText(maxValue(newVal,txfA1Left.getText(),txfA3Left.getText()));
+        });
+        txfA3Left.textProperty().addListener((observable,oldval,newVal)->{
+            lblALeft.setText(maxValue(newVal,txfA2Left.getText(),txfA1Left.getText()));
+        });
+        
+        txfPM1Right.textProperty().addListener((observable, oldval, newVal) -> {
+            lblPMRight.setText(maxValue(newVal, txfPM2Right.getText(), txfPM3Right.getText()));
+
+        });
+        txfPM2Right.textProperty().addListener((observable, oldval, newVal) -> {
+            lblPMRight.setText(maxValue(newVal, txfPM1Right.getText(), txfPM3Right.getText()));
+
+        });
+        txfPM3Right.textProperty().addListener((observable,oldval,newVal)->{
+            lblPMRight.setText(maxValue(newVal, txfPM1Right.getText(), txfPM2Right.getText()));
+        });
+        txfPL1Right.textProperty().addListener((observable,oldval,newVal)->{
+            lblPLRight.setText(maxValue(newVal, txfPL2Right.getText(), txfPL3Right.getText()));
+            
+        });
+        txfPL2Right.textProperty().addListener((observable,oldval,newVal)->{
+            lblPLRight.setText(maxValue(newVal, txfPL1Right.getText(), txfPL3Right.getText()));
+            
+        });
+        txfPL3Right.textProperty().addListener((observable,oldval,newVal)->{
+            lblPLRight.setText(maxValue(newVal, txfPL2Right.getText(), txfPL1Right.getText()));
+        });
+        txfPM1Left.textProperty().addListener((observable,oldval,newVal)->{
+            lblPMLeft.setText(maxValue(newVal, txfPM2Left.getText(), txfPM3Left.getText()));
+        });
+        txfPM2Left.textProperty().addListener((observable,oldval,newVal)->{
+            lblPMLeft.setText(maxValue(newVal, txfPM1Left.getText(), txfPM3Left.getText()));
+            
+        });
+        txfPM3Left.textProperty().addListener((observable,oldval,newVal)->{
+           lblPMLeft.setText(maxValue(newVal, txfPM1Left.getText(), txfPM2Left.getText()));
+        });
+        txfPL1Left.textProperty().addListener((observable,oldval,newVal)->{
+            lblPLLeft.setText(maxValue(newVal, txfPL2Left.getText(), txfPL3Left.getText()));
+        });
+        txfPL2Left.textProperty().addListener((observable,oldval,newVal)->{
+            lblPLLeft.setText(maxValue(newVal, txfPL1Left.getText(), txfPL3Left.getText()));
+        });
+        txfPL3Left.textProperty().addListener((observable,oldval,newVal)->{
+            lblPLLeft.setText(maxValue(newVal, txfPL2Left.getText(), txfPL1Left.getText()));
+        });
+    }
+    private void setFMSScoreSheetHandlers(){
+        tgHurdleStepR.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) -> {
+            
+            if (tgHurdleStepR.getSelectedToggle() != null && tgHurdleStepL.getSelectedToggle() != null) {
+               ToggleButton r= ((ToggleButton)newToggle);
+               ToggleButton l= ((ToggleButton)tgHurdleStepL.getSelectedToggle());
+                txfHurdleStep.setText(maxValue(l.getText(),r.getText()));
+                
+            }
+        });
+        tgHurdleStepL.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) -> {
+            
+            if (tgHurdleStepR.getSelectedToggle() != null && tgHurdleStepL.getSelectedToggle() != null) {
+               ToggleButton l= ((ToggleButton)newToggle);
+               ToggleButton r= ((ToggleButton)tgHurdleStepR.getSelectedToggle());
+                txfHurdleStep.setText(maxValue(l.getText(),r.getText()));
+                
+            }
+        });
+    }
     private boolean validateTab1() {
         //IsValid activates the color effect. They all have to be called.
         /*
@@ -217,14 +529,14 @@ public class BowlerController implements Initializable {
 
     private boolean validateTab2() {
         //Validate fields in tab 1 and set errors flag 0 to true if any errors are found.
-        if (txfDeepSquat.getText().equals("")) {
+       /* if (txfDeepSquat.getText().equals("")) {
             
             //Red shadow effect
             txfDeepSquat.setStyle("-fx-effect: dropshadow( gaussian , rgba(212, 27, 27,1) , 10,0,0,0 );");
             //txfAddress.setStyle("-fx-effect: dropshadow( gaussian , rgba(212, 27, 27,1) , 10,0,0,0 );");
 
             return false;
-        }
+        }*/
         return true;
     }
     private boolean validateTabs(int index) {
@@ -257,4 +569,5 @@ public class BowlerController implements Initializable {
         }
         return flag;
     }
+    
 }

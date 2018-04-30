@@ -18,9 +18,9 @@
     <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TabPane id="tabPane" fx:id="tabPane" layoutX="175.0" layoutY="7.0" prefHeight="350.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TabPane id="tabPane" fx:id="tabPane" layoutX="-6.0" prefHeight="350.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0">
               <tabs>
-                <Tab id="tab" fx:id="tabBowlerInformation" text="Bowler Information">
+                <Tab id="tab" fx:id="tabBowlerInformation" text="Demographics">
                   <content>
                         <VBox alignment="CENTER" layoutX="28.0" layoutY="20.0" prefHeight="466.0" prefWidth="751.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
                            <children>
@@ -101,43 +101,56 @@
                                        </font></Label>
                                     <TextField fx:id="txfHeight" prefHeight="25.0" prefWidth="78.0">
                                        <HBox.margin>
-                                          <Insets right="15.0" />
+                                          <Insets />
                                        </HBox.margin>
                                     </TextField>
+                                    <Label text="cm">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Label>
                                     <Label prefHeight="17.0" prefWidth="50.0" text="Weight:">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font></Label>
                                     <TextField fx:id="txfWeight" prefHeight="25.0" prefWidth="72.0">
                                        <HBox.margin>
-                                          <Insets right="15.0" />
+                                          <Insets />
                                        </HBox.margin>
                                     </TextField>
+                                    <Label text="kg">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Label>
                                     <Label prefHeight="17.0" prefWidth="30.0" text="Age:">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font></Label>
-                                    <ComboBox prefHeight="25.0" prefWidth="61.0">
+                                    <TextField fx:id="txfAge" prefHeight="25.0" prefWidth="72.0">
                                        <HBox.margin>
                                           <Insets right="10.0" />
                                        </HBox.margin>
-                                    </ComboBox>
+                                    </TextField>
                                     <Label prefHeight="17.0" prefWidth="55.0" text="Gender:">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font></Label>
-                                    <VBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="87.0">
+                                    <VBox alignment="CENTER_LEFT" prefHeight="50.0">
                                        <children>
-                                          <RadioButton mnemonicParsing="false" text="Male">
+                                          <RadioButton fx:id="radMale" mnemonicParsing="false" text="Male">
                                              <toggleGroup>
                                                 <ToggleGroup fx:id="gender" />
                                              </toggleGroup>
                                           </RadioButton>
-                                          <RadioButton mnemonicParsing="false" text="Female" toggleGroup="$gender" />
+                                          <RadioButton fx:id="radFemale" mnemonicParsing="false" text="Female" toggleGroup="$gender" />
                                        </children>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
                                     </VBox>
                                     <Label prefHeight="17.0" prefWidth="124.0" text="Hand/Leg Dominance:" />
-                                    <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                                    <VBox alignment="CENTER_LEFT" prefHeight="200.0">
                                        <children>
                                           <RadioButton mnemonicParsing="false" text="Right">
                                              <toggleGroup>
@@ -171,9 +184,9 @@
                 </Tab>
                   <Tab fx:id="tab2" text="Y-Balance Test">
                      <content>
-                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefViewportHeight="528.0" prefViewportWidth="800.0">
+                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="1244.0" prefViewportHeight="528.0" prefViewportWidth="800.0" prefWidth="800.0">
                            <content>
-                              <VBox prefHeight="995.0" prefWidth="800.0">
+                              <VBox prefHeight="633.0" prefWidth="800.0">
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="50.0" prefWidth="800.0">
                                        <children>
@@ -199,13 +212,13 @@
                                                       <Insets right="25.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                                <TextField />
+                                                <TextField fx:id="txfRightLimbLength" />
                                              </children>
                                           </HBox>
                                           <Label alignment="CENTER" text="(Measure from right ASIS to right medial malleolus in supine after performing bilateral bridge)" />
                                        </children>
                                     </VBox>
-                                    <HBox alignment="CENTER" prefHeight="427.0" prefWidth="750.0" spacing="15.0">
+                                    <HBox alignment="CENTER" prefHeight="296.0" prefWidth="736.0" spacing="15.0">
                                        <children>
                                           <VBox alignment="TOP_CENTER" prefHeight="172.0" prefWidth="400.0">
                                              <children>
@@ -217,7 +230,12 @@
                                                       <Insets right="25.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                                <GridPane prefHeight="381.0" prefWidth="400.0">
+                                                <Label text="All measurements must be in centimiters.">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <GridPane prefHeight="229.0" prefWidth="400.0">
                                                   <columnConstraints>
                                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -235,47 +253,47 @@
                                                          <children>
                                                             <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <ImageView fitHeight="375.0" fitWidth="375.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.columnIndex="1" GridPane.rowSpan="3">
+                                                                  <ImageView fitHeight="222.0" fitWidth="375.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.columnIndex="1" GridPane.rowSpan="3">
                                                                      <image>
                                                                         <Image url="@../images/Y-Balance.PNG" />
                                                                      </image>
                                                                   </ImageView>
                                                                   <VBox prefHeight="200.0" prefWidth="100.0">
                                                                      <children>
-                                                                        <HBox prefHeight="100.0" prefWidth="200.0">
+                                                                        <HBox prefHeight="95.0" prefWidth="282.0">
                                                                            <VBox.margin>
                                                                               <Insets right="75.0" top="25.0" />
                                                                            </VBox.margin>
                                                                            <children>
-                                                                              <AnchorPane prefHeight="100.0" prefWidth="401.0">
+                                                                              <AnchorPane prefHeight="86.0" prefWidth="278.0">
                                                                                  <children>
-                                                                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                        <children>
-                                                                                          <TextField />
-                                                                                          <TextField />
-                                                                                          <TextField />
+                                                                                          <TextField fx:id="txfA1Right" alignment="CENTER" />
+                                                                                          <TextField fx:id="txfA2Right" alignment="CENTER" />
+                                                                                          <TextField fx:id="txfA3Right" alignment="CENTER" />
                                                                                        </children>
                                                                                     </VBox>
                                                                                  </children>
                                                                               </AnchorPane>
                                                                            </children>
                                                                         </HBox>
-                                                                        <HBox prefHeight="252.0" prefWidth="400.0">
+                                                                        <HBox prefHeight="122.0" prefWidth="400.0">
                                                                            <children>
                                                                               <AnchorPane prefHeight="251.0" prefWidth="401.0">
                                                                                  <children>
-                                                                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                        <children>
-                                                                                          <TextField />
-                                                                                          <TextField />
-                                                                                          <TextField />
+                                                                                          <TextField fx:id="txfPL1Right" alignment="CENTER" />
+                                                                                          <TextField fx:id="txfPL2Right" alignment="CENTER" />
+                                                                                          <TextField fx:id="txfPL3Right" alignment="CENTER" />
                                                                                        </children>
                                                                                     </VBox>
-                                                                                    <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                    <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                        <children>
-                                                                                          <TextField />
-                                                                                          <TextField />
-                                                                                          <TextField />
+                                                                                          <TextField fx:id="txfPM1Right" alignment="CENTER" />
+                                                                                          <TextField fx:id="txfPM2Right" alignment="CENTER" />
+                                                                                          <TextField fx:id="txfPM3Right" alignment="CENTER" />
                                                                                        </children>
                                                                                     </VBox>
                                                                                  </children>
@@ -294,7 +312,7 @@
                                           </VBox>
                                           <VBox alignment="TOP_CENTER" prefHeight="172.0" prefWidth="400.0">
                                              <children>
-                                                <Label text="Right">
+                                                <Label text="Left">
                                                    <font>
                                                       <Font size="31.0" />
                                                    </font>
@@ -302,28 +320,33 @@
                                                       <Insets right="25.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                                <GridPane prefHeight="381.0" prefWidth="400.0">
+                                                <Label text="All measurements must be in centimiters.">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <GridPane prefHeight="229.0" prefWidth="400.0">
                                                    <children>
                                                       <AnchorPane prefHeight="375.0" prefWidth="384.0" GridPane.columnSpan="5" GridPane.rowSpan="3">
                                                          <children>
                                                             <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <ImageView fitHeight="375.0" fitWidth="375.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.columnIndex="1" GridPane.rowSpan="3">
+                                                                  <ImageView fitHeight="222.0" fitWidth="375.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.columnIndex="1" GridPane.rowSpan="3">
                                                                      <image>
                                                                         <Image url="@../images/Y-Balance.PNG" />
                                                                      </image>
                                                                   </ImageView>
                                                                   <VBox prefHeight="200.0" prefWidth="100.0">
                                                                      <children>
-                                                                        <HBox prefHeight="100.0" prefWidth="200.0">
+                                                                        <HBox prefHeight="95.0" prefWidth="282.0">
                                                                            <children>
-                                                                              <AnchorPane prefHeight="100.0" prefWidth="401.0">
+                                                                              <AnchorPane prefHeight="86.0" prefWidth="278.0">
                                                                                  <children>
-                                                                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                        <children>
-                                                                                          <TextField />
-                                                                                          <TextField />
-                                                                                          <TextField />
+                                                                                          <TextField fx:id="txfA1Left" alignment="CENTER" />
+                                                                                          <TextField fx:id="txfA2Left" alignment="CENTER" />
+                                                                                          <TextField fx:id="txfA3Left" alignment="CENTER" />
                                                                                        </children>
                                                                                     </VBox>
                                                                                  </children>
@@ -333,22 +356,22 @@
                                                                               <Insets right="75.0" top="25.0" />
                                                                            </VBox.margin>
                                                                         </HBox>
-                                                                        <HBox prefHeight="252.0" prefWidth="400.0">
+                                                                        <HBox prefHeight="122.0" prefWidth="400.0">
                                                                            <children>
                                                                               <AnchorPane prefHeight="251.0" prefWidth="401.0">
                                                                                  <children>
-                                                                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                        <children>
-                                                                                          <TextField />
-                                                                                          <TextField />
-                                                                                          <TextField />
+                                                                                          <TextField fx:id="txfPL1Left" alignment="CENTER" />
+                                                                                          <TextField fx:id="txfPL2Left" alignment="CENTER" />
+                                                                                          <TextField fx:id="txfPL3Left" alignment="CENTER" />
                                                                                        </children>
                                                                                     </VBox>
-                                                                                    <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                    <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                        <children>
-                                                                                          <TextField />
-                                                                                          <TextField />
-                                                                                          <TextField />
+                                                                                          <TextField fx:id="txfPM1Left" alignment="CENTER" />
+                                                                                          <TextField fx:id="txfPM2Left" alignment="CENTER" />
+                                                                                          <TextField fx:id="txfPM3Left" alignment="CENTER" />
                                                                                        </children>
                                                                                     </VBox>
                                                                                  </children>
@@ -379,149 +402,159 @@
                                           </VBox>
                                        </children>
                                     </HBox>
-                                    <VBox prefHeight="209.0" prefWidth="750.0">
+                                    <HBox spacing="25.0">
                                        <children>
-                                          <Label text="Greatest Sucessful Reach">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                          </Label>
-                                          <GridPane gridLinesVisible="true" maxWidth="900.0">
-                                            <columnConstraints>
-                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                            </columnConstraints>
-                                            <rowConstraints>
-                                              <RowConstraints maxHeight="40.0" minHeight="9.0" percentHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
-                                              <RowConstraints maxHeight="81.0" minHeight="10.0" percentHeight="30.0" prefHeight="75.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                            </rowConstraints>
+                                          <VBox prefHeight="209.0" prefWidth="918.0">
                                              <children>
-                                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Right" GridPane.columnIndex="1">
+                                                <Label text="Greatest Sucessful Reach">
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="187.0" text="Left" GridPane.columnIndex="2">
-                                                   <font>
-                                                      <Font name="System Bold" size="15.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="185.0" text="Difference" GridPane.columnIndex="3">
-                                                   <font>
-                                                      <Font name="System Bold" size="15.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Anterior(A)" GridPane.rowIndex="1">
-                                                   <font>
-                                                      <Font name="System Bold" size="15.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Posterolateral(PL)" GridPane.rowIndex="3">
-                                                   <font>
-                                                      <Font name="System Bold" size="15.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Posteromedial(PM)" GridPane.rowIndex="2">
-                                                   <font>
-                                                      <Font name="System Bold" size="15.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                <Label alignment="CENTER" prefHeight="51.0" prefWidth="187.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label alignment="CENTER" prefHeight="51.0" prefWidth="187.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label alignment="CENTER" prefHeight="50.0" prefWidth="187.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </GridPane>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets bottom="25.0" />
-                                       </VBox.margin>
-                                    </VBox>
-                                    <VBox prefHeight="209.0" prefWidth="750.0">
-                                       <children>
-                                          <Label text="Composite Score">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                          </Label>
-                                          <HBox>
-                                             <children>
-                                                <GridPane gridLinesVisible="true" prefHeight="189.0" prefWidth="449.0">
+                                                <GridPane gridLinesVisible="true" maxWidth="900.0">
+                                                  <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="152.0" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="113.0" minWidth="10.0" prefWidth="105.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="105.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="80.0" />
+                                                  </columnConstraints>
+                                                  <rowConstraints>
+                                                    <RowConstraints maxHeight="40.0" minHeight="9.0" percentHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints maxHeight="81.0" minHeight="10.0" percentHeight="30.0" prefHeight="75.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  </rowConstraints>
                                                    <children>
-                                                      <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Anterior(A)">
+                                                      <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Right" GridPane.columnIndex="1">
                                                          <font>
                                                             <Font name="System Bold" size="15.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Posteromedial(PM)" GridPane.rowIndex="1">
+                                                      <Label alignment="CENTER" prefHeight="17.0" prefWidth="187.0" text="Left" GridPane.columnIndex="2">
                                                          <font>
                                                             <Font name="System Bold" size="15.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER" prefHeight="88.0" prefWidth="214.0" GridPane.columnIndex="1">
+                                                      <Label alignment="CENTER" prefHeight="17.0" prefWidth="185.0" text="Difference" GridPane.columnIndex="3">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Anterior(A)" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Posterolateral(PL)" GridPane.rowIndex="3">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Posteromedial(PM)" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="lblADif" alignment="CENTER" prefHeight="51.0" prefWidth="187.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                                          <font>
                                                             <Font size="20.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER" prefHeight="88.0" prefWidth="214.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                      <Label fx:id="lblPMDif" alignment="CENTER" prefHeight="51.0" prefWidth="187.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="lblPLDif" alignment="CENTER" prefHeight="50.0" prefWidth="187.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="lblARight" alignment="CENTER" prefHeight="51.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="lblPMRight" alignment="CENTER" prefHeight="51.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="lblPLRight" alignment="CENTER" prefHeight="51.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="lblALeft" alignment="CENTER" prefHeight="51.0" prefWidth="187.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="lblPMLeft" alignment="CENTER" prefHeight="51.0" prefWidth="187.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="lblPLLeft" alignment="CENTER" prefHeight="51.0" prefWidth="187.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                                          <font>
                                                             <Font size="20.0" />
                                                          </font>
                                                       </Label>
                                                    </children>
-                                                   <columnConstraints>
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                   </columnConstraints>
-                                                   <rowConstraints>
-                                                      <RowConstraints maxHeight="81.0" minHeight="10.0" percentHeight="50.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" percentHeight="50.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                                                   </rowConstraints>
                                                 </GridPane>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="25.0" />
+                                             </VBox.margin>
+                                          </VBox>
+                                          <VBox prefHeight="209.0" prefWidth="750.0">
+                                             <children>
+                                                <Label text="Composite Score">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                </Label>
                                                 <HBox>
                                                    <children>
-                                                      <VBox alignment="CENTER" prefHeight="189.0" prefWidth="257.0">
+                                                      <GridPane gridLinesVisible="true" prefHeight="189.0" prefWidth="449.0">
                                                          <children>
-                                                            <Label alignment="CENTER" prefHeight="20.0" prefWidth="302.0" text="(Anterior + Posteromedial + Posterolateral)" underline="true" wrapText="true" />
-                                                            <Label alignment="CENTER" prefHeight="21.0" prefWidth="302.0" text="3 X Right Limb Length" wrapText="true" />
-                                                         </children>
-                                                      </VBox>
-                                                      <VBox alignment="CENTER" prefHeight="189.0" prefWidth="87.0">
-                                                         <children>
-                                                            <Label prefHeight="21.0" prefWidth="302.0" text="X100" underline="true" wrapText="true">
-                                                               <VBox.margin>
-                                                                  <Insets />
-                                                               </VBox.margin>
+                                                            <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Right">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Left" GridPane.rowIndex="1">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="lblCompositeRight" alignment="CENTER" prefHeight="88.0" prefWidth="214.0" GridPane.columnIndex="1">
+                                                               <font>
+                                                                  <Font size="20.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="lblCompositeLeft" alignment="CENTER" prefHeight="88.0" prefWidth="214.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                               <font>
+                                                                  <Font size="20.0" />
+                                                               </font>
                                                             </Label>
                                                          </children>
-                                                      </VBox>
+                                                         <columnConstraints>
+                                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints maxHeight="81.0" minHeight="10.0" percentHeight="50.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" percentHeight="50.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                      </GridPane>
+                                                      <HBox />
                                                    </children>
                                                 </HBox>
                                              </children>
-                                          </HBox>
+                                          </VBox>
                                        </children>
-                                    </VBox>
+                                    </HBox>
                                  </children>
                                  <padding>
                                     <Insets bottom="25.0" left="25.0" right="25.0" />
@@ -533,12 +566,12 @@
                   </Tab>
                 <Tab id="tab" fx:id="tabFMSScore" text="FMS Score Sheet">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <VBox alignment="CENTER">
                            <children>
-                              <GridPane alignment="CENTER" hgap="1.0" layoutX="25.0" layoutY="26.0" prefHeight="470.0" prefWidth="700.0" vgap="7.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                              <GridPane alignment="CENTER" hgap="1.0" layoutX="65.0" layoutY="26.0" maxWidth="730.0" prefHeight="500.0" prefWidth="725.0" vgap="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0">
                                 <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="267.0" minWidth="10.0" prefWidth="217.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="138.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="267.0" minWidth="10.0" prefWidth="207.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="108.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" prefWidth="125.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="297.0" minWidth="10.0" prefWidth="297.0" />
                                 </columnConstraints>
@@ -564,17 +597,17 @@
                                     </Label>
                                     <Label alignment="CENTER" prefHeight="32.0" prefWidth="176.0" text="Raw Score" GridPane.columnIndex="1">
                                        <font>
-                                          <Font name="System Bold" size="20.0" />
+                                          <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
                                     <Label alignment="CENTER" prefHeight="30.0" prefWidth="150.0" text="Final Score" GridPane.columnIndex="2">
                                        <font>
-                                          <Font name="System Bold" size="20.0" />
+                                          <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
                                     <Label alignment="CENTER" prefHeight="32.0" prefWidth="176.0" text="Comments" GridPane.columnIndex="3">
                                        <font>
-                                          <Font name="System Bold" size="20.0" />
+                                          <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
                                     <AnchorPane prefHeight="35.0" prefWidth="167.0" GridPane.rowIndex="2">
@@ -583,7 +616,7 @@
                                              <children>
                                                 <Label prefHeight="32.0" prefWidth="180.0" text="HURDLE STEP" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.rowIndex="2">
                                                    <font>
-                                                      <Font name="System Bold" size="12.0" />
+                                                      <Font name="System Bold" size="11.0" />
                                                    </font>
                                                 </Label>
                                              </children>
@@ -614,19 +647,25 @@
                                           <Font name="System Bold" size="20.0" />
                                        </font>
                                     </Label>
-                                    <Label alignment="CENTER" prefHeight="32.0" prefWidth="176.0" text="Test">
-                                       <font>
-                                          <Font name="System Bold" size="20.0" />
-                                       </font>
-                                    </Label>
                                     <Label prefHeight="32.0" prefWidth="176.0" text="DEEP SQUAT" GridPane.rowIndex="1">
                                        <font>
-                                          <Font name="System Bold" size="12.0" />
+                                          <Font name="System Bold" size="11.0" />
                                        </font>
                                     </Label>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <children>
-                                          <TextField fx:id="txfDeepSquat" alignment="CENTER" layoutX="-8.0" layoutY="9.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <HBox alignment="CENTER" layoutX="-14.0" layoutY="2.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <ToggleButton mnemonicParsing="false" text="0">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="tgDeepSquat" />
+                                                   </toggleGroup>
+                                                </ToggleButton>
+                                                <ToggleButton mnemonicParsing="false" text="1" toggleGroup="$tgDeepSquat" />
+                                                <ToggleButton mnemonicParsing="false" text="2" toggleGroup="$tgDeepSquat" />
+                                                <ToggleButton mnemonicParsing="false" text="3" toggleGroup="$tgDeepSquat" />
+                                             </children>
+                                          </HBox>
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -634,31 +673,57 @@
                                           <TextField alignment="CENTER" layoutX="-10.0" layoutY="2.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font size="15.0" />
-                                             </font></TextField>
+                                             </font>
+                                          </TextField>
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                        <children>
-                                          <TextField layoutX="13.0" layoutY="2.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <TextArea focusTraversable="false" layoutX="-21.0" layoutY="-84.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0" />
                                        </children>
                                     </AnchorPane>
                                     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <children>
-                                          <TextField alignment="CENTER" style="-fx-background-color: #D3D3D3;" />
-                                          <TextField alignment="CENTER" />
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <ToggleButton mnemonicParsing="false" text="0">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="tgHurdleStepL" />
+                                                   </toggleGroup>
+                                                </ToggleButton>
+                                                <ToggleButton mnemonicParsing="false" text="1" toggleGroup="$tgHurdleStepL" />
+                                                <ToggleButton mnemonicParsing="false" text="2" toggleGroup="$tgHurdleStepL" />
+                                                <ToggleButton mnemonicParsing="false" text="3" toggleGroup="$tgHurdleStepL" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <ToggleButton mnemonicParsing="false" text="0">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="tgHurdleStepR" />
+                                                   </toggleGroup>
+                                                </ToggleButton>
+                                                <ToggleButton mnemonicParsing="false" text="1" toggleGroup="$tgHurdleStepR" />
+                                                <ToggleButton mnemonicParsing="false" text="2" toggleGroup="$tgHurdleStepR" />
+                                                <ToggleButton mnemonicParsing="false" text="3" toggleGroup="$tgHurdleStepR" />
+                                             </children>
+                                          </HBox>
                                        </children>
                                     </VBox>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                        <children>
-                                          <TextField alignment="CENTER" layoutX="-23.0" layoutY="22.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TextField fx:id="txfHurdleStep" alignment="CENTER" disable="true" layoutX="-23.0" layoutY="22.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
-                                             </font></TextField>
-                                       </children></AnchorPane>
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                        <children>
-                                          <TextField layoutX="-22.0" layoutY="13.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                       </children></AnchorPane>
+                                          <TextArea focusTraversable="false" layoutY="-75.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
                                     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <children>
                                           <TextField alignment="CENTER" style="-fx-background-color: #D3D3D3;" />
@@ -671,7 +736,7 @@
                                              <children>
                                                 <Label prefHeight="41.0" prefWidth="161.0" text="SHOULDER MOBILITY" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-52.0" AnchorPane.topAnchor="0.0" GridPane.rowIndex="2">
                                                    <font>
-                                                      <Font name="System Bold" size="12.0" />
+                                                      <Font name="System Bold" size="11.0" />
                                                    </font>
                                                 </Label>
                                              </children>
@@ -702,16 +767,18 @@
                                           <TextField alignment="CENTER" layoutX="-48.0" layoutY="9.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
-                                             </font></TextField>
-                                       </children></AnchorPane>
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
                                        <children>
-                                          <TextField layoutX="-22.0" layoutY="13.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <TextArea focusTraversable="false" layoutX="14.0" layoutY="-74.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
                                        <children>
-                                          <TextField layoutX="-22.0" layoutY="13.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <TextArea focusTraversable="false" layoutX="14.0" layoutY="-64.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.rowSpan="2">
@@ -719,7 +786,8 @@
                                           <TextField alignment="CENTER" layoutX="-48.0" layoutY="2.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
-                                             </font></TextField>
+                                             </font>
+                                          </TextField>
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
@@ -740,7 +808,7 @@
                                        <children>
                                           <Label prefHeight="30.0" prefWidth="194.0" text="EXTENSION CLEARING TEST" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0" GridPane.rowIndex="2">
                                              <font>
-                                                <Font name="System Bold" size="12.0" />
+                                                <Font name="System Bold" size="11.0" />
                                              </font>
                                           </Label>
                                        </children>
@@ -751,7 +819,7 @@
                                              <children>
                                                 <Label prefHeight="32.0" prefWidth="180.0" text="INLINE LOUNGE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.rowIndex="2">
                                                    <font>
-                                                      <Font name="System Bold" size="12.0" />
+                                                      <Font name="System Bold" size="11.0" />
                                                    </font>
                                                 </Label>
                                              </children>
@@ -783,7 +851,7 @@
                                              <children>
                                                 <Label prefHeight="50.0" prefWidth="161.0" text="SHOULDER CLEARING TEST" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-52.0" AnchorPane.topAnchor="0.0" GridPane.rowIndex="2">
                                                    <font>
-                                                      <Font name="System Bold" size="12.0" />
+                                                      <Font name="System Bold" size="11.0" />
                                                    </font>
                                                 </Label>
                                              </children>
@@ -814,7 +882,8 @@
                                           <TextField alignment="CENTER" layoutX="-34.0" layoutY="14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
-                                             </font></TextField>
+                                             </font>
+                                          </TextField>
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="35.0" prefWidth="167.0" GridPane.rowIndex="6">
@@ -823,7 +892,7 @@
                                              <children>
                                                 <Label prefHeight="50.0" prefWidth="184.0" text="ACTIVE STRAIGHT-LEG RAISE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-75.0" AnchorPane.topAnchor="0.0" GridPane.rowIndex="2">
                                                    <font>
-                                                      <Font name="System Bold" size="12.0" />
+                                                      <Font name="System Bold" size="11.0" />
                                                    </font>
                                                 </Label>
                                              </children>
@@ -856,7 +925,8 @@
                                                 <Font name="System Bold" size="17.0" />
                                              </font>
                                           </TextField>
-                                       </children></AnchorPane>
+                                       </children>
+                                    </AnchorPane>
                                     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                        <children>
                                           <TextField alignment="CENTER" style="-fx-background-color: #D3D3D3;" />
@@ -892,7 +962,7 @@
                                              <children>
                                                 <Label prefHeight="30.0" prefWidth="190.0" text="TRUNK STABILITY PUSH-UP" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-81.0" AnchorPane.topAnchor="0.0" GridPane.rowIndex="2">
                                                    <font>
-                                                      <Font name="System Bold" size="12.0" />
+                                                      <Font name="System Bold" size="11.0" />
                                                    </font>
                                                 </Label>
                                              </children>
@@ -902,32 +972,32 @@
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6">
                                        <children>
-                                          <TextField layoutX="-22.0" layoutY="13.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <TextArea focusTraversable="false" layoutX="-34.0" layoutY="-75.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7">
                                        <children>
-                                          <TextField layoutX="-22.0" layoutY="13.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <TextArea focusTraversable="false" layoutX="-8.0" layoutY="-84.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="8">
                                        <children>
-                                          <TextField layoutX="-22.0" layoutY="13.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <TextArea focusTraversable="false" layoutX="-50.0" layoutY="-86.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="9">
                                        <children>
-                                          <TextField layoutX="-22.0" layoutY="13.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <TextArea focusTraversable="false" layoutX="-19.0" layoutY="-86.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="10">
                                        <children>
-                                          <TextField layoutX="-22.0" layoutY="13.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <TextArea focusTraversable="false" layoutX="-56.0" layoutY="-100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5">
                                        <children>
-                                          <TextField layoutX="-22.0" layoutY="13.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <TextArea focusTraversable="false" layoutX="-30.0" layoutY="-75.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="35.0" prefWidth="167.0" GridPane.rowIndex="9">
@@ -936,7 +1006,7 @@
                                              <children>
                                                 <Label prefHeight="50.0" prefWidth="183.0" text="ACTIVE STRAIGHT-LEG RAISE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-74.0" AnchorPane.topAnchor="0.0" GridPane.rowIndex="2">
                                                    <font>
-                                                      <Font name="System Bold" size="12.0" />
+                                                      <Font name="System Bold" size="11.0" />
                                                    </font>
                                                 </Label>
                                              </children>
@@ -966,7 +1036,7 @@
                                        <children>
                                           <Label prefHeight="30.0" prefWidth="194.0" text="EXTENSION CLEARING TEST" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0" GridPane.rowIndex="2">
                                              <font>
-                                                <Font name="System Bold" size="12.0" />
+                                                <Font name="System Bold" size="11.0" />
                                              </font>
                                           </Label>
                                        </children>
@@ -977,9 +1047,12 @@
                                        </children>
                                     </AnchorPane>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets left="50.0" right="50.0" />
+                                 </VBox.margin>
                               </GridPane>
                            </children>
-                        </AnchorPane>
+                        </VBox>
                   </content>
                 </Tab>
                   <Tab fx:id="tab1" text="Fitness Testing Data Sheet">
@@ -1031,7 +1104,7 @@
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="txfHeight1" prefHeight="25.0" prefWidth="78.0">
+                                          <TextField fx:id="txfAge2" prefHeight="25.0" prefWidth="78.0">
                                              <HBox.margin>
                                                 <Insets right="15.0" />
                                              </HBox.margin>
@@ -1043,12 +1116,12 @@
                                           </Label>
                                           <VBox alignment="CENTER_LEFT" prefHeight="50.0">
                                              <children>
-                                                <RadioButton mnemonicParsing="false" text="Male">
+                                                <RadioButton fx:id="radMale2" mnemonicParsing="false" text="Male">
                                                    <toggleGroup>
-                                                      <ToggleGroup fx:id="gender1" />
+                                                      <ToggleGroup fx:id="gender2" />
                                                    </toggleGroup>
                                                 </RadioButton>
-                                                <RadioButton mnemonicParsing="false" text="Female" toggleGroup="$gender1" />
+                                                <RadioButton fx:id="radFemale2" mnemonicParsing="false" text="Female" toggleGroup="$gender2" />
                                              </children>
                                              <HBox.margin>
                                                 <Insets right="15.0" />
@@ -1087,7 +1160,7 @@
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="txfHeight11" prefHeight="25.0" prefWidth="78.0">
+                                          <TextField fx:id="txfHeight2" prefHeight="25.0" prefWidth="78.0">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -1103,7 +1176,7 @@
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="txfHeight111" prefHeight="25.0" prefWidth="78.0" />
+                                          <TextField fx:id="txfWeight2" prefHeight="25.0" prefWidth="78.0" />
                                           <Label text="kg">
                                              <HBox.margin>
                                                 <Insets right="15.0" />
@@ -1114,7 +1187,7 @@
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="txfHeight1111" prefHeight="25.0" prefWidth="78.0" />
+                                          <TextField prefHeight="25.0" prefWidth="78.0" />
                                           <Label text="kg/m2" />
                                        </children>
                                     </HBox>
@@ -1154,7 +1227,7 @@
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="txfHeight111" prefHeight="25.0" prefWidth="78.0">
+                                                <TextField prefHeight="25.0" prefWidth="78.0">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -1170,8 +1243,8 @@
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="txfHeight1111" prefHeight="25.0" prefWidth="78.0" />
-                                                <Label text="kg">
+                                                <TextField prefHeight="25.0" prefWidth="78.0" />
+                                                <Label text="cm">
                                                    <HBox.margin>
                                                       <Insets right="15.0" />
                                                    </HBox.margin>
@@ -1185,7 +1258,7 @@
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="txfHeight1111" prefHeight="25.0" prefWidth="78.0">
+                                                <TextField prefHeight="25.0" prefWidth="78.0">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -1202,7 +1275,7 @@
                                                    </font>
                                                 </Label>
                                                 <TextField fx:id="txfHeight11111" prefHeight="25.0" prefWidth="78.0" />
-                                                <Label text="kg">
+                                                <Label text="cm">
                                                    <HBox.margin>
                                                       <Insets right="15.0" />
                                                    </HBox.margin>
@@ -1216,7 +1289,7 @@
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="txfHeight11111" prefHeight="25.0" prefWidth="78.0">
+                                                <TextField prefHeight="25.0" prefWidth="78.0">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -1314,7 +1387,7 @@
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="txfHeight1111" prefHeight="25.0" prefWidth="78.0" />
+                                          <TextField prefHeight="25.0" prefWidth="78.0" />
                                           <Label text="kg">
                                              <HBox.margin>
                                                 <Insets right="15.0" />
@@ -1325,7 +1398,7 @@
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="txfHeight111" prefHeight="25.0" prefWidth="78.0">
+                                          <TextField prefHeight="25.0" prefWidth="78.0">
                                              <HBox.margin>
                                                 <Insets right="2.0" />
                                              </HBox.margin>
@@ -1376,7 +1449,7 @@
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="txfHeight1111" prefHeight="25.0" prefWidth="70.0">
+                                          <TextField prefHeight="25.0" prefWidth="70.0">
                                              <HBox.margin>
                                                 <Insets right="2.0" />
                                              </HBox.margin>
@@ -1453,12 +1526,12 @@
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="txfHeight11113" prefHeight="25.0" prefWidth="70.0">
+                                          <TextField prefHeight="25.0" prefWidth="70.0">
                                              <HBox.margin>
                                                 <Insets right="2.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="txfHeight111311" prefHeight="25.0" prefWidth="70.0">
+                                          <TextField prefHeight="25.0" prefWidth="70.0">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -1501,13 +1574,13 @@
                                                 <Insets right="10.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <TextField fx:id="txfHeight111131" prefHeight="25.0" prefWidth="70.0">
+                                          <TextField prefHeight="25.0" prefWidth="70.0">
                                              <HBox.margin>
                                                 <Insets right="2.0" />
                                              </HBox.margin>
                                           </TextField>
                                           <Label text="cm" />
-                                          <TextField fx:id="txfHeight1113111" prefHeight="25.0" prefWidth="70.0">
+                                          <TextField prefHeight="25.0" prefWidth="70.0">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -1570,7 +1643,7 @@
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="txfHeight111111" prefHeight="25.0" prefWidth="78.0">
+                                                <TextField prefHeight="25.0" prefWidth="78.0">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -1599,7 +1672,7 @@
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="txfHeight1111" prefHeight="25.0" prefWidth="78.0">
+                                                <TextField prefHeight="25.0" prefWidth="78.0">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -1668,7 +1741,7 @@
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="txfHeight11111111" prefHeight="25.0" prefWidth="78.0">
+                                                <TextField prefHeight="25.0" prefWidth="78.0">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -1733,7 +1806,7 @@
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="txfHeight1111111" prefHeight="25.0" prefWidth="78.0">
+                                                <TextField prefHeight="25.0" prefWidth="78.0">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -1767,7 +1840,7 @@
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="txfHeight11111111" prefHeight="25.0" prefWidth="78.0">
+                                                <TextField prefHeight="25.0" prefWidth="78.0">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -1783,7 +1856,7 @@
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="txfHeight11111111" prefHeight="25.0" prefWidth="78.0" />
+                                                <TextField prefHeight="25.0" prefWidth="78.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -1799,11 +1872,6 @@
                            </VBox.margin>
                         </ScrollPane>
                      </content>
-                  </Tab>
-                  <Tab fx:id="tab3" text="Untitled Tab">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
                   </Tab>
               </tabs>
             </TabPane>
