@@ -95,6 +95,43 @@ public class AdminController implements Initializable {
             e.printStackTrace();
         }
     }
+    
+    @FXML
+    private void showSearch(ActionEvent event) {
+        String fxml = "/main/resources/view/Search.fxml";
+        
+        AnchorPane root;
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            InputStream in = LuckyLanes.class.getResourceAsStream(fxml);
+
+            loader.setBuilderFactory(new JavaFXBuilderFactory());
+            loader.setLocation(LuckyLanes.class.getResource(fxml));
+
+            try {
+                root = (AnchorPane) loader.load(in);
+            } finally {
+                in.close();
+            }
+            
+            Stage stage = new Stage();
+            stage.setTitle("Search Athlete");
+            stage.setScene(new Scene(root));
+            stage.show();
+            
+            
+            SearchController newAthlete = (SearchController)((Initializable) loader.getController());
+            //newAthlete.setStage(stage);
+            
+            stage.setOnCloseRequest((WindowEvent we) -> {
+                ((Stage) (((Node) (event.getSource())).getScene().getWindow())).show();
+            });
+            // Hide this current window (if this is what you want)
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     private void testing(ActionEvent event) {

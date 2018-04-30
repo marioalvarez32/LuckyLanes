@@ -83,5 +83,41 @@ public class NewAthleteController implements Initializable {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void createBaseballPlayer(ActionEvent event) {
+        String fxml = "/main/resources/view/bowler.fxml";
+        
+        BorderPane root;
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            InputStream in = LuckyLanes.class.getResourceAsStream(fxml);
+            
+            loader.setBuilderFactory(new JavaFXBuilderFactory());
+            loader.setLocation(LuckyLanes.class.getResource(fxml));
+
+            try {
+                root = (BorderPane) loader.load(in);
+            } finally {
+                in.close();
+            }
+            
+            Stage stage = new Stage();
+            stage.setTitle("My New Stage Title");
+            stage.setScene(new Scene(root));
+            stage.show();
+            
+            
+            BowlerController newBowler = (BowlerController)((Initializable) loader.getController());
+            newBowler.setStage(stage);
+            newBowler.createListeners();
+            stage.setOnCloseRequest((WindowEvent we) -> {
+                ((Stage) (((Node) (event.getSource())).getScene().getWindow())).show();
+            });
+            // Hide this current window (if this is what you want)
+            //((Node) (event.getSource())).getScene().getWindow().hide();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
 }

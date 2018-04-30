@@ -38,18 +38,14 @@
               </menus>
             </MenuBar>
          </top>
-         <bottom>
-            <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-         </bottom>
          <center>
             <AnchorPane BorderPane.alignment="CENTER">
                <children>
                   <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <AnchorPane prefHeight="250.0" prefWidth="200.0" style="-fx-background-color: black;" />
                         <AnchorPane>
                            <children>
-                              <GridPane alignment="CENTER" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <GridPane alignment="CENTER_LEFT" layoutY="14.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
                                 <columnConstraints>
                                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -60,16 +56,16 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button fx:id="btnNewBowler" mnemonicParsing="false" GridPane.columnIndex="1">
+                                    <Button fx:id="btnNewBowler" mnemonicParsing="false" onAction="#showSearch" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <graphic>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                                              <children>
                                                 <ImageView fitHeight="33.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../icons/edit.png" />
                                                    </image>
                                                 </ImageView>
-                                                <Label text="Edit" textFill="WHITE">
+                                                <Label text="Search" textFill="WHITE">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
@@ -78,9 +74,9 @@
                                           </HBox>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btnNewBowler1" mnemonicParsing="false" onAction="#showNewAthlete">
+                                    <Button fx:id="btnNewBowler1" mnemonicParsing="false" onAction="#showNewAthlete" GridPane.rowIndex="1">
                                        <graphic>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                                              <children>
                                                 <ImageView fitHeight="33.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -96,7 +92,18 @@
                                           </HBox>
                                        </graphic>
                                     </Button>
-                                    <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="1" />
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2">
+                                       <children>
+                                          <VBox alignment="CENTER" layoutX="188.0" layoutY="-30.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../images/logo.png" />
+                                                   </image></ImageView>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </GridPane>
                            </children>
