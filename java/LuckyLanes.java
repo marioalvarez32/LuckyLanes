@@ -21,6 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.formObjects.*;
+
 /**
  * This is the main class to start the application.
  * 
@@ -32,6 +33,7 @@ import main.formObjects.*;
 public class LuckyLanes extends Application {
     
     private Stage stage;
+    public static Database db;
     
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -154,6 +156,7 @@ public class LuckyLanes extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        db.createDatabase();
         launch(args);
     }
 
