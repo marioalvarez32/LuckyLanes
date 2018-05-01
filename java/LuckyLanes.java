@@ -117,6 +117,7 @@ public class LuckyLanes extends Application {
             
             //Send current instance of the application class to the login controller.
             root.setApp(this);
+            root.setStage(stage);
             stage.setResizable(true);
             stage.sizeToScene();
         } catch (IOException ex) {

@@ -30,11 +30,21 @@
                     <MenuItem mnemonicParsing="false" text="Delete" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
+                  <Menu mnemonicParsing="false" text="Edit">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Settings">
+                     <items>
+                      <Menu mnemonicParsing="false" text="Database">
+                        <items>
+                              <MenuItem mnemonicParsing="false" onAction="#createDatabase" text="Create" />
+                              <MenuItem mnemonicParsing="false" onAction="#openDatabase" text="Open" />
+                        </items>
+                      </Menu>
+                     </items>
+                  </Menu>
               </menus>
             </MenuBar>
          </top>

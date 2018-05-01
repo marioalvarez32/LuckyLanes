@@ -5,6 +5,7 @@
  */
 package main.java.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -18,8 +19,10 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import main.java.Database;
 import main.java.LuckyLanes;
 
 /**
@@ -32,6 +35,7 @@ import main.java.LuckyLanes;
 public class AdminController implements Initializable {
 
     private LuckyLanes app;
+    private Stage stage;
 
     @FXML
     Button btnNewBowler;
@@ -48,7 +52,7 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+
     }
 
     /**
@@ -58,16 +62,44 @@ public class AdminController implements Initializable {
     public void setApp(LuckyLanes app) {
         this.app = app;
     }
-    
-    @FXML
-    public void testThis(ActionEvent e){
-        
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
-    
+
+    @FXML
+    public void testThis(ActionEvent e) {
+        Database.createDatabase();
+    }
+
+    @FXML
+    public void createDatabase(ActionEvent e) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Database File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Database file(*.db)", "*.db"));
+        File databasePath = fileChooser.showSaveDialog(stage);
+        if (!databasePath.getName().contains(".")) {
+            databasePath = new File(databasePath.getAbsolutePath());
+        }
+        System.out.println(databasePath);
+        Database.createDatabase(databasePath.toString());
+    }
+
+    @FXML
+    public void openDatabase(ActionEvent e) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Database File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Database file(*.db)", "*.db"));
+        File databasePath = fileChooser.showOpenDialog(stage);
+
+        System.out.println(databasePath);
+        Database.connect(databasePath.toString());
+    }
+
     @FXML
     private void showNewAthlete(ActionEvent event) {
         String fxml = "/main/resources/view/newAthlete.fxml";
-        
+
         AnchorPane root;
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -81,16 +113,15 @@ public class AdminController implements Initializable {
             } finally {
                 in.close();
             }
-            
+
             Stage stage = new Stage();
             stage.setTitle("My New Stage Title");
             stage.setScene(new Scene(root));
             stage.show();
-            
-            
-            NewAthleteController newAthlete = (NewAthleteController)((Initializable) loader.getController());
+
+            NewAthleteController newAthlete = (NewAthleteController) ((Initializable) loader.getController());
             newAthlete.setStage(stage);
-            
+
             stage.setOnCloseRequest((WindowEvent we) -> {
                 ((Stage) (((Node) (event.getSource())).getScene().getWindow())).show();
             });
@@ -100,11 +131,11 @@ public class AdminController implements Initializable {
             e.printStackTrace();
         }
     }
-    
+
     @FXML
     private void showSearch(ActionEvent event) {
         String fxml = "/main/resources/view/Search.fxml";
-        
+
         AnchorPane root;
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -118,16 +149,15 @@ public class AdminController implements Initializable {
             } finally {
                 in.close();
             }
-            
+
             Stage stage = new Stage();
             stage.setTitle("Search Athlete");
             stage.setScene(new Scene(root));
             stage.show();
-            
-            
-            SearchController newAthlete = (SearchController)((Initializable) loader.getController());
+
+            SearchController newAthlete = (SearchController) ((Initializable) loader.getController());
             //newAthlete.setStage(stage);
-            
+
             stage.setOnCloseRequest((WindowEvent we) -> {
                 ((Stage) (((Node) (event.getSource())).getScene().getWindow())).show();
             });
