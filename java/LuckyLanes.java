@@ -33,12 +33,17 @@ import main.formObjects.*;
 public class LuckyLanes extends Application {
     
     private Stage stage;
-    public static Database db;
+    public static Database db = new Database();
     
     @Override
     public void start(Stage primaryStage) throws Exception {
+<<<<<<< Updated upstream
         //db.createDatabase();
         //Database.connect();
+=======
+        db.connect();
+
+>>>>>>> Stashed changes
         /*
         testing Aerobic class
         Aerobic ar = new Aerobic(19, "male");

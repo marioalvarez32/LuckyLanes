@@ -14,7 +14,7 @@ public class Database {
     
     // driver name and database
     static final String DRIVER = "org.h2.Driver";
-    static final String URL = "jdbc:h2:~/Lucky";
+    static final String URL = "jdbc:h2:~/Lucky_Lane";
     
     // database credentials
     static final String USERNAME = "LuckyLanes";
