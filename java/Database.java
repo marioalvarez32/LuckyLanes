@@ -34,13 +34,14 @@ public class Database {
      */
     public static void connect(String url){
         URL = "jdbc:h2:file:" +url;
-        
+        URL = URL.split("\\.",2)[0];
+        System.out.println("URL IS:" +URL);
         try {
             System.out.println("Grabbing driver...");
             Class.forName(DRIVER);
             
             System.out.println("Connecting to the database...");
-            conn = DriverManager.getConnection("jdbc:h2:file:"+url, USERNAME, PASSWORD);
+            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             System.out.println("Connected...");
         } catch (SQLException ex) {
            System.out.println("Connection was unsuccessful.");
@@ -85,11 +86,11 @@ public class Database {
             
             // add in athlete table
             state = conn.createStatement();
-            sql = "CREATE TABLE ATHLETE (ID INT PRIMARY KEY, name VARCHAR(255), "
+            sql = "CREATE TABLE ATHLETE (ID INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), "
                     + "date VARCHAR(255), dateOfBirth VARCHAR(255), address VARCHAR(255), city VARCHAR(255), "
                     + "state VARCHAR(255), zip int, phone VARCHAR(255), school VARCHAR(255), "
-                    + "height doublt, weight double, age int, gender VARCHAR(255), handDominance "
-                    + "VARCHAR(255), legDominance VARCHAR(255), primarySport VARCHAR(255), primaryPosition VARCHAR(255);";
+                    + "height double, weight double, age int, gender VARCHAR(255), handDominance "
+                    + "VARCHAR(255), legDominance VARCHAR(255), primarySport VARCHAR(255), primaryPosition VARCHAR(255));";
             state.execute(sql);
             System.out.println("Created a table...");
             
@@ -98,7 +99,7 @@ public class Database {
             state.close();
             conn.close();
         } catch (SQLException ex) {
-           System.out.println("Connection was unsuccessful.");
+           ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
             System.out.println("Driver detection was unsuccessful.");
         }

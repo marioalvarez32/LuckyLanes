@@ -298,7 +298,6 @@ public class Athlete {
     public void addRow() {
         String sql;
         sql = "INSERT INTO ATHLETE VALUES("
-                + "need to generate the ID number."
                 + name + ","
                 + date.toString() + ","
                 + dateOfBirth.toString() + ","
