@@ -344,13 +344,13 @@ public class BowlerController implements Initializable {
                 return "";
             }
     }
-     private String maxValue(String t1, String t2){
+     private String minValue(String t1, String t2){
         double a, b;
             try{
                 a=Double.parseDouble(t1);
                 b=Double.parseDouble(t2);
                 
-                if(a>=b){
+                if(a<=b){
                     return ""+(int)a;
                 }else{
                     return ""+(int)b;
@@ -500,7 +500,7 @@ public class BowlerController implements Initializable {
             if (tgHurdleStepR.getSelectedToggle() != null && tgHurdleStepL.getSelectedToggle() != null) {
                ToggleButton r= ((ToggleButton)newToggle);
                ToggleButton l= ((ToggleButton)tgHurdleStepL.getSelectedToggle());
-                txfHurdleStep.setText(maxValue(l.getText(),r.getText()));
+                txfHurdleStep.setText(minValue(l.getText(),r.getText()));
                 
             }
         });
@@ -509,7 +509,7 @@ public class BowlerController implements Initializable {
             if (tgHurdleStepR.getSelectedToggle() != null && tgHurdleStepL.getSelectedToggle() != null) {
                ToggleButton l= ((ToggleButton)newToggle);
                ToggleButton r= ((ToggleButton)tgHurdleStepR.getSelectedToggle());
-                txfHurdleStep.setText(maxValue(l.getText(),r.getText()));
+                txfHurdleStep.setText(minValue(l.getText(),r.getText()));
                 
             }
         });

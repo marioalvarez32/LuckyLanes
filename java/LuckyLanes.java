@@ -37,6 +37,8 @@ public class LuckyLanes extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception {
+        //db.createDatabase();
+        //Database.connect();
         /*
         testing Aerobic class
         Aerobic ar = new Aerobic(19, "male");
@@ -156,7 +158,6 @@ public class LuckyLanes extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        db.createDatabase();
         launch(args);
     }
 

@@ -58,7 +58,12 @@ public class AdminController implements Initializable {
     public void setApp(LuckyLanes app) {
         this.app = app;
     }
-
+    
+    @FXML
+    public void testThis(ActionEvent e){
+        
+    }
+    
     @FXML
     private void showNewAthlete(ActionEvent event) {
         String fxml = "/main/resources/view/newAthlete.fxml";
