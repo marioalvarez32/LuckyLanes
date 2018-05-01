@@ -90,10 +90,33 @@ public class Database {
                     + "date VARCHAR(255), dateOfBirth VARCHAR(255), address VARCHAR(255), city VARCHAR(255), "
                     + "state VARCHAR(255), zip int, phone VARCHAR(255), school VARCHAR(255), "
                     + "height double, weight double, age int, gender VARCHAR(255), handDominance "
-                    + "VARCHAR(255), legDominance VARCHAR(255), primarySport VARCHAR(255), primaryPosition VARCHAR(255));";
+                    + "VARCHAR(255), legDominance VARCHAR(255), primarySport VARCHAR(255), primaryPosition VARCHAR(255));";           
             state.execute(sql);
             System.out.println("Created a table...");
+          
+            for(int i = 0; i<50; i++) {
+            sql = "INSERT INTO ATHLETE VALUES (null, 'Nicole', '2/3/19', '12/11/1994',"
+                    + "'a box', 'whitewater', 'wi', 53045, '208-5039', 'UW-Whitewater',"
+                    + "5.3, 10000000, 23, 'female', 'right', 'left', 'eating', 'front end');";
+            state.executeUpdate(sql);
+            }
             
+            sql = "SELECT name, school, zip FROM ATHLETE;";
+            ResultSet rs = state.executeQuery(sql);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columns = rsmd.getColumnCount();
+            while(rs.next()) {
+                for(int j = 1; j <= columns; j++) {
+                    if(j>1) {
+                        System.out.println(", "); 
+                    }
+                    String colVal = rs.getString(j);
+                    System.out.print(colVal + " " + rsmd.getColumnName(j));
+                }
+                System.out.println("");
+            }
+            System.out.println("Executed Query....");
+
             // close database 
             System.out.println("Closing the database...");
             state.close();

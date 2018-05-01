@@ -7,7 +7,9 @@ package main.java.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 /**
@@ -17,6 +19,8 @@ import javafx.stage.Stage;
  */
 public class SearchController implements Initializable {
 
+    @FXML TableView table;
+    
     /**
      * Initializes the controller class.
      */
