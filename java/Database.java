@@ -5,6 +5,8 @@
  */
 package main.java;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,30 +16,32 @@ public class Database {
     
     // driver name and database
     static final String DRIVER = "org.h2.Driver";
-    static final String URL = "jdbc:h2:file:C:\\Users\\Mario\\Desktop\\Database testing\\Lucky";
+    static String URL = "jdbc:h2:~/LuckyLanes";
     
     // database credentials
-    static final String USERNAME = "LuckyLanes";
-    static final String PASSWORD = "lucky";
+    static String USERNAME = "luckylanes";
+    static String PASSWORD = "lucky";
     
-    /* Function:    Connect
+    public static Connection conn = null;
+    public static Statement state = null;
+
+    
+    /**Function:    Connect
      * Return:      Void
      * Parameters:  None
      * Description: Will set up a connection to the
      *              database.
      */
-    public static void connect(String path){
+    public static void connect(String url){
+        URL = "jdbc:h2:file:" +url;
+        
         try {
             System.out.println("Grabbing driver...");
             Class.forName(DRIVER);
             
             System.out.println("Connecting to the database...");
-            Connection conn;
-            conn = DriverManager.getConnection("jdbc:h2:file:"+path, USERNAME, PASSWORD);
+            conn = DriverManager.getConnection("jdbc:h2:file:"+url, USERNAME, PASSWORD);
             System.out.println("Connected...");
-            // close database 
-            System.out.println("Closing the database...");
-            conn.close();
         } catch (SQLException ex) {
            System.out.println("Connection was unsuccessful.");
         } catch (ClassNotFoundException ex) {
@@ -46,37 +50,31 @@ public class Database {
             e.printStackTrace();
         }
     }
-    public static void connect() {
+    
+    /**Function:    Close
+     * Return:      Void
+     * Parameters:  None
+     * Description: Will close the connection to the databse.
+     */
+    public static void close() {
+        // close database
         try {
-            System.out.println("Grabbing driver...");
-            Class.forName(DRIVER);
-            
-            System.out.println("Connecting to the database...");
-            Connection conn;
-            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            System.out.println("Connected...");
-            // close database 
-         //   System.out.println("Closing the database...");
-           // conn.close();
+            System.out.println("Closing the database...");
+            conn.close();
         } catch (SQLException ex) {
-           System.out.println("Connection was unsuccessful.");
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Driver detection was unsuccessful.");
-        } catch (Exception e){
-            e.printStackTrace();
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
    
-    /* Function:    createDatabase
-     * Return:      Void
+    /**Function:    createDatabase
+     * Return:      Void, none.
      * Parameters:  None
      * Description: Will create the database and tables of the database
      */
-    public static void createDatabase() {
+    public static void createDatabase(String url) {
         // declare variables
-        Connection conn = null;
-        Statement state = null;
         String sql;
+        URL = "jdbc:h2:file:" +url;
         
         try {
             // grab driver
@@ -87,7 +85,11 @@ public class Database {
             
             // add in athlete table
             state = conn.createStatement();
-            sql = "CREATE TABLE ATHLETE (ID INT PRIMARY KEY, name VARCHAR(255), address VARCHAR(255), date int, dateOfBirth int, phone VARCHAR(255), school VARCHAR(255), gender VARCHAR(255), age int, weight double);";
+            sql = "CREATE TABLE ATHLETE (ID INT PRIMARY KEY, name VARCHAR(255), "
+                    + "date VARCHAR(255), dateOfBirth VARCHAR(255), address VARCHAR(255), city VARCHAR(255), "
+                    + "state VARCHAR(255), zip int, phone VARCHAR(255), school VARCHAR(255), "
+                    + "height doublt, weight double, age int, gender VARCHAR(255), handDominance "
+                    + "VARCHAR(255), legDominance VARCHAR(255), primarySport VARCHAR(255), primaryPosition VARCHAR(255);";
             state.execute(sql);
             System.out.println("Created a table...");
             
@@ -101,33 +103,27 @@ public class Database {
             System.out.println("Driver detection was unsuccessful.");
         }
     }
-    public static void createDatabase(String path) {
-        // declare variables
-        Connection conn = null;
-        Statement state = null;
-        String sql;
-        
+    
+    /**Function:    executeUpdate
+     * Return:      Void, none.
+     * Parameters:  String sql - the sql statement
+     *              that will be executed.
+     * Description: insert, update, delete functions
+     *              of SQL statements will be executed
+     */
+    public static void executeUpdate(String sql) {
         try {
-            // grab driver
-            Class.forName(DRIVER);
+            // connect
+            connect(URL);
             
-            // create a database of the following credentials
-            conn = DriverManager.getConnection("jdbc:h2:file:"+path, USERNAME, PASSWORD);
-            
-            // add in athlete table
+            // execute the SQL statement
             state = conn.createStatement();
-            sql = "CREATE TABLE ATHLETE (ID INT PRIMARY KEY, name VARCHAR(255), address VARCHAR(255), date int, dateOfBirth int, phone VARCHAR(255), school VARCHAR(255), gender VARCHAR(255), age int, weight double);";
-            state.execute(sql);
-            System.out.println("Created a table...");
+            state.executeUpdate(sql);
             
-            // close database 
-            System.out.println("Closing the database...");
-            state.close();
-            conn.close();
+            // close the database
+            close();
         } catch (SQLException ex) {
-           System.out.println("Connection was unsuccessful.");
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Driver detection was unsuccessful.");
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

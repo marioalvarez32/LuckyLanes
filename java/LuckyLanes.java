@@ -37,8 +37,6 @@ public class LuckyLanes extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //db.createDatabase();
-        //Database.connect();
         /*
         testing Aerobic class
         Aerobic ar = new Aerobic(19, "male");

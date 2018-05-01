@@ -33,7 +33,8 @@ import main.java.LuckyLanes;
  * @author Mario
  */
 public class AdminController implements Initializable {
-
+    
+    private Database db;
     private LuckyLanes app;
     private Stage stage;
 
@@ -69,14 +70,13 @@ public class AdminController implements Initializable {
 
     @FXML
     public void testThis(ActionEvent e) {
-        Database.createDatabase();
     }
 
     @FXML
     public void createDatabase(ActionEvent e) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Database File");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Database file(*.db)", "*.db"));
+      //  fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Database file(*.db)", "*.db"));
         File databasePath = fileChooser.showSaveDialog(stage);
         if (!databasePath.getName().contains(".")) {
             databasePath = new File(databasePath.getAbsolutePath());
@@ -89,7 +89,7 @@ public class AdminController implements Initializable {
     public void openDatabase(ActionEvent e) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Database File");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Database file(*.db)", "*.db"));
+     //   fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Database file(*.db)", "*.db"));
         File databasePath = fileChooser.showOpenDialog(stage);
 
         System.out.println(databasePath);

@@ -292,5 +292,32 @@ public class Athlete {
         this.primaryPosition = primaryPosition;
     }
 
-
+    /**
+     * 
+     */
+    public void addRow() {
+        String sql;
+        sql = "INSERT INTO ATHLETE VALUES("
+                + "need to generate the ID number."
+                + name + ","
+                + date.toString() + ","
+                + dateOfBirth.toString() + ","
+                + address + ","
+                + city + ","
+                + state + ","
+                + Integer.toString(zip) + ","
+                + phone + ","
+                + school + ","
+                + Double.toString(height) + ","
+                + Double.toString(weight) + ","
+                + Integer.toString(age) + ","
+                + gender + ","
+                + handDominance + ","
+                + legDominance + ","
+                + primarySport + ","
+                + primaryPosition + ","
+                + ");";
+        Database.executeUpdate(sql);
+    }
 }
+
