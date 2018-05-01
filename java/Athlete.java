@@ -13,25 +13,43 @@ import java.util.Date;
  */
 public class Athlete {
     private String name;
-    private String address;
     private Date date;
     private Date dateOfBirth;
+    private String address;
+    private String city;
+    private String state;
+    private int zip;
     private String phone;
     private String school;
-    private String gender;
-    private int age;
+    private double height;
     private double weight;
+    private int age;
+    private String gender;
+    private String handDominance;
+    private String legDominance;
+    private String primarySport;
+    private String primaryPosition;
+
     
     public Athlete(){
         this.name = "";
+        this.date = null;
+        this.dateOfBirth = null;
         this.address = "";
-        this.date = null;
-        this.date = null;
+        this.city = "";
+        this.state = "";
+        this.zip = 0;
         this.phone = "";
         this.school = "";
-        this.gender = "";
-        this.age = 0;
+        this.height = 0;
         this.weight = 0;
+        this.age = 0;
+        this.gender = "";
+        this.handDominance = "";
+        this.legDominance = "";
+        this.primarySport = "";
+        this.primaryPosition = "";
+ 
     }
     
       
@@ -48,21 +66,7 @@ public class Athlete {
     public void setName(String name) {
         this.name = name;
     }
-
-    /**
-     * @return the address
-     */
-    public String getAddress() {
-        return address;
-    }
-
-    /**
-     * @param address the address to set
-     */
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
+    
     /**
      * @return the date
      */
@@ -92,6 +96,63 @@ public class Athlete {
     }
 
     /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    
+    /**
+     * @return the city
+     */
+    public String getCity() {
+        return city;
+    }
+    
+    /**
+     * @param city the city to set
+     */
+    public void setCity(String city) {
+        this.city = city;
+    }
+    
+        /**
+     * @return the state
+     */
+    public String getState() {
+        return state;
+    }
+    
+    /**
+     * @param state the state to set
+     */
+    public void setState(String state) {
+        this.state = state;
+    }
+    
+    /**
+     * @return the zip
+     */
+    public int getZip() {
+        return zip;
+    }
+    
+    /**
+     * @param zip the zip to set
+     */
+    public void setZip(int zip) {
+        this.zip = zip;
+    }
+    
+    /**
      * @return the phone
      */
     public String getPhone() {
@@ -120,6 +181,48 @@ public class Athlete {
     }
 
     /**
+     * @return the height
+     */
+    public double getHeight() {
+        return height;
+    }
+    
+    /**
+     * @param height the height to set
+     */
+    public void setHeight(double height) {
+        this.height = height;
+    }
+    
+    /**
+     * @return the weight
+     */
+    public double getWeight() {
+        return weight;
+    }
+
+    /**
+     * @param weight the weight to set
+     */
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+        
+    /**
+     * @return the age
+     */
+    public int getAge() {
+        return age;
+    }
+
+    /**
+     * @param age the age to set
+     */
+    public void setAge(int age) {
+        this.age = age;
+    }
+    
+    /**
      * @return the gender
      */
     public String getGender() {
@@ -134,31 +237,60 @@ public class Athlete {
     }
 
     /**
-     * @return the age
+     * @return the handDominance
      */
-    public int getAge() {
-        return age;
+    public String getHandDominance() {
+        return handDominance;
     }
 
     /**
-     * @param age the age to set
+     * @param handDominance the handDominance to set
      */
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    /**
-     * @return the weight
-     */
-    public double getWeight() {
-        return weight;
-    }
-
-    /**
-     * @param weight the weight to set
-     */
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public void setHandDominance(String handDominance) {
+        this.handDominance = handDominance;
     }
     
+    /**
+     * @return the legDominance
+     */
+    public String getLegDominance() {
+        return legDominance;
+    }
+
+    /**
+     * @param legDominance the legDominace to set
+     */
+    public void setLegDominance(String legDominance) {
+        this.legDominance = legDominance;
+    }
+    
+     /**
+     * @return the primarySport
+     */
+    public String getPrimarySport() {
+        return primarySport;
+    }
+
+    /**
+     * @param primarySport the primarySport to set
+     */
+    public void setPrimarySport(String primarySport) {
+        this.primarySport = primarySport;
+    }
+    
+    /**
+     * @return the primaryPosition
+     */
+    public String getPrimaryPosition() {
+        return primaryPosition;
+    }
+
+    /**
+     * @param primaryPosition the primaryPosition to set
+     */
+    public void setPrimaryPosition(String primaryPosition) {
+        this.primaryPosition = primaryPosition;
+    }
+
+
 }
