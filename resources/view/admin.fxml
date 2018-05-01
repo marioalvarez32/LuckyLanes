@@ -104,6 +104,7 @@
                                           </VBox>
                                        </children>
                                     </AnchorPane>
+                                    <Button mnemonicParsing="false" onAction="#testThis" text="Testing Button" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
