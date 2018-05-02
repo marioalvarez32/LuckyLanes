@@ -93,14 +93,14 @@ public class Database {
                     + "VARCHAR(255), legDominance VARCHAR(255), primarySport VARCHAR(255), primaryPosition VARCHAR(255));";           
             state.execute(sql);
             System.out.println("Created a table...");
-          
+            
             for(int i = 0; i<50; i++) {
             sql = "INSERT INTO ATHLETE VALUES (null, 'Nicole', '2/3/19', '12/11/1994',"
                     + "'a box', 'whitewater', 'wi', 53045, '208-5039', 'UW-Whitewater',"
                     + "5.3, 10000000, 23, 'female', 'right', 'left', 'eating', 'front end');";
             state.executeUpdate(sql);
             }
-            
+
             sql = "SELECT name, school, zip FROM ATHLETE;";
             ResultSet rs = state.executeQuery(sql);
             ResultSetMetaData rsmd = rs.getMetaData();

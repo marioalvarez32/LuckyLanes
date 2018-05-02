@@ -13,8 +13,8 @@ import java.util.Date;
  */
 public class Athlete {
     private String name;
-    private Date date;
-    private Date dateOfBirth;
+    private String date;
+    private String dateOfBirth;
     private String address;
     private String city;
     private String state;
@@ -29,8 +29,30 @@ public class Athlete {
     private String legDominance;
     private String primarySport;
     private String primaryPosition;
-
     
+    
+    
+    
+ public Athlete(String name,String date,String dateOfBirth,String address,String city,String state,int zip,String phone,String school,double height,double weight,int age,String gender,String handDominance,String legDominance,String primarySport,String primaryPosition){
+        this.name = name;
+        this.date = date;
+        this.dateOfBirth = dateOfBirth;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.phone = phone;
+        this.school = school;
+        this.height = height;
+        this.weight = weight;
+        this.age = age;
+        this.gender = gender;
+        this.handDominance = handDominance;
+        this.legDominance = legDominance;
+        this.primarySport = primarySport;
+        this.primaryPosition = primaryPosition;
+ 
+    }
     public Athlete(){
         this.name = "";
         this.date = null;
@@ -70,28 +92,28 @@ public class Athlete {
     /**
      * @return the date
      */
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
     /**
      * @param date the date to set
      */
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
     /**
      * @return the dateOfBirth
      */
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
     /**
      * @param dateOfBirth the dateOfBirth to set
      */
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
