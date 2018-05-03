@@ -7,19 +7,23 @@ package main.java.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import main.java.Database;
 
 /**
  * FXML Controller class
  *
- * @author Mario
+ * @author nicolenelson
  */
 public class SearchController implements Initializable {
 
     @FXML TableView table;
+    private ObservableList<ObservableList> data;
     
     /**
      * Initializes the controller class.
@@ -29,4 +33,13 @@ public class SearchController implements Initializable {
         // TODO
     }    
     
+    
+    public void button() {
+        
+    }
+    
+    public void buildData() {
+        data = FXCollections.observableArrayList();
+        
+    }
 }

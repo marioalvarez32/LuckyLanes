@@ -888,6 +888,7 @@ public class BowlerController implements Initializable {
         String legDominance = (dominance.getSelectedToggle() != null) ? ((ToggleButton) dominance.getSelectedToggle()).getText() : "-";
         String primarySport = txfPrimarySport.getText();
         String primaryPosition = txfPrimaryPosition.getText();
+<<<<<<< HEAD
 
         return new Athlete(name, date, dateOfBirth, address, city, state, zip, phone, school, height, weight, age, gender, handDominance, legDominance, primarySport, primaryPosition);
 
@@ -920,5 +921,14 @@ public class BowlerController implements Initializable {
 
         return new Athlete(name, date, dateOfBirth, address, city, state, zip, phone, school, height, weight, age, gender, handDominance, legDominance, primarySport, primaryPosition);
 
+=======
+        
+        Athlete temp = new Athlete(name, date, dateOfBirth, address, city, state,zip, phone, school, height,weight,age, gender, handDominance, legDominance, primarySport, primaryPosition);
+        
+        //Try with a catch if you get exceptions.
+         temp.addRow();
+        
+        System.out.println("Did Stuff");
+>>>>>>> 7966b238964f5dbd966495371d7d3e11dae08dd1
     }
 }

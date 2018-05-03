@@ -7,10 +7,17 @@ package main.java;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
  * @author nicolenelson
+ * this class holds the functions pertaining to the database, including
+ * creating a database, opening a connection to the database, closing 
+ * the connection to the database, executing an insert/delete sql statement,
+ * and executing an sql query. 
+ * 
  */
 public class Database {
     
@@ -28,14 +35,37 @@ public class Database {
     
     /**Function:    Connect
      * Return:      Void
-     * Parameters:  None
+     * Parameters:  String - url
      * Description: Will set up a connection to the
      *              database.
      */
     public static void connect(String url){
         URL = "jdbc:h2:file:" +url;
         URL = URL.split("\\.",2)[0];
-        System.out.println("URL IS:" +URL);
+        System.out.println("URL ON CONNECT:" +URL);
+        try {
+            System.out.println("Grabbing driver...");
+            Class.forName(DRIVER);
+            
+            System.out.println("Connecting to the database...");
+            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            System.out.println("Connected...");
+        } catch (SQLException ex) {
+           System.out.println("Connection was unsuccessful.");
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Driver detection was unsuccessful.");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+        /**Function:    Connect
+         * Return:      Void
+         * Parameters:  None
+         * Description: Will set up a connection to the
+         *              database, no parameter needed.
+         */
+        public static void connect(){
+        System.out.println("URL ON CONNECT, NO PARAM:" +URL);
         try {
             System.out.println("Grabbing driver...");
             Class.forName(DRIVER);
@@ -59,6 +89,7 @@ public class Database {
      */
     public static void close() {
         // close database
+        
         try {
             System.out.println("Closing the database...");
             conn.close();
@@ -76,7 +107,7 @@ public class Database {
         // declare variables
         String sql;
         URL = "jdbc:h2:file:" +url;
-        
+        System.out.println("The url upon creating: " +URL);
         try {
             // grab driver
             Class.forName(DRIVER);
@@ -108,12 +139,12 @@ public class Database {
             while(rs.next()) {
                 for(int j = 1; j <= columns; j++) {
                     if(j>1) {
-                        System.out.println(", "); 
+              //          System.out.println(", "); 
                     }
                     String colVal = rs.getString(j);
-                    System.out.print(colVal + " " + rsmd.getColumnName(j));
+             //       System.out.print(colVal + " " + rsmd.getColumnName(j));
                 }
-                System.out.println("");
+             //   System.out.println("");
             }
             System.out.println("Executed Query....");
 
@@ -136,9 +167,11 @@ public class Database {
      *              of SQL statements will be executed
      */
     public static void executeUpdate(String sql) {
+        System.out.println("THE ON EXECUTE: " +URL);
+
         try {
             // connect
-            connect(URL);
+            connect();
             
             // execute the SQL statement
             state = conn.createStatement();
