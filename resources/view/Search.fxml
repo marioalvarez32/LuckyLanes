@@ -37,43 +37,49 @@
                               <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0">
                                  <children>
                                     <Label text="Name: " />
-                                    <TextField />
+                                    <TextField fx:id="txtName" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0">
                                  <children>
                                     <Label text="Address:" />
-                                    <TextField />
+                                    <TextField fx:id="txtAddress" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0">
                                  <children>
                                     <Label text="State" />
-                                    <TextField />
+                                    <TextField fx:id="txtState" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0">
                                  <children>
                                     <Label text="City:" />
-                                    <TextField />
+                                    <TextField fx:id="txtCity" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0">
                                  <children>
                                     <Label text="Zip:" />
-                                    <TextField />
+                                    <TextField fx:id="txtZip" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0">
                                  <children>
                                     <Label text="School:" />
-                                    <TextField />
+                                    <TextField fx:id="txtSchool" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0">
                                  <children>
                                     <Label text="Sport:" />
-                                    <TextField />
+                                    <TextField fx:id="txtSport" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="ID:" />
+                                    <TextField fx:id="txtID" />
                                  </children>
                               </HBox>
                            </children>
@@ -95,10 +101,10 @@
                           <columns>
                             <TableColumn prefWidth="75.0" text="ID Code" />
                             <TableColumn prefWidth="75.0" text="Name" />
-                              <TableColumn prefWidth="75.0" text="Address" />
                               <TableColumn prefWidth="75.0" text="State" />
                               <TableColumn prefWidth="75.0" text="Zip" />
                               <TableColumn prefWidth="75.0" text="School" />
+                              <TableColumn prefWidth="75.0" text="Address" />
                           </columns>
                            <VBox.margin>
                               <Insets top="30.0" />

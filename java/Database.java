@@ -7,8 +7,12 @@ package main.java;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.util.Callback;
 
 /**
  *
@@ -182,5 +186,22 @@ public class Database {
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public static ResultSet searchQuery(String sql) {        
+        // connection to database
+        connect();
+        ResultSet rs = null;
+        
+        try {
+            // call the sql query, place in RS.
+            state = conn.createStatement();
+            rs = state.executeQuery(sql);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return rs;
     }
 }
