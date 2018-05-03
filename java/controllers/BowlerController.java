@@ -859,43 +859,13 @@ public class BowlerController implements Initializable {
     private void finishDataCollection(ActionEvent e) {
 
         //Try with a catch if you get exceptions.
-        Athlete temp = createAthlete();
+        //Athlete temp = createAthlete();
 
         System.out.println("Did Stuff");
     }
 
     //Create Athlete object.
-    private Athlete createAthlete() {
-
-        /**
-         * **************Athlete Creation********************
-         */
-        String name = txfName.getText();
-        String date = lblDate.getText();
-        String dateOfBirth = dpDate.getValue().toString();
-        String address = txfAddress.getText();
-        String city = txfCity.getText();
-        String state = cbState.getValue().toString();
-        int zip = (txfZip.getText().equals("") ? 0 : Integer.parseInt(txfZip.getText()));
-        String phone = txfPhone.getText();
-        String school = txfSchool.getText();
-        double height = (txfHeight.getText().equals("") ? 0 : Double.parseDouble(txfHeight.getText()));
-        double weight = (txfWeight.getText().equals("") ? 0 : Double.parseDouble(txfWeight.getText()));
-        int age = (txfAge.getText().equals("") ? 0 : Integer.parseInt(txfAge.getText()));
-
-        String gender = (tgGender.getSelectedToggle() != null) ? ((ToggleButton) tgGender.getSelectedToggle()).getText() : "-";
-        String handDominance = (dominance.getSelectedToggle() != null) ? ((ToggleButton) dominance.getSelectedToggle()).getText() : "-";
-        String legDominance = (dominance.getSelectedToggle() != null) ? ((ToggleButton) dominance.getSelectedToggle()).getText() : "-";
-        String primarySport = txfPrimarySport.getText();
-        String primaryPosition = txfPrimaryPosition.getText();
-<<<<<<< HEAD
-
-        return new Athlete(name, date, dateOfBirth, address, city, state, zip, phone, school, height, weight, age, gender, handDominance, legDominance, primarySport, primaryPosition);
-
-    }
-
-    //Create Athlete object.
-    private Athlete createAthlete2() {
+    private void createAthlete() {
 
         /**
          * **************Athlete Creation********************
@@ -919,16 +889,13 @@ public class BowlerController implements Initializable {
         String primarySport = txfPrimarySport.getText();
         String primaryPosition = txfPrimaryPosition.getText();
 
-        return new Athlete(name, date, dateOfBirth, address, city, state, zip, phone, school, height, weight, age, gender, handDominance, legDominance, primarySport, primaryPosition);
 
-=======
-        
         Athlete temp = new Athlete(name, date, dateOfBirth, address, city, state,zip, phone, school, height,weight,age, gender, handDominance, legDominance, primarySport, primaryPosition);
         
         //Try with a catch if you get exceptions.
-         temp.addRow();
+        temp.addRow();
         
         System.out.println("Did Stuff");
->>>>>>> 7966b238964f5dbd966495371d7d3e11dae08dd1
+
     }
 }
