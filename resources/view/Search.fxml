@@ -82,6 +82,7 @@
                                     <TextField fx:id="txtID" />
                                  </children>
                               </HBox>
+                              <Button fx:id="buttonSubmit" mnemonicParsing="false" onAction="#buildData" text="Submit" />
                            </children>
                            <padding>
                               <Insets right="10.0" top="50.0" />
@@ -98,14 +99,6 @@
                   <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <TableView fx:id="table" layoutY="30.0" prefHeight="545.0" prefWidth="588.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="ID Code" />
-                            <TableColumn prefWidth="75.0" text="Name" />
-                              <TableColumn prefWidth="75.0" text="State" />
-                              <TableColumn prefWidth="75.0" text="Zip" />
-                              <TableColumn prefWidth="75.0" text="School" />
-                              <TableColumn prefWidth="75.0" text="Address" />
-                          </columns>
                            <VBox.margin>
                               <Insets top="30.0" />
                            </VBox.margin>

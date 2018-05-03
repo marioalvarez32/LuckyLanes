@@ -15,8 +15,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -40,7 +42,9 @@ public class SearchController implements Initializable {
     @FXML TextField txtCity;
     @FXML TextField txtSchool;
     @FXML TextField txtSport;
+    @FXML TextField txtZip;
     @FXML TextField txtID;
+    @FXML Button buttonSubmit;
     
     // variables for sql/database
     private ObservableList<ObservableList> data;
@@ -53,17 +57,23 @@ public class SearchController implements Initializable {
         // TODO
     }    
     
-    public void buildData() {
+    @FXML 
+    public void buildData(ActionEvent e) {
+        for(int i = 0; i < table.getItems().size(); i++) {
+            table.getItems().clear();
+        }
+        System.out.println("Running");
         // prepare SQL statement
         String SQL= "SELECT name, address, school FROM ATHLETE WHERE "
-                + "(name = '" +txtName.getText() +"' or name is null) "
-                + "(&& address = '" +txtName.getText() +"' or address is null) "
-                + "(&& state = '" +txtName.getText() +"' or state is null) "
-                + "(&& city = '" +txtName.getText() +"' or city is null) "
-                + "(&& zip = " +txtName.getText() +" or zip is null) "
-                + "(&& school = '" +txtName.getText() +"' or school is null) "
-                + "(&& sport = '" +txtName.getText() +"' or sport is null) "
-                + "(&& ID = " +txtName.getText() +" or ID is null) "; // data to grab
+                + "(UPPER(name) LIKE UPPER('%" +txtName.getText() +"%') or name is null) "
+                + "and (UPPER(address) LIKE UPPER('%" +txtAddress.getText() +"%') or address is null) "
+                + "and (UPPER(state) LIKE UPPER('%" +txtState.getText() +"%') or state is null) "
+                + "and (UPPER(city) LIKE UPPER('%" +txtCity.getText() +"%') or city is null) "
+                + "and (zip LIKE ('%" +txtZip.getText() +"%') or zip is null) "
+                + "and (UPPER(school) LIKE UPPER('%" +txtSchool.getText() +"%') or school is null) "
+                + "and (UPPER(primarysport) LIKE UPPER('%" +txtSport.getText() +"%') or primarysport is null) "
+                + "and (ID LIKE ('%" +txtID.getText() +"') or ID is null) "; // data to grab
+        
         
         // grab the result set of the equation
         ResultSet rs = Database.searchQuery(SQL);
