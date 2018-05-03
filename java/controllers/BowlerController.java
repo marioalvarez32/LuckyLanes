@@ -32,9 +32,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import main.java.Athlete;
+import main.java.scene.control.TextFieldRequired;
 
 /**
  * FXML Controller class
@@ -74,35 +81,35 @@ public class BowlerController implements Initializable {
      * **************************************************************************
      */
     @FXML
-    TextField txfName;
+    TextFieldRequired txfName;
     @FXML
     Label lblDate;
     @FXML
     DatePicker dpDate;
     @FXML
-    TextField txfAddress;
+    TextFieldRequired txfAddress;
     @FXML
-    TextField txfCity;
+    TextFieldRequired txfCity;
     @FXML
     ComboBox cbState;
     @FXML
-    TextField txfZip;
+    TextFieldRequired txfZip;
     @FXML
-    TextField txfPhone;
+    TextFieldRequired txfPhone;
     @FXML
-    TextField txfSchool;
+    TextFieldRequired txfSchool;
     @FXML
-    TextField txfAge;
+    TextFieldRequired txfAge;
     @FXML
-    TextField txfHeight;
+    TextFieldRequired txfHeight;
     @FXML
-    TextField txfWeight;
+    TextFieldRequired txfWeight;
     @FXML
-    TextField txfGender;
+    TextFieldRequired txfGender;
     @FXML
-    TextField txfPrimaryPosition;
+    TextFieldRequired txfPrimaryPosition;
     @FXML
-    TextField txfPrimarySport;
+    TextFieldRequired txfPrimarySport;
     @FXML
     ToggleGroup tgGender;
     @FXML
@@ -118,43 +125,45 @@ public class BowlerController implements Initializable {
      * **************************************************************************
      */
     @FXML
-    TextField txfRightLimbLength;
+    VBox vbYBalanceRoot;
     @FXML
-    TextField txfA1Right;
+    TextFieldRequired txfRightLimbLength;
     @FXML
-    TextField txfA2Right;
+    TextFieldRequired txfA1Right;
     @FXML
-    TextField txfA3Right;
+    TextFieldRequired txfA2Right;
     @FXML
-    TextField txfA1Left;
+    TextFieldRequired txfA3Right;
     @FXML
-    TextField txfA2Left;
+    TextFieldRequired txfA1Left;
     @FXML
-    TextField txfA3Left;
+    TextFieldRequired txfA2Left;
     @FXML
-    TextField txfPM1Right;
+    TextFieldRequired txfA3Left;
     @FXML
-    TextField txfPM2Right;
+    TextFieldRequired txfPM1Right;
     @FXML
-    TextField txfPM3Right;
+    TextFieldRequired txfPM2Right;
     @FXML
-    TextField txfPL1Right;
+    TextFieldRequired txfPM3Right;
     @FXML
-    TextField txfPL2Right;
+    TextFieldRequired txfPL1Right;
     @FXML
-    TextField txfPL3Right;
+    TextFieldRequired txfPL2Right;
     @FXML
-    TextField txfPM1Left;
+    TextFieldRequired txfPL3Right;
     @FXML
-    TextField txfPM2Left;
+    TextFieldRequired txfPM1Left;
     @FXML
-    TextField txfPM3Left;
+    TextFieldRequired txfPM2Left;
     @FXML
-    TextField txfPL1Left;
+    TextFieldRequired txfPM3Left;
     @FXML
-    TextField txfPL2Left;
+    TextFieldRequired txfPL1Left;
     @FXML
-    TextField txfPL3Left;
+    TextFieldRequired txfPL2Left;
+    @FXML
+    TextFieldRequired txfPL3Left;
     @FXML
     Label lblARight;
     @FXML
@@ -256,6 +265,7 @@ public class BowlerController implements Initializable {
     private boolean[] errors;
     DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     Date date = new Date();
+
     /**
      * Initializes the controller class.
      *
@@ -267,70 +277,50 @@ public class BowlerController implements Initializable {
 
         errors = new boolean[NUM_TAB];
 
-        
         lblDate.setText(dateFormat.format(date));
         selectionModel = tabPane.getSelectionModel();
+        initializeDemographics();
+        initializeYBalance();
         //Create validation regex for all TextFieldRequired
         /*
-        txfName.setValidationRegex("^([a-zA-Z&.()\\-,']+[ ]*)+$");//Name contains at least two letters.
-        txfAddress.setValidationRegex("^[a-zA-Z0-9 #.,;:'°]{3,}$");
+        //Name contains at least two letters.
+        
         txfWeight.setValidationRegex("^[0-9]+$");
         txfHeight.setValidationRegex("^[0-9]+$");
          */
-        ObservableList<String> options = FXCollections.observableArrayList(
-                "Wisconsin",
-                "Alabama",
-                "Alaska",
-                "Arizon",
-                "Arkansas",
-                "Californi",
-                "Colorado",
-                "Connecticut",
-                "Delaware",
-                "Florida",
-                "Georgia",
-                "Hawaii",
-                "Idaho",
-                "Illinois",
-                "Indiana",
-                "Iowa",
-                "Kansas",
-                "Kentucky",
-                "Louisiana",
-                "Maine",
-                "Maryland",
-                "Massachusetts",
-                "Michigan",
-                "Minnesota",
-                "Mississippi",
-                "Missouri",
-                "Montana",
-                "Nebraska",
-                "Nevada",
-                "New Hampshire",
-                "New Jersey",
-                "New Mexico",
-                "New York",
-                "North Carolina",
-                "North Dakota",
-                "Ohio",
-                "Oklahoma",
-                "Oregon",
-                "Pennsylvania",
-                "Rhode Island",
-                "South Carolina",
-                "South Dakota",
-                "Tennessee",
-                "Texas",
-                "Utah",
-                "Vermont",
-                "Virginia",
-                "Washington,",
-                "West Virginia",
-                "Wyomin"
-        );
-        cbState.getItems().setAll(options);
 
+    }
+
+    private void initializeDemographics() {
+        ObservableList<String> options = FXCollections.observableArrayList("Wisconsin");
+        cbState.getItems().setAll(options);
+        //TextField Required 
+        txfName.setValidation("^([a-zA-Z&.()\\-,']+[ ]*)+$", "Name must be at least two characters and can contain: & . ( ) - , '");
+        txfAddress.setValidation("^[a-zA-Z0-9 #]{3,}$", "Address can contain only letters, numbers and #");
+
+        txfCity.setValidation("^[a-zA-Z]+(?:[\\s-][a-zA-Z]*)*$", "City must contain only letters.");
+        txfZip.setValidation("^\\d{5}$", "Zip Code must contain 5 digits.");
+        txfPhone.setValidation("^(\\d{10})|(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$", "Phone Number must be in any of the following formats: \n###-###-####\n(###) ###-####\n### ### ####\n###.###.####\n+## (###) ###-####");
+        txfSchool.setValidation(TextFieldRequired.ALPHANUMERIC, "School can contain only letters, numbers");
+
+        txfHeight.setValidation("^[0-9]+$", "Height must be in centimeters and can only contain digits.");
+        txfWeight.setValidation("^[0-9]+$", "Weight must be in kilograms and can only contain digits.");
+        txfAge.setValidation("^[0-9]+$", "Age must be in years and can only contain digits.");
+
+        txfPrimarySport.setValidation(TextFieldRequired.ALPHANUMERIC, "Primary Sport can contain any letters or numbers");
+        txfPrimaryPosition.setValidation(TextFieldRequired.ALPHANUMERIC, "Primary position can contain any letters or numbers");
+
+        txfAddress.setRequired(true);
+        txfName.setRequired(true);
+        txfAge.setRequired(true);
+    }
+    private void initializeYBalance(){
+        //Initialize all YBalanace textfield boxes to be required and to validate to only digits.
+        
+        for(TextFieldRequired txf:getAllTextFieldRequired(vbYBalanceRoot)){
+            txf.setValidation(TextFieldRequired.NUMERIC, "Measurement must be in centimeters and only contain digits.");
+            txf.setRequired(true);
+        }
     }
 
     public void setStage(Stage stage) {
@@ -338,7 +328,7 @@ public class BowlerController implements Initializable {
     }
 
     public void createListeners() {
-        
+
         //validateTabs();
         this.stage.titleProperty().bind(txfName.textProperty());
         txfAge.textProperty().bindBidirectional(txfAge2.textProperty());
@@ -720,10 +710,31 @@ public class BowlerController implements Initializable {
         });
     }
 
-    private boolean validateDemographics() {
-        boolean flag;
-        flag = !"".equals(txfName.getText()) && !"".equals(txfAddress.getText()) && dpDate.getValue() != null && !"".equals(txfHeight.getText()) && !"".equals(txfWeight.getText());
+    public static ArrayList<TextFieldRequired> getAllTextFieldRequired(Parent root) {
+        ArrayList<TextFieldRequired> nodes = new ArrayList<>();
+        addAllTextFIeldRequired(root, nodes);
+        return nodes;
+    }
 
+    private static void addAllTextFIeldRequired(Parent parent, ArrayList<TextFieldRequired> nodes) {
+        for (Node node : parent.getChildrenUnmodifiable()) {
+            
+            if (node instanceof TextFieldRequired) {
+                nodes.add((TextFieldRequired)node);
+            }else if(node instanceof Pane){
+                addAllTextFIeldRequired((Parent) node, nodes);
+            }
+        }
+    }
+
+    private boolean validateDemographics() {
+        boolean flag = true;
+        Parent root = (Parent)tabDemographics.getContent();
+        for(TextFieldRequired txf:getAllTextFieldRequired(root)){
+            if(!txf.isValid())
+                flag=false;
+        }
+        
         if (flag) {
             //No errors
             tabDemographics.getStyleClass().clear();
@@ -746,9 +757,13 @@ public class BowlerController implements Initializable {
     }
 
     private boolean validateTabYBalanceTest() {
-        boolean flag;
-        flag = !"".equals(lblCompositeRight.getText()) && !"".equals(lblCompositeLeft.getText());
-
+        boolean flag = true;
+        
+        for(TextFieldRequired txf:getAllTextFieldRequired(vbYBalanceRoot)){
+            if(!txf.isValid())
+                flag=false;
+        }
+        
         if (flag) {
             //No errors
             tabYBalance.getStyleClass().clear();
@@ -816,7 +831,7 @@ public class BowlerController implements Initializable {
             case 4:
                 break;
         }
-        
+
         if (flag) {
             //No errors
             selectionModel.getSelectedItem().getStyleClass().clear();
@@ -839,36 +854,71 @@ public class BowlerController implements Initializable {
         btnFinish.setDisable(true);
         return false;
     }
-    
-    
-    
-      @FXML
+
+    @FXML
     private void finishDataCollection(ActionEvent e) {
-        /****************Athlete Creation*********************/
+
+        //Try with a catch if you get exceptions.
+        Athlete temp = createAthlete();
+
+        System.out.println("Did Stuff");
+    }
+
+    //Create Athlete object.
+    private Athlete createAthlete() {
+
+        /**
+         * **************Athlete Creation********************
+         */
         String name = txfName.getText();
-        String date= lblDate.getText();
-        String dateOfBirth= dpDate.getValue().toString();
+        String date = lblDate.getText();
+        String dateOfBirth = dpDate.getValue().toString();
         String address = txfAddress.getText();
         String city = txfCity.getText();
         String state = cbState.getValue().toString();
-        int zip = (txfZip.getText().equals("") ? 0 :Integer.parseInt(txfZip.getText()));
+        int zip = (txfZip.getText().equals("") ? 0 : Integer.parseInt(txfZip.getText()));
         String phone = txfPhone.getText();
         String school = txfSchool.getText();
-        double height = (txfHeight.getText().equals("") ? 0 :Double.parseDouble(txfHeight.getText())); 
-        double weight = (txfWeight.getText().equals("") ? 0 :Double.parseDouble(txfWeight.getText()));
-        int age = (txfAge.getText().equals("") ? 0 :Integer.parseInt(txfAge.getText()));
-        
-        String gender = (tgGender.getSelectedToggle() !=null)?((ToggleButton)tgGender.getSelectedToggle()).getText():"-";
-        String handDominance = (dominance.getSelectedToggle() !=null)?((ToggleButton)dominance.getSelectedToggle()).getText():"-";
-        String legDominance = (dominance.getSelectedToggle() !=null)?((ToggleButton)dominance.getSelectedToggle()).getText():"-";
+        double height = (txfHeight.getText().equals("") ? 0 : Double.parseDouble(txfHeight.getText()));
+        double weight = (txfWeight.getText().equals("") ? 0 : Double.parseDouble(txfWeight.getText()));
+        int age = (txfAge.getText().equals("") ? 0 : Integer.parseInt(txfAge.getText()));
+
+        String gender = (tgGender.getSelectedToggle() != null) ? ((ToggleButton) tgGender.getSelectedToggle()).getText() : "-";
+        String handDominance = (dominance.getSelectedToggle() != null) ? ((ToggleButton) dominance.getSelectedToggle()).getText() : "-";
+        String legDominance = (dominance.getSelectedToggle() != null) ? ((ToggleButton) dominance.getSelectedToggle()).getText() : "-";
         String primarySport = txfPrimarySport.getText();
         String primaryPosition = txfPrimaryPosition.getText();
-        
-        Athlete temp = new Athlete(name, date, dateOfBirth, address, city, state,zip, phone, school, height,weight,age, gender, handDominance, legDominance, primarySport, primaryPosition);
-        
-        //Try with a catch if you get exceptions.
-         
-        
-        System.out.println("Did Stuff");
+
+        return new Athlete(name, date, dateOfBirth, address, city, state, zip, phone, school, height, weight, age, gender, handDominance, legDominance, primarySport, primaryPosition);
+
+    }
+
+    //Create Athlete object.
+    private Athlete createAthlete2() {
+
+        /**
+         * **************Athlete Creation********************
+         */
+        String name = txfName.getText();
+        String date = lblDate.getText();
+        String dateOfBirth = dpDate.getValue().toString();
+        String address = txfAddress.getText();
+        String city = txfCity.getText();
+        String state = cbState.getValue().toString();
+        int zip = (txfZip.getText().equals("") ? 0 : Integer.parseInt(txfZip.getText()));
+        String phone = txfPhone.getText();
+        String school = txfSchool.getText();
+        double height = (txfHeight.getText().equals("") ? 0 : Double.parseDouble(txfHeight.getText()));
+        double weight = (txfWeight.getText().equals("") ? 0 : Double.parseDouble(txfWeight.getText()));
+        int age = (txfAge.getText().equals("") ? 0 : Integer.parseInt(txfAge.getText()));
+
+        String gender = (tgGender.getSelectedToggle() != null) ? ((ToggleButton) tgGender.getSelectedToggle()).getText() : "-";
+        String handDominance = (dominance.getSelectedToggle() != null) ? ((ToggleButton) dominance.getSelectedToggle()).getText() : "-";
+        String legDominance = (dominance.getSelectedToggle() != null) ? ((ToggleButton) dominance.getSelectedToggle()).getText() : "-";
+        String primarySport = txfPrimarySport.getText();
+        String primaryPosition = txfPrimaryPosition.getText();
+
+        return new Athlete(name, date, dateOfBirth, address, city, state, zip, phone, school, height, weight, age, gender, handDominance, legDominance, primarySport, primaryPosition);
+
     }
 }

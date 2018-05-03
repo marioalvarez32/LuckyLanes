@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import main.java.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import main.java.scene.control.TextFieldRequired?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.BowlerController">
    <stylesheets>
@@ -31,11 +33,11 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="txfName" prefHeight="25.0" prefWidth="283.0">
+                                    <TextFieldRequired fx:id="txfName" prefHeight="25.0" prefWidth="283.0">
                                        <HBox.margin>
                                           <Insets right="25.0" />
                                        </HBox.margin>
-                                    </TextField>
+                                    </TextFieldRequired>
                                     <Label text="Date:">
                                        <HBox.margin>
                                           <Insets right="5.0" />
@@ -60,17 +62,17 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="txfAddress" prefHeight="25.0" prefWidth="699.0" />
+                                    <TextFieldRequired fx:id="txfAddress" prefHeight="25.0" prefWidth="699.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
                                  <children>
                                     <Label prefHeight="17.0" prefWidth="80.0" text="City:" />
-                                    <TextField fx:id="txfCity" prefHeight="25.0" prefWidth="137.0">
+                                    <TextFieldRequired fx:id="txfCity" prefHeight="25.0" prefWidth="137.0">
                                        <HBox.margin>
                                           <Insets right="15.0" />
                                        </HBox.margin>
-                                    </TextField>
+                                    </TextFieldRequired>
                                     <Label prefHeight="17.0" prefWidth="39.0" text="State:" />
                                     <ComboBox fx:id="cbState" prefWidth="150.0" promptText="Select State">
                                        <HBox.margin>
@@ -78,19 +80,19 @@
                                        </HBox.margin>
                                     </ComboBox>
                                     <Label prefHeight="17.0" prefWidth="22.0" text="Zip:" />
-                                    <TextField fx:id="txfZip" prefHeight="25.0" prefWidth="137.0">
+                                    <TextFieldRequired fx:id="txfZip" prefHeight="25.0" prefWidth="137.0">
                                        <HBox.margin>
                                           <Insets right="15.0" />
                                        </HBox.margin>
-                                    </TextField>
+                                    </TextFieldRequired>
                                     <Label prefHeight="17.0" prefWidth="42.0" text="Phone:" />
-                                    <TextField fx:id="txfPhone" prefHeight="25.0" prefWidth="126.0" />
+                                    <TextFieldRequired fx:id="txfPhone" prefHeight="25.0" prefWidth="126.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                                  <children>
                                     <Label prefHeight="17.0" prefWidth="80.0" text="School:" />
-                                    <TextField fx:id="txfSchool" prefHeight="25.0" prefWidth="699.0" />
+                                    <TextFieldRequired fx:id="txfSchool" prefHeight="25.0" prefWidth="699.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
@@ -99,11 +101,11 @@
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font></Label>
-                                    <TextField fx:id="txfHeight" prefHeight="25.0" prefWidth="78.0">
+                                    <TextFieldRequired fx:id="txfHeight" prefHeight="25.0" prefWidth="78.0">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
-                                    </TextField>
+                                    </TextFieldRequired>
                                     <Label text="cm">
                                        <HBox.margin>
                                           <Insets right="10.0" />
@@ -113,11 +115,11 @@
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font></Label>
-                                    <TextField fx:id="txfWeight" prefHeight="25.0" prefWidth="72.0">
+                                    <TextFieldRequired fx:id="txfWeight" prefHeight="25.0" prefWidth="72.0">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
-                                    </TextField>
+                                    </TextFieldRequired>
                                     <Label text="kg">
                                        <HBox.margin>
                                           <Insets right="10.0" />
@@ -127,11 +129,11 @@
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font></Label>
-                                    <TextField fx:id="txfAge" prefHeight="25.0" prefWidth="72.0">
+                                    <TextFieldRequired fx:id="txfAge" prefHeight="25.0" prefWidth="72.0">
                                        <HBox.margin>
                                           <Insets right="10.0" />
                                        </HBox.margin>
-                                    </TextField>
+                                    </TextFieldRequired>
                                     <Label prefHeight="17.0" prefWidth="55.0" text="Gender:">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
@@ -168,17 +170,17 @@
                               <HBox alignment="CENTER" prefHeight="50.0" prefWidth="741.0">
                                  <children>
                                     <Label prefHeight="17.0" prefWidth="80.0" text="Primary Sport:" />
-                                    <TextField fx:id="txfPrimarySport" prefHeight="25.0" prefWidth="296.0">
+                                    <TextFieldRequired fx:id="txfPrimarySport" prefHeight="25.0" prefWidth="296.0">
                                        <HBox.margin>
                                           <Insets right="15.0" />
                                        </HBox.margin>
-                                    </TextField>
+                                    </TextFieldRequired>
                                     <Label prefHeight="17.0" prefWidth="102.0" text="Primary Position:" />
-                                    <TextField fx:id="txfPrimaryPosition" prefHeight="25.0" prefWidth="286.0">
+                                    <TextFieldRequired fx:id="txfPrimaryPosition" prefHeight="25.0" prefWidth="286.0">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
-                                    </TextField>
+                                    </TextFieldRequired>
                                  </children>
                               </HBox>
                            </children>
@@ -189,7 +191,7 @@
                      <content>
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="1244.0" prefViewportHeight="528.0" prefViewportWidth="800.0" prefWidth="800.0">
                            <content>
-                              <VBox prefHeight="633.0" prefWidth="800.0">
+                              <VBox fx:id="vbYBalanceRoot" prefHeight="633.0" prefWidth="800.0">
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="50.0" prefWidth="800.0">
                                        <children>
@@ -215,7 +217,7 @@
                                                       <Insets right="25.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                                <TextField fx:id="txfRightLimbLength" />
+                                                <TextFieldRequired fx:id="txfRightLimbLength" />
                                              </children>
                                           </HBox>
                                           <Label alignment="CENTER" text="(Measure from right ASIS to right medial malleolus in supine after performing bilateral bridge)" />
@@ -272,9 +274,9 @@
                                                                                  <children>
                                                                                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                        <children>
-                                                                                          <TextField fx:id="txfA1Right" alignment="CENTER" />
-                                                                                          <TextField fx:id="txfA2Right" alignment="CENTER" />
-                                                                                          <TextField fx:id="txfA3Right" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfA1Right" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfA2Right" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfA3Right" alignment="CENTER" />
                                                                                        </children>
                                                                                     </VBox>
                                                                                  </children>
@@ -287,16 +289,16 @@
                                                                                  <children>
                                                                                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                        <children>
-                                                                                          <TextField fx:id="txfPL1Right" alignment="CENTER" />
-                                                                                          <TextField fx:id="txfPL2Right" alignment="CENTER" />
-                                                                                          <TextField fx:id="txfPL3Right" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfPL1Right" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfPL2Right" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfPL3Right" alignment="CENTER" />
                                                                                        </children>
                                                                                     </VBox>
                                                                                     <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                        <children>
-                                                                                          <TextField fx:id="txfPM1Right" alignment="CENTER" />
-                                                                                          <TextField fx:id="txfPM2Right" alignment="CENTER" />
-                                                                                          <TextField fx:id="txfPM3Right" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfPM1Right" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfPM2Right" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfPM3Right" alignment="CENTER" />
                                                                                        </children>
                                                                                     </VBox>
                                                                                  </children>
@@ -347,9 +349,9 @@
                                                                                  <children>
                                                                                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                        <children>
-                                                                                          <TextField fx:id="txfA1Left" alignment="CENTER" />
-                                                                                          <TextField fx:id="txfA2Left" alignment="CENTER" />
-                                                                                          <TextField fx:id="txfA3Left" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfA1Left" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfA2Left" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfA3Left" alignment="CENTER" />
                                                                                        </children>
                                                                                     </VBox>
                                                                                  </children>
@@ -365,16 +367,16 @@
                                                                                  <children>
                                                                                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                        <children>
-                                                                                          <TextField fx:id="txfPL1Left" alignment="CENTER" />
-                                                                                          <TextField fx:id="txfPL2Left" alignment="CENTER" />
-                                                                                          <TextField fx:id="txfPL3Left" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfPL1Left" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfPL2Left" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfPL3Left" alignment="CENTER" />
                                                                                        </children>
                                                                                     </VBox>
                                                                                     <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                        <children>
-                                                                                          <TextField fx:id="txfPM1Left" alignment="CENTER" />
-                                                                                          <TextField fx:id="txfPM2Left" alignment="CENTER" />
-                                                                                          <TextField fx:id="txfPM3Left" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfPM1Left" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfPM2Left" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfPM3Left" alignment="CENTER" />
                                                                                        </children>
                                                                                     </VBox>
                                                                                  </children>
