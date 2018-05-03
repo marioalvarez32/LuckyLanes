@@ -76,7 +76,7 @@ public class AdminController implements Initializable {
     public void createDatabase(ActionEvent e) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Database File");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Database file(*.db)", "*.db"));
+        //fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Database file(*.db)", "*.db"));
         File databasePath = fileChooser.showSaveDialog(stage);
         if (databasePath != null) {
             Database.createDatabase(databasePath.toString());

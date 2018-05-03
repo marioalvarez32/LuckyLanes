@@ -867,7 +867,7 @@ public class BowlerController implements Initializable {
         Athlete temp = new Athlete(name, date, dateOfBirth, address, city, state,zip, phone, school, height,weight,age, gender, handDominance, legDominance, primarySport, primaryPosition);
         
         //Try with a catch if you get exceptions.
-         
+         temp.addRow();
         
         System.out.println("Did Stuff");
     }
