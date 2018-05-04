@@ -13,8 +13,8 @@ import javafx.scene.control.Tooltip;
  * @author Mario
  */
 public class TextFieldRequired extends TextField {
-    public static String ALPHA = "^[a-zA-Z]+$";
-    public static String ALPHANUMERIC = "^[a-zA-Z0-9]+$";
+    public static String ALPHA = "^[a-zA-Z ]+$";
+    public static String ALPHANUMERIC = "^[a-zA-Z0-9 ]+$";
     public static String NUMERIC = "^[1-9]+[0-9]*$";
     
     private String validationRegex;

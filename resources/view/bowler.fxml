@@ -287,18 +287,18 @@
                                                                            <children>
                                                                               <AnchorPane prefHeight="251.0" prefWidth="401.0">
                                                                                  <children>
-                                                                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                                                       <children>
-                                                                                          <TextFieldRequired fx:id="txfPL1Right" alignment="CENTER" />
-                                                                                          <TextFieldRequired fx:id="txfPL2Right" alignment="CENTER" />
-                                                                                          <TextFieldRequired fx:id="txfPL3Right" alignment="CENTER" />
-                                                                                       </children>
-                                                                                    </VBox>
                                                                                     <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                        <children>
                                                                                           <TextFieldRequired fx:id="txfPM1Right" alignment="CENTER" />
                                                                                           <TextFieldRequired fx:id="txfPM2Right" alignment="CENTER" />
                                                                                           <TextFieldRequired fx:id="txfPM3Right" alignment="CENTER" />
+                                                                                       </children>
+                                                                                    </VBox>
+                                                                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                       <children>
+                                                                                          <TextFieldRequired fx:id="txfPL1Right" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfPL2Right" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfPL3Right" alignment="CENTER" />
                                                                                        </children>
                                                                                     </VBox>
                                                                                  </children>
@@ -365,18 +365,18 @@
                                                                            <children>
                                                                               <AnchorPane prefHeight="251.0" prefWidth="401.0">
                                                                                  <children>
-                                                                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                                                       <children>
-                                                                                          <TextFieldRequired fx:id="txfPL1Left" alignment="CENTER" />
-                                                                                          <TextFieldRequired fx:id="txfPL2Left" alignment="CENTER" />
-                                                                                          <TextFieldRequired fx:id="txfPL3Left" alignment="CENTER" />
-                                                                                       </children>
-                                                                                    </VBox>
                                                                                     <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                        <children>
                                                                                           <TextFieldRequired fx:id="txfPM1Left" alignment="CENTER" />
                                                                                           <TextFieldRequired fx:id="txfPM2Left" alignment="CENTER" />
                                                                                           <TextFieldRequired fx:id="txfPM3Left" alignment="CENTER" />
+                                                                                       </children>
+                                                                                    </VBox>
+                                                                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                       <children>
+                                                                                          <TextFieldRequired fx:id="txfPL1Left" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfPL2Left" alignment="CENTER" />
+                                                                                          <TextFieldRequired fx:id="txfPL3Left" alignment="CENTER" />
                                                                                        </children>
                                                                                     </VBox>
                                                                                  </children>
@@ -571,7 +571,7 @@
                   </Tab>
                 <Tab id="tab" fx:id="tabFMS" text="FMS Score Sheet">
                   <content>
-                        <VBox alignment="CENTER">
+                        <VBox fx:id="vbFMSRoot" alignment="CENTER">
                            <children>
                               <GridPane alignment="CENTER" hgap="1.0" layoutX="65.0" layoutY="26.0" maxWidth="730.0" prefHeight="500.0" prefWidth="725.0" vgap="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0">
                                 <columnConstraints>
@@ -675,11 +675,11 @@
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                        <children>
-                                          <TextField fx:id="txfDeepSquat" alignment="CENTER" disable="true" layoutX="-10.0" layoutY="2.0" maxHeight="31.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TextFieldRequired fx:id="txfDeepSquat" alignment="CENTER" editable="false" layoutX="-10.0" layoutY="2.0" maxHeight="31.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
                                              </font>
-                                          </TextField>
+                                          </TextFieldRequired>
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
@@ -717,11 +717,11 @@
                                     </VBox>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                        <children>
-                                          <TextField fx:id="txfHurdleStep" alignment="CENTER" disable="true" layoutX="-23.0" layoutY="22.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TextFieldRequired fx:id="txfHurdleStep" alignment="CENTER" editable="false" layoutX="-23.0" layoutY="22.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
                                              </font>
-                                          </TextField>
+                                          </TextFieldRequired>
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
@@ -795,11 +795,11 @@
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                        <children>
-                                          <TextField fx:id="txfInlineLounge" alignment="CENTER" disable="true" layoutX="-48.0" layoutY="9.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TextFieldRequired fx:id="txfInlineLounge" alignment="CENTER" editable="false" layoutX="-48.0" layoutY="9.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
                                              </font>
-                                          </TextField>
+                                          </TextFieldRequired>
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
@@ -814,34 +814,31 @@
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.rowSpan="2">
                                        <children>
-                                          <TextField fx:id="txfTrunkStability" alignment="CENTER" disable="true" layoutX="-48.0" layoutY="2.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TextFieldRequired fx:id="txfTrunkStability" alignment="CENTER" editable="false" layoutX="-48.0" layoutY="2.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
                                              </font>
-                                          </TextField>
+                                          </TextFieldRequired>
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
                                        <children>
-                                          <TextField fx:id="txfActiveStraight" alignment="CENTER" disable="true" layoutX="-13.0" layoutY="13.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TextFieldRequired fx:id="txfActiveStraight" alignment="CENTER" editable="false" layoutX="-13.0" layoutY="13.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
                                              </font>
-                                          </TextField>
+                                          </TextFieldRequired>
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                                        <children>
                                           <HBox alignment="CENTER" layoutX="-49.0" layoutY="4.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <ToggleButton mnemonicParsing="false" opacity="0.0" text="0">
+                                                <ToggleButton mnemonicParsing="false" text="-">
                                                    <toggleGroup>
                                                       <ToggleGroup fx:id="tgDeepSquat12" />
-                                                   </toggleGroup>
-                                                </ToggleButton>
-                                                <ToggleButton mnemonicParsing="false" text="-" toggleGroup="$tgDeepSquat12" />
+                                                   </toggleGroup></ToggleButton>
                                                 <ToggleButton mnemonicParsing="false" text="+" toggleGroup="$tgDeepSquat12" />
-                                                <ToggleButton mnemonicParsing="false" opacity="0.0" text="3" toggleGroup="$tgDeepSquat12" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -921,11 +918,11 @@
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="9" GridPane.rowSpan="2">
                                        <children>
-                                          <TextField fx:id="txfRotaryStability" alignment="CENTER" disable="true" layoutX="-34.0" layoutY="14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TextFieldRequired fx:id="txfRotaryStability" alignment="CENTER" editable="false" layoutX="-34.0" layoutY="14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
                                              </font>
-                                          </TextField>
+                                          </TextFieldRequired>
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="35.0" prefWidth="167.0" GridPane.rowIndex="6">
@@ -962,11 +959,11 @@
                                     </AnchorPane>
                                     <AnchorPane prefHeight="100.0" prefWidth="143.0" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.rowSpan="2">
                                        <children>
-                                          <TextField fx:id="txfShoulderMobility" alignment="CENTER" disable="true" minHeight="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TextFieldRequired fx:id="txfShoulderMobility" alignment="CENTER" editable="false" minHeight="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
                                              </font>
-                                          </TextField>
+                                          </TextFieldRequired>
                                        </children>
                                     </AnchorPane>
                                     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
@@ -1007,26 +1004,20 @@
                                              <children>
                                                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                                    <children>
-                                                      <ToggleButton mnemonicParsing="false" opacity="0.0" text="0">
+                                                      <ToggleButton mnemonicParsing="false" text="-">
                                                          <toggleGroup>
                                                             <ToggleGroup fx:id="tgShoulderClearing" />
-                                                         </toggleGroup>
-                                                      </ToggleButton>
-                                                      <ToggleButton mnemonicParsing="false" text="-" toggleGroup="$tgShoulderClearing" />
+                                                         </toggleGroup></ToggleButton>
                                                       <ToggleButton mnemonicParsing="false" text="+" toggleGroup="$tgShoulderClearing" />
-                                                      <ToggleButton mnemonicParsing="false" opacity="0.0" text="3" toggleGroup="$tgShoulderClearing" />
                                                    </children>
                                                 </HBox>
                                                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                                    <children>
-                                                      <ToggleButton mnemonicParsing="false" opacity="0.0" text="0">
+                                                      <ToggleButton mnemonicParsing="false" text="-">
                                                          <toggleGroup>
                                                             <ToggleGroup fx:id="tgHurdleStepR2" />
-                                                         </toggleGroup>
-                                                      </ToggleButton>
-                                                      <ToggleButton mnemonicParsing="false" text="-" toggleGroup="$tgHurdleStepR2" />
+                                                         </toggleGroup></ToggleButton>
                                                       <ToggleButton mnemonicParsing="false" text="+" toggleGroup="$tgHurdleStepR2" />
-                                                      <ToggleButton mnemonicParsing="false" opacity="0.0" text="3" toggleGroup="$tgHurdleStepR2" />
                                                    </children>
                                                 </HBox>
                                              </children>
@@ -1202,14 +1193,11 @@
                                        <children>
                                           <HBox alignment="CENTER" layoutX="-66.0" layoutY="-34.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <ToggleButton mnemonicParsing="false" opacity="0.0" text="0">
+                                                <ToggleButton mnemonicParsing="false" text="-">
                                                    <toggleGroup>
                                                       <ToggleGroup fx:id="tgDeepSquat11" />
-                                                   </toggleGroup>
-                                                </ToggleButton>
-                                                <ToggleButton mnemonicParsing="false" text="-" toggleGroup="$tgDeepSquat11" />
+                                                   </toggleGroup></ToggleButton>
                                                 <ToggleButton mnemonicParsing="false" text="+" toggleGroup="$tgDeepSquat11" />
-                                                <ToggleButton mnemonicParsing="false" opacity="0.0" text="3" toggleGroup="$tgDeepSquat11" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -1227,9 +1215,9 @@
                      <content>
                         <ScrollPane fx:id="spDataSheet" fitToWidth="true" hbarPolicy="NEVER" minHeight="520.0" minWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
                            <content>
-                              <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="0.0">
+                              <VBox fx:id="vbFtinessTestingRoot" fillWidth="false" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <HBox prefHeight="8.0" prefWidth="751.0">
+                                    <HBox prefHeight="26.0" prefWidth="313.0">
                                        <children>
                                           <Label text="ID Code:">
                                              <font>
@@ -1237,165 +1225,106 @@
                                              </font>
                                           </Label>
                                        </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="25.0" prefWidth="736.0">
-                                       <children>
-                                          <Label text="Collegiate Showcase Fitness Testing Data Sheet ">
-                                             <font>
-                                                <Font name="System Bold" size="17.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="25.0" prefWidth="736.0">
-                                       <children>
-                                          <Label text="* Indicates calculations are required based on formulas ">
-                                             <font>
-                                                <Font name="System Bold" size="13.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox prefHeight="25.0" prefWidth="736.0">
-                                       <children>
-                                          <Label text="Vitals">
-                                             <font>
-                                                <Font name="System Bold" size="17.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                       <children>
-                                          <Label text="Age:">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="txfAge2" prefHeight="25.0" prefWidth="78.0">
-                                             <HBox.margin>
-                                                <Insets right="15.0" />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <Label prefHeight="17.0" prefWidth="55.0" text="Gender:">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <VBox alignment="CENTER_LEFT" prefHeight="50.0">
-                                             <children>
-                                                <RadioButton fx:id="radMale2" mnemonicParsing="false" text="Male">
-                                                   <toggleGroup>
-                                                      <ToggleGroup fx:id="gender2" />
-                                                   </toggleGroup>
-                                                </RadioButton>
-                                                <RadioButton fx:id="radFemale2" mnemonicParsing="false" text="Female" toggleGroup="$gender2" />
-                                             </children>
-                                             <HBox.margin>
-                                                <Insets right="15.0" />
-                                             </HBox.margin>
-                                          </VBox>
-                                          <Label text="Resting HR:">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="txfHeight11" prefHeight="25.0" prefWidth="78.0" />
-                                          <Label text="bmp">
-                                             <HBox.margin>
-                                                <Insets right="15.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label text="Resting HR:">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="txfHeight111" prefHeight="25.0" prefWidth="78.0" />
-                                          <Label text="/">
-                                             <font>
-                                                <Font size="23.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="txfHeight1111" prefHeight="25.0" prefWidth="78.0" />
-                                          <Label text="bmp" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="716.0">
-                                       <children>
-                                          <Label text="Height:">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="txfHeight2" prefHeight="25.0" prefWidth="78.0">
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <Label text="cm" />
-                                          <VBox alignment="CENTER_LEFT" prefHeight="50.0">
-                                             <HBox.margin>
-                                                <Insets right="15.0" />
-                                             </HBox.margin>
-                                          </VBox>
-                                          <Label text="Body Weight:">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="txfWeight2" prefHeight="25.0" prefWidth="78.0" />
-                                          <Label text="kg">
-                                             <HBox.margin>
-                                                <Insets right="15.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label text="*BMI:">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField prefHeight="25.0" prefWidth="78.0" />
-                                          <Label text="kg/m2" />
-                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <VBox.margin>
+                                          <Insets bottom="50.0" left="10.0" top="10.0" />
+                                       </VBox.margin>
                                     </HBox>
                                     <VBox>
                                        <children>
-                                          <HBox prefHeight="25.0" prefWidth="736.0">
+                                          <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="736.0">
                                              <children>
-                                                <Label text="Anthropometrics">
+                                                <Label text="Collegiate Showcase Fitness Testing Data Sheet ">
                                                    <font>
                                                       <Font name="System Bold" size="17.0" />
                                                    </font>
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <HBox prefHeight="25.0" prefWidth="736.0">
+                                          <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="736.0">
                                              <children>
-                                                <Label text="Circumferences">
+                                                <Label text="* Indicates calculations are required based on formulas ">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <HBox prefHeight="25.0" prefWidth="736.0">
+                                          <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="736.0">
                                              <children>
-                                                <Label text="Apply tape measure directly to skin(not over clothing). Be sure to use the Gullick on the tape measure.">
+                                                <Label text="Vitals">
                                                    <font>
-                                                      <Font name="System Italic" size="13.0" />
+                                                      <Font name="System Bold" size="17.0" />
                                                    </font>
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
+                                          <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="751.0">
                                              <children>
-                                                <Label text="Waist Circumference:">
+                                                <Label text="Age:">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField prefHeight="25.0" prefWidth="78.0">
+                                                <TextField fx:id="txfAge2" prefHeight="25.0" prefWidth="78.0">
+                                                   <HBox.margin>
+                                                      <Insets right="15.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <Label prefHeight="17.0" prefWidth="55.0" text="Gender:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                   <children>
+                                                      <RadioButton fx:id="radMale2" mnemonicParsing="false" text="Male">
+                                                         <toggleGroup>
+                                                            <ToggleGroup fx:id="gender2" />
+                                                         </toggleGroup>
+                                                      </RadioButton>
+                                                      <RadioButton fx:id="radFemale2" mnemonicParsing="false" text="Female" toggleGroup="$gender2" />
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets right="15.0" />
+                                                   </HBox.margin>
+                                                </VBox>
+                                                <Label text="Resting HR:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txfHeight11" prefHeight="25.0" prefWidth="78.0" />
+                                                <Label text="bmp">
+                                                   <HBox.margin>
+                                                      <Insets right="15.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <Label text="Resting BP:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txfHeight111" prefHeight="25.0" prefWidth="78.0" />
+                                                <Label text="/">
+                                                   <font>
+                                                      <Font size="23.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txfHeight1111" prefHeight="25.0" prefWidth="78.0" />
+                                                <Label text="mmHg" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="716.0">
+                                             <children>
+                                                <Label text="Height:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txfHeight2" prefHeight="25.0" prefWidth="78.0">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -1406,633 +1335,1001 @@
                                                       <Insets right="15.0" />
                                                    </HBox.margin>
                                                 </VBox>
-                                                <Label text="Hip Circumference:">
+                                                <Label text="Body Weight:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txfWeight2" prefHeight="25.0" prefWidth="78.0" />
+                                                <Label text="kg">
+                                                   <HBox.margin>
+                                                      <Insets right="15.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <Label text="*BMI:">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
                                                 <TextField prefHeight="25.0" prefWidth="78.0" />
-                                                <Label text="cm">
-                                                   <HBox.margin>
-                                                      <Insets right="15.0" />
-                                                   </HBox.margin>
-                                                </Label>
+                                                <Label text="kg/m2" />
                                              </children>
                                           </HBox>
-                                          <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
+                                          <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="716.0">
                                              <children>
-                                                <Label text="Mid-Thigh Circumference:">
+                                                <Label text="Peak Flow Meter">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField prefHeight="25.0" prefWidth="78.0">
+                                                <Label text="(Record 2 trials; circle best trial)" />
+                                                <TextField fx:id="txfHeight21" prefHeight="25.0" prefWidth="78.0">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
                                                 </TextField>
-                                                <Label text="cm" />
                                                 <VBox alignment="CENTER_LEFT" prefHeight="50.0">
                                                    <HBox.margin>
                                                       <Insets right="15.0" />
                                                    </HBox.margin>
                                                 </VBox>
-                                                <Label text="Flexed Arm Circumference:">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField fx:id="txfHeight11111" prefHeight="25.0" prefWidth="78.0" />
-                                                <Label text="cm">
+                                                <TextField fx:id="txfWeight21" prefHeight="25.0" prefWidth="78.0" />
+                                                <Label text="L/min">
                                                    <HBox.margin>
                                                       <Insets right="15.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                             <children>
-                                                <Label text="*Hamstrings CSA">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField prefHeight="25.0" prefWidth="78.0">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </TextField>
-                                                <Label text="cm2" />
-                                                <VBox alignment="CENTER_LEFT" prefHeight="50.0">
-                                                   <HBox.margin>
-                                                      <Insets right="15.0" />
-                                                   </HBox.margin>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                             <children>
-                                                <Label text="*Quadriceps CSA">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField fx:id="txfHeight111111" prefHeight="25.0" prefWidth="78.0">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </TextField>
-                                                <Label text="cm2" />
-                                                <VBox alignment="CENTER_LEFT" prefHeight="50.0">
-                                                   <HBox.margin>
-                                                      <Insets right="15.0" />
-                                                   </HBox.margin>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                             <children>
-                                                <Label text="*Total ThighCSA">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField fx:id="txfHeight111112" prefHeight="25.0" prefWidth="78.0">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </TextField>
-                                                <Label text="cm2" />
-                                                <VBox alignment="CENTER_LEFT" prefHeight="50.0">
-                                                   <HBox.margin>
-                                                      <Insets right="15.0" />
-                                                   </HBox.margin>
-                                                </VBox>
                                              </children>
                                           </HBox>
                                        </children>
+                                       <VBox.margin>
+                                          <Insets left="25.0" />
+                                       </VBox.margin>
                                     </VBox>
-                                    <HBox prefHeight="25.0" prefWidth="736.0">
+                                    <VBox alignment="TOP_CENTER" fillWidth="false" maxWidth="700.0">
                                        <children>
-                                          <Label text="SIT &amp; REACH">
+                                          <TitledPane minWidth="750.0" prefWidth="0.0" text="Anthropometrics" textAlignment="JUSTIFY">
                                              <font>
-                                                <Font name="System Bold" size="17.0" />
+                                                <Font name="System Bold" size="15.0" />
                                              </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox prefHeight="25.0" prefWidth="736.0">
-                                       <children>
-                                          <Label text="Shoes and socks off">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox>
-                                       <children>
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="27.0" prefWidth="926.0" text="Start distance remains same. Record 3 end distance attempts.">
-                                             <font>
-                                                <Font name="System Italic" size="13.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox>
-                                       <children>
-                                          <Label alignment="TOP_LEFT" prefHeight="27.0" prefWidth="926.0" text="Subtract your Start Distance from your BEST attempt to calculate your Final Distance. Use SCALE A(cm).">
-                                             <font>
-                                                <Font name="System Italic" size="13.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                       <children>
-                                          <Label text="Start Distance:">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField prefHeight="25.0" prefWidth="78.0" />
-                                          <Label text="kg">
-                                             <HBox.margin>
-                                                <Insets right="15.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label text="End Distance:">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField prefHeight="25.0" prefWidth="78.0">
-                                             <HBox.margin>
-                                                <Insets right="2.0" />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <TextField fx:id="txfHeight1112" prefHeight="25.0" prefWidth="78.0">
-                                             <HBox.margin>
-                                                <Insets right="2.0" />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <TextField fx:id="txfHeight1113" prefHeight="25.0" prefWidth="78.0" />
-                                          <Label text="cm" />
-                                          <VBox alignment="CENTER_LEFT" prefHeight="50.0">
-                                             <HBox.margin>
-                                                <Insets right="15.0" />
-                                             </HBox.margin>
-                                          </VBox>
-                                          <Label text="Final DIstance:">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="txfHeight11112" prefHeight="25.0" prefWidth="78.0" />
-                                          <Label text="cm" />
-                                       </children>
-                                    </HBox>
-                                    <HBox prefHeight="25.0" prefWidth="736.0">
-                                       <children>
-                                          <Label text="MUSCLE STRENGTH &amp; ENDURANCE &amp; POWER">
-                                             <font>
-                                                <Font name="System Bold" size="17.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox prefHeight="25.0" prefWidth="736.0">
-                                       <children>
-                                          <Label text="Handgrip (Record 3 trials for each hand; circle best tiral for each hand)">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                       <children>
-                                          <Label text="Right:">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField prefHeight="25.0" prefWidth="70.0">
-                                             <HBox.margin>
-                                                <Insets right="2.0" />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <TextField fx:id="txfHeight11121" prefHeight="25.0" prefWidth="70.0">
-                                             <HBox.margin>
-                                                <Insets right="2.0" />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <TextField fx:id="txfHeight11131" prefHeight="25.0" prefWidth="70.0" />
-                                          <Label text="kg">
-                                             <HBox.margin>
-                                                <Insets right="15.0" />
-                                             </HBox.margin></Label>
-                                          <Label text="Left:">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="txfHeight111311" prefHeight="25.0" prefWidth="70.0">
-                                             <HBox.margin>
-                                                <Insets right="2.0" />
-                                             </HBox.margin></TextField>
-                                          <TextField fx:id="txfHeight111211" prefHeight="25.0" prefWidth="70.0">
-                                             <HBox.margin>
-                                                <Insets right="2.0" />
-                                             </HBox.margin></TextField>
-                                          <TextField fx:id="txfHeight11113" prefHeight="25.0" prefWidth="70.0" />
-                                          <Label text="kg">
-                                             <HBox.margin>
-                                                <Insets right="15.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label prefHeight="17.0" prefWidth="124.0" text="Hand/Leg Dominance:" />
-                                          <VBox alignment="CENTER_LEFT">
-                                             <children>
-                                                <RadioButton mnemonicParsing="false" text="Right">
-                                                   <toggleGroup>
-                                                      <ToggleGroup fx:id="dominance1" />
-                                                   </toggleGroup>
-                                                </RadioButton>
-                                                <RadioButton mnemonicParsing="false" text="Left" toggleGroup="$dominance1" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                       <children>
-                                          <Label text="Prone Plank Time:">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="txfHeight111113" prefHeight="25.0" prefWidth="78.0">
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <Label text="seconds" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                       <children>
-                                          <Label text="Knee Ext Isometric Force Output:">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets right="15.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label text="Right:">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField prefHeight="25.0" prefWidth="70.0">
-                                             <HBox.margin>
-                                                <Insets right="2.0" />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <TextField prefHeight="25.0" prefWidth="70.0">
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <Label text="kg">
-                                             <HBox.margin>
-                                                <Insets right="15.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label text="Left:">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="txfHeight1113111" prefHeight="25.0" prefWidth="70.0">
-                                             <HBox.margin>
-                                                <Insets right="2.0" />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <TextField fx:id="txfHeight111131" prefHeight="25.0" prefWidth="70.0" />
-                                          <Label text="kg">
-                                             <HBox.margin>
-                                                <Insets right="15.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                       <children>
-                                          <Label text="Vertical Jump Height">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label text="(Record 2 Trials, circle best trial):">
-                                             <HBox.margin>
-                                                <Insets right="10.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <TextField prefHeight="25.0" prefWidth="70.0">
-                                             <HBox.margin>
-                                                <Insets right="2.0" />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <Label text="cm" />
-                                          <TextField prefHeight="25.0" prefWidth="70.0">
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <Label text="cm">
-                                             <HBox.margin>
-                                                <Insets right="15.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                       <children>
-                                          <Label text="Med Ball Chest Pass">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label text="(Record 2 Trials, circle best trial):">
-                                             <HBox.margin>
-                                                <Insets right="10.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <TextField fx:id="txfHeight1111311" prefHeight="25.0" prefWidth="70.0">
-                                             <HBox.margin>
-                                                <Insets right="2.0" />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <Label text="m" />
-                                          <TextField fx:id="txfHeight11131111" prefHeight="25.0" prefWidth="70.0">
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <Label text="m">
-                                             <HBox.margin>
-                                                <Insets right="15.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <VBox>
-                                       <children>
-                                          <HBox prefHeight="25.0" prefWidth="736.0">
-                                             <children>
-                                                <Label text="ESTIMATED AEROBIC CAPACITY">
-                                                   <font>
-                                                      <Font name="System Bold" size="17.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                             <children>
-                                                <Label text="*Non-Exercise VO2max Estimation: ">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField prefHeight="25.0" prefWidth="78.0">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </TextField>
-                                                <Label text="mL/kg/min" />
-                                                <VBox alignment="CENTER_LEFT" prefHeight="50.0">
-                                                   <HBox.margin>
-                                                      <Insets right="15.0" />
-                                                   </HBox.margin>
+                                             <content>
+                                                <VBox fillWidth="false" prefHeight="350.0" prefWidth="750.0" spacing="10.0">
+                                                   <children>
+                                                      <HBox prefHeight="25.0" prefWidth="736.0">
+                                                         <children>
+                                                            <Label text="Circumferences" underline="true">
+                                                               <font>
+                                                                  <Font size="14.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="25.0" prefWidth="736.0">
+                                                         <children>
+                                                            <Label text="Apply tape measure directly to skin(not over clothing). Be sure to use the Gullick on the tape measure.">
+                                                               <font>
+                                                                  <Font name="System Italic" size="13.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <Label text="Waist Circumference:">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField prefHeight="25.0" prefWidth="78.0">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label text="cm" />
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </VBox>
+                                                            <Label text="Hip Circumference:">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField prefHeight="25.0" prefWidth="78.0" />
+                                                            <Label text="cm">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <Label text="Mid-Thigh Circumference:">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField prefHeight="25.0" prefWidth="78.0">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label text="cm" />
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </VBox>
+                                                            <Label text="Flexed Arm Circumference:">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txfHeight11111" prefHeight="25.0" prefWidth="78.0" />
+                                                            <Label text="cm">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <Label text="*Hamstrings CSA">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField prefHeight="25.0" prefWidth="78.0">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label text="cm2" />
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <Label text="*Quadriceps CSA">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txfHeight111111" prefHeight="25.0" prefWidth="78.0">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label text="cm2" />
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <Label text="*Total ThighCSA">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txfHeight111112" prefHeight="25.0" prefWidth="78.0">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label text="cm2" />
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" layoutX="22.0" layoutY="298.0" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <Label text="*Total ThighCSA">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txfHeight1111121" prefHeight="25.0" prefWidth="78.0">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label text="cm2" />
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="25.0" prefWidth="736.0">
+                                                         <children>
+                                                            <Label text="Skinfold Measurements " underline="true">
+                                                               <font>
+                                                                  <Font size="14.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label text="(Record 2 within 2mm; avg together)" underline="true">
+                                                               <font>
+                                                                  <Font size="14.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox>
+                                                         <children>
+                                                            <VBox prefHeight="69.0" prefWidth="435.0" spacing="10.0">
+                                                               <children>
+                                                                  <Label text="Male">
+                                                                     <font>
+                                                                        <Font size="14.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="409.0">
+                                                                     <children>
+                                                                        <Label text="Pectoral:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField fx:id="txfHeight211" prefHeight="25.0" prefWidth="78.0">
+                                                                           <HBox.margin>
+                                                                              <Insets />
+                                                                           </HBox.margin>
+                                                                        </TextField>
+                                                                        <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                                           <HBox.margin>
+                                                                              <Insets right="15.0" />
+                                                                           </HBox.margin>
+                                                                        </VBox>
+                                                                        <TextField fx:id="txfWeight211" prefHeight="25.0" prefWidth="78.0" />
+                                                                        <Label text="AVG:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                           <HBox.margin>
+                                                                              <Insets left="10.0" />
+                                                                           </HBox.margin>
+                                                                        </Label>
+                                                                        <TextField fx:id="txfHeight2111" prefHeight="25.0" prefWidth="78.0" />
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="409.0">
+                                                                     <children>
+                                                                        <Label text="Abdominal:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField fx:id="txfHeight2111" prefHeight="25.0" prefWidth="78.0">
+                                                                           <HBox.margin>
+                                                                              <Insets />
+                                                                           </HBox.margin>
+                                                                        </TextField>
+                                                                        <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                                           <HBox.margin>
+                                                                              <Insets right="15.0" />
+                                                                           </HBox.margin>
+                                                                        </VBox>
+                                                                        <TextField fx:id="txfWeight2111" prefHeight="25.0" prefWidth="78.0" />
+                                                                        <Label text="AVG:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                           <HBox.margin>
+                                                                              <Insets left="10.0" />
+                                                                           </HBox.margin>
+                                                                        </Label>
+                                                                        <TextField fx:id="txfHeight21111" prefHeight="25.0" prefWidth="78.0" />
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="409.0">
+                                                                     <children>
+                                                                        <Label text="Thigh:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField fx:id="txfHeight21111" prefHeight="25.0" prefWidth="78.0">
+                                                                           <HBox.margin>
+                                                                              <Insets />
+                                                                           </HBox.margin>
+                                                                        </TextField>
+                                                                        <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                                           <HBox.margin>
+                                                                              <Insets right="15.0" />
+                                                                           </HBox.margin>
+                                                                        </VBox>
+                                                                        <TextField fx:id="txfWeight21111" prefHeight="25.0" prefWidth="78.0" />
+                                                                        <Label text="AVG:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                           <HBox.margin>
+                                                                              <Insets left="10.0" />
+                                                                           </HBox.margin>
+                                                                        </Label>
+                                                                        <TextField fx:id="txfHeight211111" prefHeight="25.0" prefWidth="78.0" />
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox prefHeight="69.0" prefWidth="435.0" spacing="10.0">
+                                                               <children>
+                                                                  <Label text="Female">
+                                                                     <font>
+                                                                        <Font size="14.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="409.0">
+                                                                     <children>
+                                                                        <Label text="Triceps:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField fx:id="txfHeight2111" prefHeight="25.0" prefWidth="78.0">
+                                                                           <HBox.margin>
+                                                                              <Insets />
+                                                                           </HBox.margin>
+                                                                        </TextField>
+                                                                        <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                                           <HBox.margin>
+                                                                              <Insets right="15.0" />
+                                                                           </HBox.margin>
+                                                                        </VBox>
+                                                                        <TextField fx:id="txfWeight2111" prefHeight="25.0" prefWidth="78.0" />
+                                                                        <Label text="AVG:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                           <HBox.margin>
+                                                                              <Insets left="10.0" />
+                                                                           </HBox.margin>
+                                                                        </Label>
+                                                                        <TextField fx:id="txfHeight2111" prefHeight="25.0" prefWidth="78.0" />
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="409.0">
+                                                                     <children>
+                                                                        <Label text="Suprailiac:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField fx:id="txfHeight21111" prefHeight="25.0" prefWidth="78.0">
+                                                                           <HBox.margin>
+                                                                              <Insets />
+                                                                           </HBox.margin>
+                                                                        </TextField>
+                                                                        <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                                           <HBox.margin>
+                                                                              <Insets right="15.0" />
+                                                                           </HBox.margin>
+                                                                        </VBox>
+                                                                        <TextField fx:id="txfWeight21111" prefHeight="25.0" prefWidth="78.0" />
+                                                                        <Label text="AVG:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                           <HBox.margin>
+                                                                              <Insets left="10.0" />
+                                                                           </HBox.margin>
+                                                                        </Label>
+                                                                        <TextField fx:id="txfHeight21111" prefHeight="25.0" prefWidth="78.0" />
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="409.0">
+                                                                     <children>
+                                                                        <Label text="Thigh:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField fx:id="txfHeight211111" prefHeight="25.0" prefWidth="78.0">
+                                                                           <HBox.margin>
+                                                                              <Insets />
+                                                                           </HBox.margin>
+                                                                        </TextField>
+                                                                        <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                                           <HBox.margin>
+                                                                              <Insets right="15.0" />
+                                                                           </HBox.margin>
+                                                                        </VBox>
+                                                                        <TextField fx:id="txfWeight211111" prefHeight="25.0" prefWidth="78.0" />
+                                                                        <Label text="AVG:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                           <HBox.margin>
+                                                                              <Insets left="10.0" />
+                                                                           </HBox.margin>
+                                                                        </Label>
+                                                                        <TextField fx:id="txfHeight2111111" prefHeight="25.0" prefWidth="78.0" />
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="409.0">
+                                                         <children>
+                                                            <Label text="*Skinfold">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txfHeight2111" prefHeight="25.0" prefWidth="78.0">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label text="\%" />
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </VBox>
+                                                            <Label text="BIA:">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets left="10.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <TextField fx:id="txfHeight21112" prefHeight="25.0" prefWidth="78.0" />
+                                                            <Label text="\%" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
                                                 </VBox>
-                                             </children>
-                                          </HBox>
-                                          <HBox prefHeight="25.0" prefWidth="736.0">
-                                             <children>
-                                                <Label text="YMCA Step Test">
-                                                   <font>
-                                                      <Font name="System Bold" size="14.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                             <children>
-                                                <Label text="Post 15 s HR=">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField prefHeight="25.0" prefWidth="78.0">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </TextField>
-                                                <Label text="bpm" />
-                                                <VBox alignment="CENTER_LEFT" prefHeight="50.0">
-                                                   <HBox.margin>
-                                                      <Insets right="15.0" />
-                                                   </HBox.margin>
+                                             </content>
+                                          </TitledPane>
+                                          <TitledPane minWidth="750.0" text="Sit &amp; Reach" textAlignment="JUSTIFY">
+                                             <content>
+                                                <VBox fillWidth="false" prefWidth="750.0">
+                                                   <children>
+                                                      <HBox prefHeight="25.0" prefWidth="736.0" />
+                                                      <HBox layoutY="26.0" prefHeight="25.0" prefWidth="736.0">
+                                                         <children>
+                                                            <Label text="Shoes and socks off">
+                                                               <font>
+                                                                  <Font size="14.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox layoutY="51.0">
+                                                         <children>
+                                                            <Label alignment="BOTTOM_LEFT" prefHeight="27.0" prefWidth="926.0" text="Start distance remains same. Record 3 end distance attempts.">
+                                                               <font>
+                                                                  <Font name="System Italic" size="13.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox layoutY="78.0">
+                                                         <children>
+                                                            <Label alignment="TOP_LEFT" prefHeight="27.0" prefWidth="926.0" text="Subtract your Start Distance from your BEST attempt to calculate your Final Distance. Use SCALE A(cm).">
+                                                               <font>
+                                                                  <Font name="System Italic" size="13.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER" layoutY="105.0" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <Label text="Start Distance:">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField prefHeight="25.0" prefWidth="70.0" />
+                                                            <Label text="kg">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <Label text="End Distance:">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField prefHeight="25.0" prefWidth="70.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="2.0" />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <TextField fx:id="txfHeight1112" prefHeight="25.0" prefWidth="70.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="2.0" />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <TextField fx:id="txfHeight1113" prefHeight="25.0" prefWidth="70.0" />
+                                                            <Label text="cm" />
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </VBox>
+                                                            <Label text="Final DIstance:">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txfHeight11112" prefHeight="25.0" prefWidth="70.0" />
+                                                            <Label text="cm" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
                                                 </VBox>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                             <children>
-                                                <Label text="VO2max(mL/kg/min) = (-0.9675 x post-test HR 15s) + 77.643">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <VBox alignment="CENTER_LEFT" prefHeight="50.0">
-                                                   <HBox.margin>
-                                                      <Insets right="15.0" />
-                                                   </HBox.margin>
+                                             </content>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane minWidth="750.0" text="MUSCLE STRENGTH &amp; ENDURANCE &amp; POWER">
+                                             <content>
+                                                <VBox fillWidth="false" prefWidth="750.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="736.0" />
+                                                      <HBox alignment="CENTER_LEFT" layoutY="26.0" prefHeight="25.0" prefWidth="736.0">
+                                                         <children>
+                                                            <Label text="Handgrip (Record 3 trials for each hand; circle best tiral for each hand)">
+                                                               <font>
+                                                                  <Font size="14.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" layoutY="51.0" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <Label text="Right:">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField prefHeight="25.0" prefWidth="60.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="2.0" />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <TextField fx:id="txfHeight11121" prefHeight="25.0" prefWidth="60.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="2.0" />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <TextField fx:id="txfHeight11131" prefHeight="25.0" prefWidth="60.0" />
+                                                            <Label text="kg">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <Label text="Left:">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txfHeight111311" prefHeight="25.0" prefWidth="60.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="2.0" />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <TextField fx:id="txfHeight111211" prefHeight="25.0" prefWidth="60.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="2.0" />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <TextField fx:id="txfHeight11113" prefHeight="25.0" prefWidth="60.0" />
+                                                            <Label text="kg">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <Label prefHeight="17.0" prefWidth="124.0" text="Hand/Leg Dominance:" />
+                                                            <VBox alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <RadioButton mnemonicParsing="false" text="Right">
+                                                                     <toggleGroup>
+                                                                        <ToggleGroup fx:id="dominance1" />
+                                                                     </toggleGroup>
+                                                                  </RadioButton>
+                                                                  <RadioButton mnemonicParsing="false" text="Left" toggleGroup="$dominance1" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" layoutY="101.0" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <Label text="Prone Plank Time:">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txfHeight111113" prefHeight="25.0" prefWidth="78.0">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label text="seconds" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" layoutY="151.0" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <Label text="Knee Ext Isometric Force Output:">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <Label text="Right:">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField prefHeight="25.0" prefWidth="70.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="2.0" />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <TextField prefHeight="25.0" prefWidth="70.0">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label text="kg">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <Label text="Left:">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txfHeight1113111" prefHeight="25.0" prefWidth="70.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="2.0" />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <TextField fx:id="txfHeight111131" prefHeight="25.0" prefWidth="70.0" />
+                                                            <Label text="kg">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" layoutY="201.0" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <Label text="Vertical Jump Height">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <Label text="(Record 2 Trials, circle best trial):">
+                                                               <HBox.margin>
+                                                                  <Insets right="10.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <TextField prefHeight="25.0" prefWidth="70.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="2.0" />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label text="cm" />
+                                                            <TextField prefHeight="25.0" prefWidth="70.0">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label text="cm">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" layoutY="251.0" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <Label text="Med Ball Chest Pass">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <Label text="(Record 2 Trials, circle best trial):">
+                                                               <HBox.margin>
+                                                                  <Insets right="10.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <TextField fx:id="txfHeight1111311" prefHeight="25.0" prefWidth="70.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="2.0" />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label text="m" />
+                                                            <TextField fx:id="txfHeight11131111" prefHeight="25.0" prefWidth="70.0">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label text="m">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
                                                 </VBox>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                             <children>
-                                                <Label text="VO2max Estimation:">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField fx:id="txfHeight1111111" prefHeight="25.0" prefWidth="78.0">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </TextField>
-                                                <Label text="mL/kg/min" />
-                                                <VBox alignment="CENTER_LEFT" prefHeight="50.0">
-                                                   <HBox.margin>
-                                                      <Insets right="15.0" />
-                                                   </HBox.margin>
+                                             </content>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane minWidth="750.0" text="ESTIMATED AEROBIC CAPACITY">
+                                             <content>
+                                                <VBox fillWidth="false" prefWidth="750.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="736.0" />
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <Label text="*Non-Exercise VO2max Estimation: ">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField prefHeight="25.0" prefWidth="78.0">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label text="mL/kg/min" />
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="736.0">
+                                                         <children>
+                                                            <Label text="YMCA Step Test">
+                                                               <font>
+                                                                  <Font name="System Bold" size="14.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <Label text="Post 15 s HR=">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField prefHeight="25.0" prefWidth="78.0">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label text="bpm" />
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <Label text="VO2max(mL/kg/min) = (-0.9675 x post-test HR 15s) + 77.643">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <Label text="VO2max Estimation:">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txfHeight1111111" prefHeight="25.0" prefWidth="78.0">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label text="mL/kg/min" />
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </VBox>
+                                                            <Label text="Age-Adjusted Rating">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txfHeight11111111" prefHeight="25.0" prefWidth="78.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="736.0">
+                                                         <children>
+                                                            <Label text="Rockport Walk Test">
+                                                               <font>
+                                                                  <Font name="System Bold" size="14.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <Label text="HR After 1-mile:">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField prefHeight="25.0" prefWidth="78.0">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label text=" bpm" />
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </VBox>
+                                                            <Label text="Walk Time">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txfHeight111111111" prefHeight="25.0" prefWidth="78.0" />
+                                                            <Label text="min" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="751.0">
+                                                         <children>
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="15.0" />
+                                                               </HBox.margin>
+                                                            </VBox>
+                                                            <Label text="Rockport Estimaed VO2max: ">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txfHeight1111111111" prefHeight="25.0" prefWidth="78.0" />
+                                                            <Label text="mL/kg/min" />
+                                                         </children>
+                                                      </HBox>
+                                                      <VBox fillWidth="false">
+                                                         <children>
+                                                            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="736.0">
+                                                               <children>
+                                                                  <Label text="12-Minute Walk Test">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="17.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="736.0">
+                                                               <children>
+                                                                  <Label text="**complete on your own on a different day">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="14.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="751.0">
+                                                               <children>
+                                                                  <Label text="Distance covered in 12 minutes =">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="12.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <TextField prefHeight="25.0" prefWidth="78.0">
+                                                                     <HBox.margin>
+                                                                        <Insets />
+                                                                     </HBox.margin>
+                                                                  </TextField>
+                                                                  <Label text="meters" />
+                                                                  <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                                     <HBox.margin>
+                                                                        <Insets right="15.0" />
+                                                                     </HBox.margin>
+                                                                  </VBox>
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="751.0">
+                                                               <children>
+                                                                  <Label text="VO2max(mL/kg/min)= (distance covered in meters - 504.9)/44.73">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="12.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                                     <HBox.margin>
+                                                                        <Insets right="15.0" />
+                                                                     </HBox.margin>
+                                                                  </VBox>
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="751.0">
+                                                               <children>
+                                                                  <Label text="VO2max Estimation:">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="12.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <TextField prefHeight="25.0" prefWidth="78.0">
+                                                                     <HBox.margin>
+                                                                        <Insets />
+                                                                     </HBox.margin>
+                                                                  </TextField>
+                                                                  <Label text="mL/kg/min" />
+                                                                  <VBox alignment="CENTER_LEFT" prefHeight="50.0">
+                                                                     <HBox.margin>
+                                                                        <Insets right="15.0" />
+                                                                     </HBox.margin>
+                                                                  </VBox>
+                                                                  <Label text="ACSM Percentile:">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="12.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <TextField prefHeight="25.0" prefWidth="78.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
                                                 </VBox>
-                                                <Label text="Age-Adjusted Rating">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField fx:id="txfHeight11111111" prefHeight="25.0" prefWidth="78.0" />
-                                             </children>
-                                          </HBox>
-                                          <HBox prefHeight="25.0" prefWidth="736.0">
-                                             <children>
-                                                <Label text="Rockport Walk Test">
-                                                   <font>
-                                                      <Font name="System Bold" size="14.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                             <children>
-                                                <Label text="HR After 1-mile:">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField prefHeight="25.0" prefWidth="78.0">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </TextField>
-                                                <Label text=" bpm" />
-                                                <VBox alignment="CENTER_LEFT" prefHeight="50.0">
-                                                   <HBox.margin>
-                                                      <Insets right="15.0" />
-                                                   </HBox.margin>
-                                                </VBox>
-                                                <Label text="Walk Time">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField fx:id="txfHeight111111111" prefHeight="25.0" prefWidth="78.0" />
-                                                <Label text="min" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                             <children>
-                                                <VBox alignment="CENTER_LEFT" prefHeight="50.0">
-                                                   <HBox.margin>
-                                                      <Insets right="15.0" />
-                                                   </HBox.margin>
-                                                </VBox>
-                                                <Label text="Rockport Estimaed VO2max: ">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField fx:id="txfHeight1111111111" prefHeight="25.0" prefWidth="78.0" />
-                                                <Label text="mL/kg/min" />
-                                             </children>
-                                          </HBox>
+                                             </content>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </TitledPane>
                                        </children>
-                                    </VBox>
-                                    <VBox>
-                                       <children>
-                                          <HBox prefHeight="25.0" prefWidth="736.0">
-                                             <children>
-                                                <Label text="12-Minute Walk Test">
-                                                   <font>
-                                                      <Font name="System Bold" size="17.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </HBox>
-                                          <HBox prefHeight="25.0" prefWidth="736.0">
-                                             <children>
-                                                <Label text="**complete on your own on a different day">
-                                                   <font>
-                                                      <Font name="System Bold" size="14.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                             <children>
-                                                <Label text="Distance covered in 12 minutes =">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField prefHeight="25.0" prefWidth="78.0">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </TextField>
-                                                <Label text="meters" />
-                                                <VBox alignment="CENTER_LEFT" prefHeight="50.0">
-                                                   <HBox.margin>
-                                                      <Insets right="15.0" />
-                                                   </HBox.margin>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                             <children>
-                                                <Label text="VO2max(mL/kg/min)= (distance covered in meters - 504.9)/44.73">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <VBox alignment="CENTER_LEFT" prefHeight="50.0">
-                                                   <HBox.margin>
-                                                      <Insets right="15.0" />
-                                                   </HBox.margin>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="50.0" prefWidth="751.0">
-                                             <children>
-                                                <Label text="VO2max Estimation:">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField prefHeight="25.0" prefWidth="78.0">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </TextField>
-                                                <Label text="mL/kg/min" />
-                                                <VBox alignment="CENTER_LEFT" prefHeight="50.0">
-                                                   <HBox.margin>
-                                                      <Insets right="15.0" />
-                                                   </HBox.margin>
-                                                </VBox>
-                                                <Label text="ACSM Percentile:">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField prefHeight="25.0" prefWidth="78.0" />
-                                             </children>
-                                          </HBox>
-                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="10.0" top="20.0" />
+                                       </VBox.margin>
                                     </VBox>
                                  </children>
-                                 <padding>
-                                    <Insets bottom="100.0" left="50.0" right="25.0" top="30.0" />
-                                 </padding>
                               </VBox>
                            </content>
                            <VBox.margin>
@@ -2056,6 +2353,7 @@
                         <Button fx:id="btnFinish" contentDisplay="RIGHT" disable="true" mnemonicParsing="false" onAction="#finishDataCollection" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: #008CBA;;" text="Finish" />
                      </children>
                   </HBox>
+                  <Button layoutX="294.0" layoutY="14.0" mnemonicParsing="false" onAction="#testingData" text="Fill In Data" />
                </children>
             </AnchorPane>
          </children>

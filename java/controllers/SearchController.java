@@ -90,7 +90,7 @@ public class SearchController implements Initializable {
                         return new SimpleStringProperty(param.getValue().get(j).toString());                        
                     }                    
                 });
-
+                
                 table.getColumns().addAll(col); 
                 System.out.println("Column ["+i+"] ");
             }

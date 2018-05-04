@@ -32,6 +32,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -194,6 +195,8 @@ public class BowlerController implements Initializable {
      * **************************************************************************
      */
     @FXML
+    VBox vbFMSRoot;
+    @FXML
     ScrollPane spDataSheet;
     @FXML
     ToggleGroup tgHurdleStepR;
@@ -221,19 +224,19 @@ public class BowlerController implements Initializable {
     @FXML
     ToggleGroup tgRotaryStabilityR;
     @FXML
-    TextField txfTrunkStability;
+    TextFieldRequired txfTrunkStability;
     @FXML
-    TextField txfInlineLounge;
+    TextFieldRequired txfInlineLounge;
     @FXML
-    TextField txfShoulderMobility;
+    TextFieldRequired txfShoulderMobility;
     @FXML
-    TextField txfActiveStraight;
+    TextFieldRequired txfActiveStraight;
     @FXML
-    TextField txfRotaryStability;
+    TextFieldRequired txfRotaryStability;
     @FXML
-    TextField txfHurdleStep;
+    TextFieldRequired txfHurdleStep;
     @FXML
-    TextField txfDeepSquat;
+    TextFieldRequired txfDeepSquat;
 
     /**
      * *************************************************************************
@@ -241,6 +244,8 @@ public class BowlerController implements Initializable {
      * Fitness Testing Data Sheet Injected Objects
      * **************************************************************************
      */
+    @FXML
+    VBox vbFtinessTestingRoot;
     @FXML
     TextField txfAge2;
     @FXML
@@ -281,6 +286,7 @@ public class BowlerController implements Initializable {
         selectionModel = tabPane.getSelectionModel();
         initializeDemographics();
         initializeYBalance();
+        initializeFMS();
         //Create validation regex for all TextFieldRequired
         /*
         //Name contains at least two letters.
@@ -314,11 +320,21 @@ public class BowlerController implements Initializable {
         txfName.setRequired(true);
         txfAge.setRequired(true);
     }
-    private void initializeYBalance(){
+
+    private void initializeYBalance() {
         //Initialize all YBalanace textfield boxes to be required and to validate to only digits.
-        
-        for(TextFieldRequired txf:getAllTextFieldRequired(vbYBalanceRoot)){
+
+        for (TextFieldRequired txf : getAllTextFieldRequired(vbYBalanceRoot)) {
             txf.setValidation(TextFieldRequired.NUMERIC, "Measurement must be in centimeters and only contain digits.");
+            txf.setRequired(true);
+        }
+    }
+
+    private void initializeFMS() {
+        //Initialize all YBalanace textfield boxes to be required and to validate to only digits.
+
+        for (TextFieldRequired txf : getAllTextFieldRequired(vbFMSRoot)) {
+            txf.setValidation("^[0-3]{1}$", "Select raw score to calculate final score.");
             txf.setRequired(true);
         }
     }
@@ -718,10 +734,10 @@ public class BowlerController implements Initializable {
 
     private static void addAllTextFIeldRequired(Parent parent, ArrayList<TextFieldRequired> nodes) {
         for (Node node : parent.getChildrenUnmodifiable()) {
-            
+
             if (node instanceof TextFieldRequired) {
-                nodes.add((TextFieldRequired)node);
-            }else if(node instanceof Pane){
+                nodes.add((TextFieldRequired) node);
+            } else if (node instanceof Pane) {
                 addAllTextFIeldRequired((Parent) node, nodes);
             }
         }
@@ -729,12 +745,13 @@ public class BowlerController implements Initializable {
 
     private boolean validateDemographics() {
         boolean flag = true;
-        Parent root = (Parent)tabDemographics.getContent();
-        for(TextFieldRequired txf:getAllTextFieldRequired(root)){
-            if(!txf.isValid())
-                flag=false;
+        Parent root = (Parent) tabDemographics.getContent();
+        for (TextFieldRequired txf : getAllTextFieldRequired(root)) {
+            if (!txf.isValid()) {
+                flag = false;
+            }
         }
-        
+
         if (flag) {
             //No errors
             tabDemographics.getStyleClass().clear();
@@ -758,12 +775,13 @@ public class BowlerController implements Initializable {
 
     private boolean validateTabYBalanceTest() {
         boolean flag = true;
-        
-        for(TextFieldRequired txf:getAllTextFieldRequired(vbYBalanceRoot)){
-            if(!txf.isValid())
-                flag=false;
+
+        for (TextFieldRequired txf : getAllTextFieldRequired(vbYBalanceRoot)) {
+            if (!txf.isValid()) {
+                flag = false;
+            }
         }
-        
+
         if (flag) {
             //No errors
             tabYBalance.getStyleClass().clear();
@@ -787,14 +805,13 @@ public class BowlerController implements Initializable {
     }
 
     private boolean validateFMS() {
-        boolean flag;
-        flag = !"".equals(txfTrunkStability.getText())
-                && !"".equals(txfInlineLounge.getText())
-                && !"".equals(txfShoulderMobility.getText())
-                && !"".equals(txfActiveStraight.getText())
-                && !"".equals(txfRotaryStability.getText())
-                && !"".equals(txfHurdleStep.getText())
-                && !"".equals(txfDeepSquat.getText());
+        boolean flag = true;
+
+        for (TextFieldRequired txf : getAllTextFieldRequired(vbFMSRoot)) {
+            if (!txf.isValid()) {
+                flag = false;
+            }
+        }
 
         if (flag) {
             //No errors
@@ -805,9 +822,7 @@ public class BowlerController implements Initializable {
             tabFMS.getStyleClass().clear();
             tabFMS.getStyleClass().addAll("tab-invalid", "tab");
         }
-
         return flag;
-
     }
 
     private boolean validateTabs(int index) {
@@ -860,8 +875,46 @@ public class BowlerController implements Initializable {
 
         //Try with a catch if you get exceptions.
         //Athlete temp = createAthlete();
-
+        createAthlete();
         System.out.println("Did Stuff");
+    }
+
+    @FXML
+    private void testingData(ActionEvent e) {
+        //YBalance
+        for (TextFieldRequired txf : getAllTextFieldRequired(vbYBalanceRoot)) {
+            txf.setText("2");
+        }
+        txfName.setText("Potato");
+        txfAddress.setText("Address potato");
+        txfCity.setText("Potatoland");
+        txfSchool.setText("Potato High");
+        txfZip.setText("66666");
+        txfPhone.setText("9999999999");
+        txfHeight.setText("5");
+        txfWeight.setText("1");
+        txfAge.setText("525");
+        radMale.setSelected(true);
+        cbState.getSelectionModel().select(0);
+        dpDate.setValue(LocalDate.now());
+        dominance.getToggles().get(0).setSelected(true);
+        txfPrimarySport.setText("Potatoball");
+        txfPrimaryPosition.setText("Fried Potato");
+
+        tgDeepSquat.getToggles().get(0).setSelected(true);
+        tgHurdleStepL.getToggles().get(0).setSelected(true);
+        tgHurdleStepR.getToggles().get(0).setSelected(true);
+
+        tgInlineLoungeL.getToggles().get(0).setSelected(true);
+        tgInlineLoungeR.getToggles().get(0).setSelected(true);
+
+        tgShoulderMobilityL.getToggles().get(2).setSelected(true);
+        tgShoulderMobilityR.getToggles().get(2).setSelected(true);
+        tgActiveStraightL.getToggles().get(2).setSelected(true);
+        tgActiveStraightR.getToggles().get(1).setSelected(true);
+        tgTrunkStability.getToggles().get(1).setSelected(true);
+        tgRotaryStabilityL.getToggles().get(2).setSelected(true);
+        tgRotaryStabilityR.getToggles().get(1).setSelected(true);
     }
 
     //Create Athlete object.
@@ -889,12 +942,11 @@ public class BowlerController implements Initializable {
         String primarySport = txfPrimarySport.getText();
         String primaryPosition = txfPrimaryPosition.getText();
 
+        Athlete temp = new Athlete(name, date, dateOfBirth, address, city, state, zip, phone, school, height, weight, age, gender, handDominance, legDominance, primarySport, primaryPosition);
 
-        Athlete temp = new Athlete(name, date, dateOfBirth, address, city, state,zip, phone, school, height,weight,age, gender, handDominance, legDominance, primarySport, primaryPosition);
-        
         //Try with a catch if you get exceptions.
         temp.addRow();
-        
+
         System.out.println("Did Stuff");
 
     }
