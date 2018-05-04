@@ -4,7 +4,13 @@
  * and open the template in the editor.
  */
 package main.java;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.*;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
@@ -35,17 +41,23 @@ public class Database {
     
     public static Connection conn = null;
     public static Statement state = null;
-
+    private String u;//Just testing stuff...Relax
     
+    public Database(String u){
+        this.u = u;
+        
+    }
+
     /**Function:    Connect
      * Return:      Void
      * Parameters:  String - url
      * Description: Will set up a connection to the
      *              database.
      */
-    public static void connect(String url){
+    public static boolean connect(String url){
         URL = "jdbc:h2:file:" +url;
         URL = URL.split("\\.",2)[0];
+        URL += ";IFEXISTS=TRUE";
         System.out.println("URL ON CONNECT:" +URL);
         try {
             System.out.println("Grabbing driver...");
@@ -54,12 +66,13 @@ public class Database {
             System.out.println("Connecting to the database...");
             conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             System.out.println("Connected...");
+            return true;
         } catch (SQLException ex) {
            System.out.println("Connection was unsuccessful.");
+           return false;
         } catch (ClassNotFoundException ex) {
             System.out.println("Driver detection was unsuccessful.");
-        } catch (Exception e){
-            e.printStackTrace();
+            return false;
         }
     }
         /**Function:    Connect
@@ -111,7 +124,9 @@ public class Database {
         // declare variables
         String sql;
         URL = "jdbc:h2:file:" +url;
+        Database.saveProperties(url);
         System.out.println("The url upon creating: " +URL);
+        
         try {
             // grab driver
             Class.forName(DRIVER);
@@ -203,5 +218,60 @@ public class Database {
         }
         
         return rs;
+    }
+    
+    public static void saveProperties(String url) {
+        Properties prop = new Properties();
+	OutputStream output = null;
+
+	try {
+
+		output = new FileOutputStream("config.properties");
+                
+		
+		prop.setProperty("url", url);
+                
+		
+		prop.store(output, null);
+
+	} catch (IOException io) {
+		io.printStackTrace();
+	} finally {
+		if (output != null) {
+			try {
+				output.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+    }
+
+    public static String loadProperties() {
+        Properties prop = new Properties();
+        InputStream input = null;
+        String url="";
+        try {
+            
+            input = new FileInputStream("config.properties");
+            
+            prop.load(input);
+   
+            url =prop.getProperty("url");
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        return url;
     }
 }

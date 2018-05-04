@@ -6,9 +6,13 @@
 package main.java.controllers;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +22,9 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -43,7 +50,10 @@ public class AdminController implements Initializable {
 
     @FXML
     Button btnTesting;
-
+    @FXML
+    Label lblTest;
+    @FXML
+    ImageView imgDatabase;
     /**
      * Initializes the controller class.
      *
@@ -53,7 +63,22 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        //Try to load the database and connect to test
+        
+        //saveProperties("Mypath");
+        //lblTest.setText(loadProperties());
+        loadDatabase();
+    }
 
+    public void loadDatabase(){
+        String url = Database.loadProperties();
+        System.out.println("Loading Database:"+url);
+        
+        if(Database.connect(url)){
+            imgDatabase.setImage(new Image("/main/resources/icons/dbConnected.png"));
+        }else{
+            imgDatabase.setImage(new Image("/main/resources/icons/dbDisconnected.png"));
+        }
     }
 
     /**
@@ -71,7 +96,7 @@ public class AdminController implements Initializable {
     @FXML
     public void testThis(ActionEvent e) {
     }
-    
+
     @FXML
     public void createDatabase(ActionEvent e) {
         FileChooser fileChooser = new FileChooser();
@@ -79,7 +104,9 @@ public class AdminController implements Initializable {
         //fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Database file(*.db)", "*.db"));
         File databasePath = fileChooser.showSaveDialog(stage);
         if (databasePath != null) {
+            
             Database.createDatabase(databasePath.toString());
+            loadDatabase();
         }
 
     }
