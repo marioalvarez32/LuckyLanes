@@ -34,6 +34,7 @@ import javafx.stage.Stage;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Toggle;
@@ -41,6 +42,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import main.java.Athlete;
 import main.java.scene.control.TextFieldRequired;
 
@@ -62,6 +65,8 @@ public class BowlerController implements Initializable {
      * Root Injected Objects
      * **************************************************************************
      */
+    @FXML
+    WebView webView;
     @FXML
     TabPane tabPane;
     @FXML
@@ -298,8 +303,14 @@ public class BowlerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+       
+        /*
+        WebEngine webEngine = webView.getEngine();
+        URL xd =this.getClass().getResource("index.html"); 
+        webEngine.load(xd.toExternalForm());
+        */
         errors = new boolean[NUM_TAB];
-
+        
         lblDate.setText(dateFormat.format(date));
         selectionModel = tabPane.getSelectionModel();
         initializeDemographics();
@@ -1053,7 +1064,7 @@ public class BowlerController implements Initializable {
 
     @FXML
     private void finishDataCollection(ActionEvent e) {
-
+        
         //Try with a catch if you get exceptions.
         //Athlete temp = createAthlete();
         createAthlete();
@@ -1068,19 +1079,19 @@ public class BowlerController implements Initializable {
         }
         txfName.setText("Potato");
         txfAddress.setText("Address potato");
-        txfCity.setText("Potatoland");
-        txfSchool.setText("Potato High");
-        txfZip.setText("66666");
-        txfPhone.setText("9999999999");
+        //txfCity.setText("Potatoland");
+        //txfSchool.setText("Potato High");
+       // txfZip.setText("66666");
+        //txfPhone.setText("9999999999");
         txfHeight.setText("5");
         txfWeight.setText("1");
         txfAge.setText("525");
         radMale.setSelected(true);
-        cbState.getSelectionModel().select(0);
-        dpDate.setValue(LocalDate.now());
+        //cbState.getSelectionModel().select(0);
+        //dpDate.setValue(LocalDate.now());
         dominance.getToggles().get(0).setSelected(true);
-        txfPrimarySport.setText("Potatoball");
-        txfPrimaryPosition.setText("Fried Potato");
+        //txfPrimarySport.setText("Potatoball");
+        //txfPrimaryPosition.setText("Fried Potato");
 
         tgDeepSquat.getToggles().get(0).setSelected(true);
         tgHurdleStepL.getToggles().get(0).setSelected(true);
@@ -1104,19 +1115,30 @@ public class BowlerController implements Initializable {
         /**
          * **************Athlete Creation********************
          */
+        Calendar cal = Calendar.getInstance();
+        
+        
+        
+        
+        
+        
         String name = txfName.getText();
         String date = lblDate.getText();
-        String dateOfBirth = dpDate.getValue().toString();
+       
         String address = txfAddress.getText();
         String city = txfCity.getText();
-        String state = cbState.getValue().toString();
+        String state = (cbState.getValue()!=null)?"No State Selected":cbState.getValue().toString();
         int zip = (txfZip.getText().equals("") ? 0 : Integer.parseInt(txfZip.getText()));
         String phone = txfPhone.getText();
         String school = txfSchool.getText();
         double height = (txfHeight.getText().equals("") ? 0 : Double.parseDouble(txfHeight.getText()));
         double weight = (txfWeight.getText().equals("") ? 0 : Double.parseDouble(txfWeight.getText()));
         int age = (txfAge.getText().equals("") ? 0 : Integer.parseInt(txfAge.getText()));
-
+        cal.add(Calendar.YEAR, (age *-1));
+        cal.set(Calendar.MONTH, 1);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        String dateOfBirth = dateFormat.format(cal.getTime());
+        dateOfBirth = (dpDate.getValue() != null)?dpDate.getValue().toString():dateOfBirth;
         String gender = (tgGender.getSelectedToggle() != null) ? ((ToggleButton) tgGender.getSelectedToggle()).getText() : "-";
         String handDominance = (dominance.getSelectedToggle() != null) ? ((ToggleButton) dominance.getSelectedToggle()).getText() : "-";
         String legDominance = (dominance.getSelectedToggle() != null) ? ((ToggleButton) dominance.getSelectedToggle()).getText() : "-";
@@ -1128,16 +1150,16 @@ public class BowlerController implements Initializable {
         //Try with a catch if you get exceptions.
         temp.addRow();
 
-        System.out.println("Did Stuff");
+        System.out.println("Created Athlete");
 
     }
 
     private void createFMS() {
-
+        
     }
 
     private void createYBalance() {
-
+        
     }
     /**
      * **********************Fitness Data injections********************************
