@@ -1159,6 +1159,15 @@ public class BowlerController implements Initializable {
     }
 
     private void createYBalance() {
+        double rightLimbLength,
+            antRightMean, antLeftMean,
+            pmRightMean, pmLeftMean,
+            plRightMean, plLeftMean, antR1, antR2, antR3, antL1, antL2, antL3, pmR1, pmR2, pmR3,
+            pmL1, pmL2, pmL3, plR1, plR2, plR3, plL1, plL2, plL3;
+        
+        
+        
+        
         
     }
     /**

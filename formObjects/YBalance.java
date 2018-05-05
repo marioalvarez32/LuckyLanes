@@ -16,6 +16,8 @@ public class YBalance {
             pmRightMean, pmLeftMean,
             plRightMean, plLeftMean, antR1, antR2, antR3, antL1, antL2, antL3, pmR1, pmR2, pmR3,
             pmL1, pmL2, pmL3, plR1, plR2, plR3, plL1, plL2, plL3;
+    private double compositeLeft;
+    private double compositeRight;
 
     //constructor that takes in all required fields.
     public YBalance(double rightLimbLength, double antR1, double antR2, double antR3, double antL1, double antL2, double antL3, double pmR1, double pmR2, double pmR3,
@@ -39,12 +41,15 @@ public class YBalance {
         this.antR2=antR2;
         this.antR3=antR3;     
         this.rightLimbLength = rightLimbLength;
-        this.antRightMean = (antR1 + antR2 + antR3) / 3.0;
-        this.antLeftMean = (antL1 + antL2 + antL3) / 3.0;
-        this.pmRightMean = (pmR1 + pmR2 + pmR3) / 3.0;
-        this.pmLeftMean = (pmL1 + pmL2 + pmL3) / 3.0;
-        this.plRightMean = (plR1 + plR2 + plR3) / 3.0;
-        this.plLeftMean = (plL1 + plL2 + plL3) / 3.0;
+        this.antRightMean = Math.max(Math.max(antR1, antR2), antR3);
+        this.antLeftMean = Math.max(Math.max(antL1, antL2), antL3);
+        this.pmRightMean = Math.max(Math.max(pmR1, pmR2), pmR3);
+        this.pmLeftMean = Math.max(Math.max(pmL1, pmL2), pmL3);
+        this.plRightMean = Math.max(Math.max(plR1, plR2), plR3);
+        this.plLeftMean = Math.max(Math.max(plL1, plL2), plL3);
+        
+        this.compositeLeft=((this.antLeftMean + this.pmLeftMean + this.plLeftMean) / (3 * this.rightLimbLength)) * 100;
+        this.compositeRight=((this.antRightMean + this.pmRightMean + this.plRightMean) / (3 * this.rightLimbLength)) * 100;
     }
 
     //empty constructor
@@ -139,5 +144,5 @@ public class YBalance {
     public double getPlLeftMean() {
         return plLeftMean;
     }
-
+   
 }
