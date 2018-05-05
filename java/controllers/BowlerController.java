@@ -224,6 +224,15 @@ public class BowlerController implements Initializable {
     @FXML
     ToggleGroup tgRotaryStabilityR;
     @FXML
+    ToggleGroup tgShoulderClearingL;
+    @FXML
+    ToggleGroup tgShoulderClearingR;
+    @FXML
+    ToggleGroup tgExtensionClearing;
+    @FXML
+    ToggleGroup tgFlexionClearing;
+
+    @FXML
     TextFieldRequired txfTrunkStability;
     @FXML
     TextFieldRequired txfInlineLounge;
@@ -237,7 +246,8 @@ public class BowlerController implements Initializable {
     TextFieldRequired txfHurdleStep;
     @FXML
     TextFieldRequired txfDeepSquat;
-
+    @FXML
+    TextField txfFMSTotal;
     /**
      * *************************************************************************
      *                                                                         *
@@ -258,7 +268,15 @@ public class BowlerController implements Initializable {
     RadioButton radMale2;
     @FXML
     RadioButton radFemale2;
-
+    @FXML
+    RadioButton radDominanceRight;
+    @FXML
+    RadioButton radDominanceLeft;
+    @FXML
+    RadioButton radDominance2Right;
+    @FXML
+    RadioButton radDominance2Left;
+    
     @FXML
     ScrollPane scrollPane;
     @FXML
@@ -319,6 +337,8 @@ public class BowlerController implements Initializable {
         txfAddress.setRequired(true);
         txfName.setRequired(true);
         txfAge.setRequired(true);
+        txfWeight.setRequired(true);
+        txfHeight.setRequired(true);
     }
 
     private void initializeYBalance() {
@@ -358,7 +378,10 @@ public class BowlerController implements Initializable {
 
         radMale.selectedProperty().bindBidirectional(radMale2.selectedProperty());
         radFemale.selectedProperty().bindBidirectional(radFemale2.selectedProperty());
-
+        
+        radDominanceRight.selectedProperty().bindBidirectional(radDominance2Right.selectedProperty());
+        radDominanceLeft.selectedProperty().bindBidirectional(radDominance2Left.selectedProperty());
+        
         selectionModel.selectedIndexProperty().addListener((observable, oldVal, newVal) -> {
             validateTabs(oldVal.intValue());
         });
@@ -607,6 +630,29 @@ public class BowlerController implements Initializable {
     }
 
     private void setFMSScoreSheetHandlers() {
+        /**
+         * **************************************************************
+         */
+        for (TextFieldRequired txf : getAllTextFieldRequired(vbFMSRoot)) {
+
+            txf.textProperty().addListener((observable, oldValue, newValue) -> {
+                boolean flag = true;
+                int sum = 0;
+                for (TextFieldRequired txf2 : getAllTextFieldRequired(vbFMSRoot)) {
+                    if (txf2.isValidNoEffect()) {
+                        //IT has a number in it
+                        sum += Integer.parseInt(txf2.getText());
+                    } else {
+                        return;
+                    }
+                }
+                txfFMSTotal.setText("" + sum);
+            });
+        }
+
+        /**
+         * **************************************************************
+         */
         tgHurdleStepR.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) -> {
 
             if (tgHurdleStepR.getSelectedToggle() != null && tgHurdleStepL.getSelectedToggle() != null) {
@@ -614,6 +660,8 @@ public class BowlerController implements Initializable {
                 ToggleButton l = ((ToggleButton) tgHurdleStepL.getSelectedToggle());
                 txfHurdleStep.setText(minValue(l.getText(), r.getText()));
 
+            } else {
+                txfHurdleStep.setText("");
             }
         });
 
@@ -624,25 +672,60 @@ public class BowlerController implements Initializable {
                 ToggleButton r = ((ToggleButton) tgHurdleStepR.getSelectedToggle());
                 txfHurdleStep.setText(minValue(l.getText(), r.getText()));
 
+            } else {
+                txfHurdleStep.setText("");
             }
         });
+        /**
+         * **************************************************************
+         */
         tgDeepSquat.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) -> {
 
             if (tgDeepSquat.getSelectedToggle() != null) {
                 ToggleButton currentToggle = ((ToggleButton) newToggle);
                 txfDeepSquat.setText(currentToggle.getText());
+            } else {
+                txfDeepSquat.setText("");
             }
         });
-        //
+        /**
+         * **************************************************************
+         */
         tgTrunkStability.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) -> {
 
-            if (tgTrunkStability.getSelectedToggle() != null) {
+            if (tgTrunkStability.getSelectedToggle() != null && tgExtensionClearing.getSelectedToggle() != null) {
                 ToggleButton currentToggle = ((ToggleButton) newToggle);
-                txfTrunkStability.setText(currentToggle.getText());
+                ToggleButton clearingL = ((ToggleButton) tgExtensionClearing.getSelectedToggle());
+                if (clearingL.getText().equals("+")) {
+                    txfTrunkStability.setText("0");
+                } else {
+                    txfTrunkStability.setText(currentToggle.getText());
+                }
+
+            } else {
+                txfTrunkStability.setText("");
             }
         });
 
-        //
+        tgExtensionClearing.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) -> {
+            if (tgTrunkStability.getSelectedToggle() != null && tgExtensionClearing.getSelectedToggle() != null) {
+                ToggleButton clearingL = ((ToggleButton) newToggle);
+                ToggleButton r = ((ToggleButton) tgTrunkStability.getSelectedToggle());
+
+                if (clearingL.getText().equals("+")) {
+                    txfTrunkStability.setText("0");
+                } else {
+                    txfTrunkStability.setText(r.getText());
+                }
+            } else {
+                txfTrunkStability.setText("");
+            }
+
+        });
+
+        /**
+         * **************************************************************
+         */
         tgInlineLoungeR.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) -> {
 
             if (tgInlineLoungeR.getSelectedToggle() != null && tgInlineLoungeL.getSelectedToggle() != null) {
@@ -650,6 +733,8 @@ public class BowlerController implements Initializable {
                 ToggleButton l = ((ToggleButton) tgInlineLoungeL.getSelectedToggle());
                 txfInlineLounge.setText(minValue(l.getText(), r.getText()));
 
+            } else {
+                txfInlineLounge.setText("");
             }
         });
 
@@ -660,31 +745,85 @@ public class BowlerController implements Initializable {
                 ToggleButton r = ((ToggleButton) tgInlineLoungeR.getSelectedToggle());
                 txfInlineLounge.setText(minValue(l.getText(), r.getText()));
 
+            } else {
+                txfInlineLounge.setText("");
             }
         });
 
-        //
+        /**
+         * **************************************************************
+         */
         tgShoulderMobilityR.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) -> {
 
-            if (tgShoulderMobilityR.getSelectedToggle() != null && tgShoulderMobilityL.getSelectedToggle() != null) {
+            if (tgShoulderMobilityR.getSelectedToggle() != null && tgShoulderMobilityL.getSelectedToggle() != null && tgShoulderClearingL.getSelectedToggle() != null && tgShoulderClearingR.getSelectedToggle() != null) {
                 ToggleButton r = ((ToggleButton) newToggle);
                 ToggleButton l = ((ToggleButton) tgShoulderMobilityL.getSelectedToggle());
-                txfShoulderMobility.setText(minValue(l.getText(), r.getText()));
+                ToggleButton clearingL = ((ToggleButton) tgShoulderClearingL.getSelectedToggle());
+                ToggleButton clearingR = ((ToggleButton) tgShoulderClearingR.getSelectedToggle());
 
+                if (clearingL.getText().equals("+") || clearingR.getText().equals("+")) {
+                    txfShoulderMobility.setText("0");
+                } else {
+                    txfShoulderMobility.setText(minValue(l.getText(), r.getText()));
+                }
+
+            } else {
+                txfShoulderMobility.setText("");
             }
         });
+        tgShoulderClearingL.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) -> {
+            if (tgShoulderMobilityR.getSelectedToggle() != null && tgShoulderMobilityL.getSelectedToggle() != null && tgShoulderClearingL.getSelectedToggle() != null && tgShoulderClearingR.getSelectedToggle() != null) {
+                ToggleButton clearingL = ((ToggleButton) newToggle);
+                ToggleButton r = ((ToggleButton) tgShoulderMobilityR.getSelectedToggle());
+                ToggleButton l = ((ToggleButton) tgShoulderMobilityL.getSelectedToggle());
 
+                if (clearingL.getText().equals("+")) {
+                    txfShoulderMobility.setText("0");
+                } else {
+                    txfShoulderMobility.setText(minValue(l.getText(), r.getText()));
+                }
+            } else {
+                txfShoulderMobility.setText("");
+            }
+
+        });
+        tgShoulderClearingR.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) -> {
+            if (tgShoulderMobilityR.getSelectedToggle() != null && tgShoulderMobilityL.getSelectedToggle() != null && tgShoulderClearingL.getSelectedToggle() != null && tgShoulderClearingR.getSelectedToggle() != null) {
+
+                ToggleButton clearingR = ((ToggleButton) newToggle);
+                ToggleButton r = ((ToggleButton) tgShoulderMobilityR.getSelectedToggle());
+                ToggleButton l = ((ToggleButton) tgShoulderMobilityL.getSelectedToggle());
+
+                if (clearingR.getText().equals("+")) {
+                    txfShoulderMobility.setText("0");
+                } else {
+                    txfShoulderMobility.setText(minValue(l.getText(), r.getText()));
+                }
+            } else {
+                txfShoulderMobility.setText("");
+            }
+        });
         tgShoulderMobilityL.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) -> {
 
-            if (tgShoulderMobilityR.getSelectedToggle() != null && tgShoulderMobilityL.getSelectedToggle() != null) {
+            if (tgShoulderMobilityR.getSelectedToggle() != null && tgShoulderMobilityL.getSelectedToggle() != null && tgShoulderClearingL.getSelectedToggle() != null && tgShoulderClearingR.getSelectedToggle() != null) {
                 ToggleButton l = ((ToggleButton) newToggle);
                 ToggleButton r = ((ToggleButton) tgShoulderMobilityR.getSelectedToggle());
-                txfShoulderMobility.setText(minValue(l.getText(), r.getText()));
+                ToggleButton clearingL = ((ToggleButton) tgShoulderClearingL.getSelectedToggle());
+                ToggleButton clearingR = ((ToggleButton) tgShoulderClearingR.getSelectedToggle());
 
+                if (clearingL.getText().equals("+") || clearingR.getText().equals("+")) {
+                    txfShoulderMobility.setText("0");
+                } else {
+                    txfShoulderMobility.setText(minValue(l.getText(), r.getText()));
+                }
+
+            } else {
+                txfShoulderMobility.setText("");
             }
         });
-        //
-
+        /**
+         * **************************************************************
+         */
         tgActiveStraightR.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) -> {
 
             if (tgActiveStraightR.getSelectedToggle() != null && tgActiveStraightL.getSelectedToggle() != null) {
@@ -692,6 +831,8 @@ public class BowlerController implements Initializable {
                 ToggleButton l = ((ToggleButton) tgActiveStraightL.getSelectedToggle());
                 txfActiveStraight.setText(minValue(l.getText(), r.getText()));
 
+            } else {
+                txfActiveStraight.setText("");
             }
         });
 
@@ -702,28 +843,68 @@ public class BowlerController implements Initializable {
                 ToggleButton r = ((ToggleButton) tgActiveStraightR.getSelectedToggle());
                 txfActiveStraight.setText(minValue(l.getText(), r.getText()));
 
+            } else {
+                txfActiveStraight.setText("");
             }
         });
-
+        /**
+         * **************************************************************
+         */
         tgRotaryStabilityR.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) -> {
 
-            if (tgRotaryStabilityR.getSelectedToggle() != null && tgRotaryStabilityL.getSelectedToggle() != null) {
+            if (tgRotaryStabilityR.getSelectedToggle() != null && tgRotaryStabilityL.getSelectedToggle() != null && tgFlexionClearing.getSelectedToggle() != null) {
                 ToggleButton r = ((ToggleButton) newToggle);
                 ToggleButton l = ((ToggleButton) tgRotaryStabilityL.getSelectedToggle());
-                txfRotaryStability.setText(minValue(l.getText(), r.getText()));
+                ToggleButton clearing = ((ToggleButton) tgFlexionClearing.getSelectedToggle());
 
+                if (clearing.getText().equals("+")) {
+                    txfRotaryStability.setText("0");
+                } else {
+                    txfRotaryStability.setText(minValue(l.getText(), r.getText()));
+                }
+
+            } else {
+                txfRotaryStability.setText("");
             }
         });
 
         tgRotaryStabilityL.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) -> {
 
-            if (tgRotaryStabilityR.getSelectedToggle() != null && tgRotaryStabilityL.getSelectedToggle() != null) {
+            if (tgRotaryStabilityR.getSelectedToggle() != null && tgRotaryStabilityL.getSelectedToggle() != null && tgFlexionClearing.getSelectedToggle() != null) {
                 ToggleButton l = ((ToggleButton) newToggle);
                 ToggleButton r = ((ToggleButton) tgRotaryStabilityR.getSelectedToggle());
-                txfRotaryStability.setText(minValue(l.getText(), r.getText()));
+                ToggleButton clearing = ((ToggleButton) tgFlexionClearing.getSelectedToggle());
 
+                if (clearing.getText().equals("+")) {
+                    txfRotaryStability.setText("0");
+                } else {
+                    txfRotaryStability.setText(minValue(l.getText(), r.getText()));
+                }
+
+            } else {
+                txfRotaryStability.setText("");
             }
         });
+
+        tgFlexionClearing.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) -> {
+
+            if (tgRotaryStabilityR.getSelectedToggle() != null && tgRotaryStabilityL.getSelectedToggle() != null && tgFlexionClearing.getSelectedToggle() != null) {
+                ToggleButton clearing = ((ToggleButton) newToggle);
+                ToggleButton r = ((ToggleButton) tgRotaryStabilityR.getSelectedToggle());
+                ToggleButton l = ((ToggleButton) tgRotaryStabilityL.getSelectedToggle());
+
+                if (clearing.getText().equals("+")) {
+                    txfRotaryStability.setText("0");
+                } else {
+                    txfRotaryStability.setText(minValue(l.getText(), r.getText()));
+                }
+
+            } else {
+                txfRotaryStability.setText("");
+            }
+
+        });
+
     }
 
     public static ArrayList<TextFieldRequired> getAllTextFieldRequired(Parent root) {
@@ -949,5 +1130,408 @@ public class BowlerController implements Initializable {
 
         System.out.println("Did Stuff");
 
+    }
+
+    private void createFMS() {
+
+    }
+
+    private void createYBalance() {
+
+    }
+    /**
+     * **********************Fitness Data injections********************************
+     */
+    @FXML
+    TextField txfRestingHR;
+    @FXML
+    TextField txfRestingBPA;
+    @FXML
+    TextField txfRestingBPB;
+    @FXML
+    TextField txfBMI;
+    @FXML
+    TextField txfPeakFLow1;
+    @FXML
+    TextField txfPeakFLow2;
+    @FXML
+    TextField txfWCirc;
+    @FXML
+    TextField txfHipCirc;
+    @FXML
+    TextField txfMidTCirc;
+    @FXML
+    TextField txfFlexArmCirc;
+    @FXML
+    TextField txfAntThigh1;
+    @FXML
+    TextField txfAntThigh2;
+    @FXML
+    TextField txfAntThighAVG;
+    @FXML
+    TextField txfHamCSA;
+    @FXML
+    TextField txfQuadCSA;
+    @FXML
+    TextField txfTotalCSA;
+    @FXML
+    TextField txfStartDist;
+    @FXML
+    TextField txfEndDist1;
+    @FXML
+    TextField txfEndDist2;
+    @FXML
+    TextField txfEndDist3;
+    @FXML
+    TextField txfFinalDist;
+    @FXML
+    TextField txfHGR1;
+    @FXML
+    TextField txfHGR2;
+    @FXML
+    TextField txfHGR3;
+    @FXML
+    TextField txfHGL1;
+    @FXML
+    TextField txfHGL2;
+    @FXML
+    TextField txfHGL3;
+    @FXML
+    TextField txfProneTime;
+    @FXML
+    TextField txfKneeExtForceR1;
+    @FXML
+    TextField txfKneeExtForceR2;
+    @FXML
+    TextField txfKneeExtForceL1;
+    @FXML
+    TextField txfKneeExtForceL2;
+    @FXML
+    TextField txfJH1;
+    @FXML
+    TextField txfJH2;
+    @FXML
+    TextField txfMedPass1;
+    @FXML
+    TextField txfMedPass2;
+    @FXML
+    TextField txfPostHR;
+    @FXML
+    TextField txfVO2Max;
+    @FXML
+    TextField txfPostVO2Max;
+    @FXML
+    TextField txfRockportHR;
+    @FXML
+    TextField txfRockportTime;
+    @FXML
+    TextField txfRockportVO2Max;
+    @FXML
+    TextField txfWalkDistance;
+    @FXML
+    TextField txfWalkVO2;
+    
+    @FXML
+    private void createFitnessData(ActionEvent e) {
+        String regexNum = TextFieldRequired.NUMERIC;
+        DecimalFormat df = new DecimalFormat("#.##");
+        /**
+         * ***************First Section********************
+         */
+        double restingHR = 0;
+        double restingBPA=0;
+        double restingBPB=0;
+        double bmi=0;
+        double peakFlow=0;
+        double height=0;
+        double weight=0;
+        double age =0;
+        try {
+            if(txfAge2.getText().matches(regexNum)){
+                age =Double.parseDouble(txfAge2.getText());
+            }
+            if (txfHeight2.getText().matches(regexNum) && txfWeight2.getText().matches(regexNum)) {
+                height = Double.parseDouble(txfHeight2.getText());
+                weight = Double.parseDouble(txfWeight2.getText());
+
+                bmi = (weight / (Math.pow(height, 2))) * 10000;
+                txfBMI.setText(df.format(bmi));
+            }else{
+                txfBMI.setText("");
+            }
+
+            if (txfRestingHR.getText().matches(regexNum)) {
+                restingHR = Double.parseDouble(txfRestingHR.getText());
+            }
+
+            if (txfRestingBPA.getText().matches(regexNum) && txfRestingBPB.getText().matches(regexNum)) {
+                restingBPA = Double.parseDouble(txfRestingHR.getText());
+                restingBPB = Double.parseDouble(txfRestingHR.getText());
+            }
+            if (txfPeakFLow1.getText().matches(regexNum) && txfPeakFLow2.getText().matches(regexNum)) {
+                double pf1 = Double.parseDouble(txfHeight2.getText());
+                double pf2 = Double.parseDouble(txfWeight2.getText());
+
+                peakFlow = Math.max(pf1, pf2);
+            }
+        } catch (Exception exception) {
+            System.out.println("First section of fitness data has errors");
+            exception.printStackTrace();
+        }
+        /**
+         * ***************Anthropometrics Section********************
+         */
+        double ant1=0;
+        double ant2=0;
+        double wCirc=0;
+        double hCirc=0;
+        double midCirc=0;
+        double fCirc=0;
+        double hamCSA=0;
+        double quadCSA=0;
+        double totalCSA=0;
+        
+        try{
+            if(txfAntThigh1.getText().matches(regexNum) && txfAntThigh2.getText().matches(regexNum)){
+                ant1=Double.parseDouble(txfAntThigh1.getText());
+                ant2=Double.parseDouble(txfAntThigh2.getText());
+                
+                double avg = (ant1+ant2)/2;
+                txfAntThighAVG.setText(""+df.format(avg));
+                
+                //Calculate CSA variables
+                if(txfMidTCirc.getText().matches(regexNum)){
+                    midCirc = Double.parseDouble(txfMidTCirc.getText());
+                    
+                    quadCSA = (2.52 * midCirc) - (1.25*avg) - 45.13;
+                    hamCSA = (1.08 * midCirc) - (0.64*avg) - 22.69;
+                    totalCSA = (4.68 * midCirc) - (2.09*avg) - 80.99;
+                    
+                    txfHamCSA.setText(df.format(hamCSA));
+                    txfQuadCSA.setText(df.format(quadCSA));
+                    txfTotalCSA.setText(df.format(totalCSA));
+                }else{
+                    midCirc =0;
+                    hamCSA=0;
+                    quadCSA=0;
+                    totalCSA=0;
+                    txfHamCSA.setText("");
+                    txfQuadCSA.setText("");
+                    txfTotalCSA.setText("");
+                }
+                
+                if(txfWCirc.getText().matches(regexNum)){
+                    wCirc = Double.parseDouble(txfWCirc.getText());  
+                }else{
+                    wCirc=0;
+                }
+                
+                if(txfHipCirc.getText().matches(regexNum)){
+                    hCirc = Double.parseDouble(txfHipCirc.getText());  
+                }else{
+                    hCirc=0;
+                }
+                
+                if(txfFlexArmCirc.getText().matches(regexNum)){
+                    fCirc = Double.parseDouble(txfFlexArmCirc.getText());  
+                }else{
+                    fCirc=0;
+                }
+                                
+            }else{
+                
+                hamCSA=0;
+                quadCSA=0;
+                totalCSA=0;
+                txfHamCSA.setText("");
+                txfQuadCSA.setText("");
+                txfTotalCSA.setText("");
+                txfAntThighAVG.setText("");
+            }
+        } catch (Exception exception) {
+            System.out.println("Antrhopometrics section of fitness data has errors");
+            exception.printStackTrace();
+        }
+        
+        /**
+         * ***************Anthropometrics Section********************
+         */
+        
+        double startDist=0;
+        double endDist1=0;
+        double endDist2=0;
+        double endDist3=0;
+        double endDist=0;
+        try{
+            if(txfStartDist.getText().matches(regexNum)){
+                startDist = Double.parseDouble(txfStartDist.getText());
+                boolean flag=true;
+                if(txfEndDist1.getText().matches(regexNum)&&txfEndDist1.getText().matches(regexNum)&&txfEndDist1.getText().matches(regexNum)){
+                    endDist1 = Double.parseDouble(txfEndDist1.getText());
+                    endDist2 = Double.parseDouble(txfEndDist2.getText());
+                    endDist3 = Double.parseDouble(txfEndDist3.getText());
+                    
+                    endDist = (Math.max(endDist1, Math.max(endDist2, endDist3))) - startDist;
+                }else{
+                    txfFinalDist.setText("");
+                }
+            }else{
+                txfStartDist.setText("");
+
+                txfFinalDist.setText("");
+            }
+        } catch (Exception exception) {
+            System.out.println("Sit & Reach section of fitness data has errors");
+            exception.printStackTrace();
+        }
+        
+        /**
+         * ***************Anthropometrics Section********************
+         */
+        double hgR1=0;
+        double hgR2=0;
+        double hgR3=0;
+        double hgR=0;
+        
+        double hgL1=0;
+        double hgL2=0;
+        double hgL3=0;
+        double hgL=0;
+        
+        double proneTime=0;
+        double kneeExtForceR1=0;
+        double kneeExtForceR2=0;
+        double kneeExtForceL1=0;
+        double kneeExtForceL2=0;
+        
+        double jh1=0;
+        double jh2=0;
+        double medPass1=0;
+        double medPass2=0;
+        
+        try{
+           if(txfHGR1.getText().matches(regexNum)&&txfHGR2.getText().matches(regexNum)&&txfHGR2.getText().matches(regexNum)){
+               hgR1=Double.parseDouble(txfHGR1.getText());
+               hgR2=Double.parseDouble(txfHGR2.getText());
+               hgR3=Double.parseDouble(txfHGR3.getText());
+               
+               hgR= Math.max(hgR1, Math.max(hgR2, hgR3));
+           }else{
+               hgR=0;
+               hgR1=0;
+               hgR2=0;
+               hgR3=0;
+           }
+           
+           if(txfHGL1.getText().matches(regexNum)&&txfHGL2.getText().matches(regexNum)&&txfHGL2.getText().matches(regexNum)){
+               hgL1=Double.parseDouble(txfHGL1.getText());
+               hgL2=Double.parseDouble(txfHGL2.getText());
+               hgL3=Double.parseDouble(txfHGL3.getText());
+               
+               hgL= Math.max(hgL1, Math.max(hgL2, hgL3));
+           }else{
+               hgL=0;
+               hgL1=0;
+               hgL2=0;
+               hgL3=0;
+           }
+           
+           if(txfProneTime.getText().matches(regexNum)){
+               proneTime = Double.parseDouble(txfProneTime.getText());
+           }else{
+               proneTime=0;
+           }
+           
+           if(txfKneeExtForceR1.getText().matches(regexNum)&&txfKneeExtForceR2.getText().matches(regexNum)){
+               kneeExtForceR1 = Double.parseDouble(txfKneeExtForceR1.getText());
+               kneeExtForceR2 = Double.parseDouble(txfKneeExtForceR2.getText());        
+           }else{
+               kneeExtForceR1=0;
+               kneeExtForceR2=0;
+           }
+           if(txfKneeExtForceL1.getText().matches(regexNum)&&txfKneeExtForceL2.getText().matches(regexNum)){
+               kneeExtForceL1 = Double.parseDouble(txfKneeExtForceL1.getText());
+               kneeExtForceL2 = Double.parseDouble(txfKneeExtForceL2.getText()); 
+           }else{
+               kneeExtForceL1=0;
+               kneeExtForceL2=0;
+           }
+           if(txfJH1.getText().matches(regexNum)&&txfJH2.getText().matches(regexNum)){
+               jh1 = Double.parseDouble(txfJH1.getText());
+               jh2 = Double.parseDouble(txfJH2.getText());
+           }else{
+               jh1 =0;
+               jh2=0;
+           }
+           if(txfMedPass1.getText().matches(regexNum)&&txfMedPass2.getText().matches(regexNum)){
+               medPass1 = Double.parseDouble(txfMedPass1.getText());
+               medPass2 = Double.parseDouble(txfMedPass2.getText());
+           }else{
+               medPass1 = 0;
+               medPass2 = 0;
+           }
+           
+        } catch (Exception exception) {
+            System.out.println("Sit & Reach section of fitness data has errors");
+            exception.printStackTrace();
+        }
+        
+        /**
+         * ***************Anthropometrics Section********************
+         */
+        
+        double postHR=0;
+        double postVO2Max=0;
+        double vO2Max=0;
+        double rockHR=0;
+        double walkTime =0;
+        double rockVO2Max=0;
+        double walkDistance=0;
+        double walkVO2Max=0;
+        try{
+            vO2Max = ((0.046*height) - (0.021*age)-4.93)*1000;//ml/min
+            vO2Max = vO2Max / weight; //ml/kg/min
+            txfVO2Max.setText(df.format(vO2Max));
+            
+            if(txfPostHR.getText().matches(regexNum)){
+                postHR = Double.parseDouble(txfPostHR.getText());
+                postVO2Max = (-0.9675 * postHR)+77.643;
+                txfPostVO2Max.setText(df.format(postVO2Max));
+            }else{
+                txfPostVO2Max.setText("");
+            }
+            
+            //Rockport Test
+            if(txfRockportHR.getText().matches(regexNum)&&txfRockportTime.getText().matches("^[0-9]+(:\\d+)+$")){
+                String time[] = txfRockportTime.getText().split(":");
+                
+                rockHR=Double.parseDouble(txfRockportHR.getText());
+                walkTime=Double.parseDouble(time[0])+ (Double.parseDouble(time[1]) / 60);//convert seconds to minutes.
+                //Just doing Male for now.
+                if(age>=30 && age <=65){
+                    rockVO2Max= (139.168 - (0.3877 * age) - (0.1692*(weight*2.20462)) - (3.2649*walkTime) - (0.1565 * rockHR));
+                }else if(age>=18 && age <=29){
+                    rockVO2Max= (97.660 - (0.0957 * age) - (0.1692*(weight*2.20462)) - (1.4537*walkTime) - (0.1194 * rockHR));
+                }
+                
+                txfRockportVO2Max.setText(df.format(rockVO2Max));
+            }else{
+                txfRockportVO2Max.setText("");
+            }
+            
+            //12-Minute Walk Test
+            if(txfWalkDistance.getText().matches(regexNum)){
+                walkDistance=Double.parseDouble(txfWalkDistance.getText());
+                //VO2max(mL/kg/min)= (distance covered in meters - 504.9)/44.73
+                walkVO2Max = (walkDistance - 504.9) / 44.73;
+                txfWalkVO2.setText(df.format(walkVO2Max));   
+            }else{
+                txfWalkVO2.setText("");
+            }
+            
+        } catch (Exception exception) {
+            System.out.println("Estimated Aerobic thing of fitness data has errors");
+            exception.printStackTrace();
+        }
     }
 }

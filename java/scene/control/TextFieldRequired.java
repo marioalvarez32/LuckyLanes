@@ -85,6 +85,25 @@ public class TextFieldRequired extends TextField {
         }
         return true;
     }
+    //Used to validate a field without affecting its style
+    public boolean isValidNoEffect() {
+        
+        if (isRequired) {
+            if (isValid(this.getText())) { 
+                return true;
+            }
+            return false;
+        }
+        //If the textfield is not empty, it must validate
+        if(!this.getText().equals("")){
+            if(isValid(this.getText())){
+                return true;
+            }
+            
+            return false;
+        }
+        return true;
+    }
 
     public boolean isValid(String text) {
         return text.matches(validationRegex);

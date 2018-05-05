@@ -63,7 +63,7 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        //Try to load the database and connect to test
+        //  Try to load the database and connect to test
         
         //saveProperties("Mypath");
         //lblTest.setText(loadProperties());
