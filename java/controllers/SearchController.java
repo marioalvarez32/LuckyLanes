@@ -9,16 +9,23 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -45,23 +52,42 @@ public class SearchController implements Initializable {
     @FXML TextField txtZip;
     @FXML TextField txtID;
     @FXML Button buttonSubmit;
-    
+    @FXML ProgressIndicator progressIndicator;
     // variables for sql/database
     private ObservableList<ObservableList> data;
-    
+    private Executor exec ;
+    private ResultSet rs;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        exec = Executors.newCachedThreadPool(runnable -> {
+            Thread t = new Thread(runnable);
+            t.setDaemon(true);
+            return t ;
+        });
+        
+        progressIndicator.progressProperty().addListener((observable,oldValue,newValue)->{
+          /*  
+            if(newValue.intValue() >0){
+                progressIndicator.setVisible(true);
+            }else if(newValue.intValue()== 100){
+                progressIndicator.setVisible(false);
+            }else{
+                progressIndicator.setVisible(false);
+            }*/
+        });
     }    
     
     @FXML 
     public void buildData(ActionEvent e) {
-        for(int i = 0; i < table.getItems().size(); i++) {
-            table.getItems().clear();
-        }
+
+        //table.getItems().clear();
+        table.getColumns().clear();
+        
         System.out.println("Running");
         // prepare SQL statement
         String SQL= "SELECT name, address, school FROM ATHLETE WHERE "
@@ -76,42 +102,81 @@ public class SearchController implements Initializable {
         
         
         // grab the result set of the equation
-        ResultSet rs = Database.searchQuery(SQL);
+        //ResultSet rs = Database.searchQuery(SQL);
+        Task<Void> databaseQuery = new Task<Void>() {
+            @Override
+            public Void call() throws Exception {
+                System.out.print("fasldfkj;asldfkj");
+                //BEHOLD
+                progressIndicator.setVisible(true);//FUCK YES!!!!
+                
+                ResultSet rs = Database.searchQuery(SQL);
+                //Platform.runlater is used to update an UI control inside a different thread.
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        data = FXCollections.observableArrayList();
+                        try {
+                            // go through the columns and add them
+                            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+                                final int j = i;
+                                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+                                col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {
+                                        return new SimpleStringProperty(param.getValue().get(j).toString());
+                                    }
+                                });
+
+                                table.getColumns().addAll(col);
+                                //System.out.println("Column ["+i+"] ");
+                            }
+
+                            // add data to the observable list
+                            while (rs.next()) {
+                                //Iterate Row
+                                ObservableList<String> row = FXCollections.observableArrayList();
+                                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                                    //Iterate Column
+                                    row.add(rs.getString(i));
+                                }
+                                //System.out.println("Row [1] added "+row );
+                                data.add(row);
+                            }
+
+                            // add to the tableview
+                            table.setItems(data);
+                        } catch (SQLException ex) {
+
+                            //Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+                });
+                return null;
+            }   
+        };
+
+        progressIndicator.progressProperty().bind(databaseQuery.progressProperty());
+        databaseQuery.setOnFailed(error -> {
+           //databaseQuery.getException().printStackTrace();
+           //Abandon the ship.
+           System.out.println("Women and kids first");
+        });
+
+        databaseQuery.setOnSucceeded(error -> {
+            //this.rs=databaseQuery.getValue();
+            System.out.println("It's Alive!!!");
+            progressIndicator.progressProperty().unbind();
+            progressIndicator.setProgress(1);
+            progressIndicator.setVisible(false);
+            
+        });
+         
+        // Task.getValue() gives the value returned from call()...
+            //rs = widgetSearchTask.getValue())
         
        // start converting the result set into tableview
-       data = FXCollections.observableArrayList();
-        try {
-            // go through the columns and add them
-            for(int i = 0; i<rs.getMetaData().getColumnCount(); i++) {
-               final int j = i;
-               TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
-               col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
-                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
-                        return new SimpleStringProperty(param.getValue().get(j).toString());                        
-                    }                    
-                });
-                
-                table.getColumns().addAll(col); 
-                System.out.println("Column ["+i+"] ");
-            }
-            
-            // add data to the observable list
-            while(rs.next()) {
-                //Iterate Row
-                ObservableList<String> row = FXCollections.observableArrayList();
-                for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
-                    //Iterate Column
-                    row.add(rs.getString(i));
-                }
-                System.out.println("Row [1] added "+row );
-                data.add(row);
-            }
-            
-            // add to the tableview
-            table.setItems(data);
-        } catch (SQLException ex) {
-            Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+       exec.execute(databaseQuery);
     }
+    
 }

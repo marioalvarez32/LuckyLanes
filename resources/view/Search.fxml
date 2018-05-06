@@ -103,13 +103,10 @@
                               <Insets top="30.0" />
                            </VBox.margin>
                         </TableView>
-                        <ProgressIndicator prefHeight="512.0" prefWidth="588.0" progress="0.0" visible="false">
+                        <ProgressIndicator fx:id="progressIndicator" prefHeight="512.0" prefWidth="588.0" visible="false">
                            <StackPane.margin>
                               <Insets />
                            </StackPane.margin>
-                           <padding>
-                              <Insets bottom="250.0" left="250.0" right="250.0" top="250.0" />
-                           </padding>
                         </ProgressIndicator>
                      </children>
                   </StackPane>
