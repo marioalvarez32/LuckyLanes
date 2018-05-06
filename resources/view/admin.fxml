@@ -93,7 +93,7 @@
                                                       <Image url="@../icons/plus-circle.png" />
                                                    </image>
                                                 </ImageView>
-                                                <Label fx:id="lblTest" text="New" textFill="WHITE">
+                                                <Label text="New" textFill="WHITE">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
@@ -114,9 +114,9 @@
                                           </VBox>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane GridPane.rowIndex="2">
+                                    <AnchorPane GridPane.columnSpan="2" GridPane.rowIndex="2">
                                        <children>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                          <HBox alignment="CENTER_LEFT" prefHeight="125.0" prefWidth="308.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <children>
                                                 <ImageView fx:id="imgDatabase" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>

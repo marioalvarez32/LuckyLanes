@@ -5,6 +5,7 @@
  */
 package main.java;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,12 +15,6 @@ import java.sql.*;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.util.Callback;
 
 /**
  *
@@ -56,20 +51,21 @@ public class Database {
         URL = "jdbc:h2:file:" + url;
         URL = URL.split("\\.", 2)[0];
         URL += ";IFEXISTS=TRUE";
-        System.out.println("URL ON CONNECT:" + URL);
+        Trace.print("URL ON CONNECT:" + URL);
         try {
-            System.out.println("Grabbing driver...");
+            Trace.print("Grabbing driver...");
+            
             Class.forName(DRIVER);
 
-            System.out.println("Connecting to the database...");
+            Trace.print("Connecting to the database...");
             conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            System.out.println("Connected...");
+            Trace.print("Connected...");
             return true;
         } catch (SQLException ex) {
-            System.out.println("Connection was unsuccessful.");
+            Trace.print("Connection was unsuccessful.");
             return false;
         } catch (ClassNotFoundException ex) {
-            System.out.println("Driver detection was unsuccessful.");
+            Trace.print("Driver detection was unsuccessful.");
             return false;
         }
     }
@@ -118,8 +114,10 @@ public class Database {
     public static void createDatabase(String url) {
         // declare variables
         String sql;
+       // url = "C\:\\Users\\HomePC\\Desktop\\Database files\\database";
+        
         URL = "jdbc:h2:file:" + url;
-        Database.saveProperties(url);
+        
         System.out.println("The url upon creating: " + URL);
 
         try {
@@ -219,8 +217,8 @@ public class Database {
 
         try {
 
-            output = new FileOutputStream("config.properties");
-
+            output = new FileOutputStream(new File("").getAbsolutePath()+"/config.properties");
+            
             prop.setProperty("url", url);
 
             prop.store(output, null);
@@ -244,15 +242,15 @@ public class Database {
         InputStream input = null;
         String url = "";
         try {
-
-            input = new FileInputStream("config.properties");
-
+            
+            input = new FileInputStream(new File("").getAbsolutePath()+"/config.properties");
             prop.load(input);
-
             url = prop.getProperty("url");
-
+            System.out.println("Changed database path.");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            //A properties file was not found, create one with empty url.
+            return null;
+            //ex.printStackTrace();
         } finally {
             if (input != null) {
                 try {

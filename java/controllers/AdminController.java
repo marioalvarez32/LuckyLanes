@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -21,16 +22,21 @@ import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import main.java.Database;
 import main.java.LuckyLanes;
+import main.java.Trace;
 
 /**
  * FXML Controller class
@@ -51,9 +57,8 @@ public class AdminController implements Initializable {
     @FXML
     Button btnTesting;
     @FXML
-    Label lblTest;
-    @FXML
     ImageView imgDatabase;
+    
     /**
      * Initializes the controller class.
      *
@@ -62,22 +67,31 @@ public class AdminController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        //  Try to load the database and connect to test
-        
-        //saveProperties("Mypath");
-        //lblTest.setText(loadProperties());
-        loadDatabase();
+        Trace.createFile();
     }
 
-    public void loadDatabase(){
-        String url = Database.loadProperties();
-        System.out.println("Loading Database:"+url);
-        
-        if(Database.connect(url)){
-            imgDatabase.setImage(new Image("/main/resources/icons/dbConnected.png"));
-        }else{
-            imgDatabase.setImage(new Image("/main/resources/icons/dbDisconnected.png"));
+    private void showDatabaseAlert() {
+        imgDatabase.setImage(new Image("/main/resources/icons/dbDisconnected.png"));
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Database Not Found.");
+        alert.setHeaderText("Please create or open a database file");
+        alert.setContentText("Select an option");
+
+        ButtonType buttonTypeCreate = new ButtonType("Create");
+        ButtonType buttonTypeOpen = new ButtonType("Open");
+
+        alert.getButtonTypes().addAll(buttonTypeCreate, buttonTypeOpen);
+
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.initOwner(stage);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == buttonTypeCreate) {
+            this.createDatabase(null);
+        } else if (result.get() == buttonTypeOpen) {
+            this.openDatabase(null);
+        } else {
+
         }
     }
 
@@ -93,8 +107,32 @@ public class AdminController implements Initializable {
         this.stage = stage;
     }
 
+    public void test() {
+
+    }
+
+    public void loadDatabase() {
+        imgDatabase.setVisible(true);
+        String url = Database.loadProperties();
+        if (url == null) {
+            showDatabaseAlert();
+
+        } else {
+            System.out.println("Loading Database:" + url);
+            
+            if (Database.connect(url)) {
+                imgDatabase.setImage(new Image("/main/resources/icons/dbConnected.png"));
+            } else {
+                //lblTest.setText("Couldn't connect with that url");
+                showDatabaseAlert();
+                imgDatabase.setImage(new Image("/main/resources/icons/dbDisconnected.png"));
+            }
+        }
+    }
+
     @FXML
     public void testThis(ActionEvent e) {
+
     }
 
     @FXML
@@ -104,8 +142,9 @@ public class AdminController implements Initializable {
         //fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Database file(*.db)", "*.db"));
         File databasePath = fileChooser.showSaveDialog(stage);
         if (databasePath != null) {
-            
-            Database.createDatabase(databasePath.toString());
+
+            Database.createDatabase(databasePath.getPath());
+            Database.saveProperties(databasePath.getPath());
             loadDatabase();
         }
 
@@ -118,7 +157,8 @@ public class AdminController implements Initializable {
         //   fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Database file(*.db)", "*.db"));
         File databasePath = fileChooser.showOpenDialog(stage);
         if (databasePath != null) {
-            Database.connect(databasePath.toString());
+            Database.saveProperties(databasePath.toString());
+            loadDatabase();
         }
     }
 

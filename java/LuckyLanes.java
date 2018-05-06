@@ -65,10 +65,11 @@ public class LuckyLanes extends Application {
             });
             //Replace the content of the stage.
            //gotoLogin();
-           gotoAdmin();
             primaryStage.initStyle(StageStyle.DECORATED);
+            gotoAdmin();
+            
             //Starts the application.
-            primaryStage.show();
+            //primaryStage.show();
             
         } catch (Exception ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
@@ -118,6 +119,10 @@ public class LuckyLanes extends Application {
             root.setStage(stage);
             stage.setResizable(true);
             stage.sizeToScene();
+            //root.loadDatabase();
+            
+            stage.show();           
+            root.loadDatabase();
         } catch (IOException ex) {
             Logger.getLogger(LuckyLanes.class.getName()).log(Level.SEVERE, null, ex);
         }
