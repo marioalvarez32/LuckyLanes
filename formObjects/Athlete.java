@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java;
+package main.formObjects;
 
 import java.util.Date;
+import main.java.Database;
 
 /**
  *

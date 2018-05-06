@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
@@ -44,7 +45,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import main.java.Athlete;
+import main.formObjects.YBalance;
+import main.formObjects.Athlete;
+import main.formObjects.FMS;
+import main.formObjects.FitnessTest;
 import main.java.scene.control.TextFieldRequired;
 
 /**
@@ -253,6 +257,29 @@ public class BowlerController implements Initializable {
     TextFieldRequired txfDeepSquat;
     @FXML
     TextField txfFMSTotal;
+    
+    @FXML
+    TextArea txfDeepSquatComment;
+    @FXML
+    TextArea txfHurdleStepComment;
+    @FXML
+    TextArea txfInlineLoungeComment;
+
+    @FXML
+    TextArea txfShoulderMobilityComment;
+    @FXML
+    TextArea txfShoulderClearingComment;
+    @FXML
+    TextArea txfLegRaiseComment;
+
+    @FXML
+    TextArea txfTrunkStabilityComment;
+    @FXML
+    TextArea txfExtensionClearingComment;
+    @FXML
+    TextArea txfRotaryComment;
+    @FXML
+    TextArea txfFlexionComment;
     /**
      * *************************************************************************
      *                                                                         *
@@ -281,7 +308,7 @@ public class BowlerController implements Initializable {
     RadioButton radDominance2Right;
     @FXML
     RadioButton radDominance2Left;
-    
+
     @FXML
     ScrollPane scrollPane;
     @FXML
@@ -303,14 +330,13 @@ public class BowlerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-       
         /*
         WebEngine webEngine = webView.getEngine();
         URL xd =this.getClass().getResource("index.html"); 
         webEngine.load(xd.toExternalForm());
-        */
+         */
         errors = new boolean[NUM_TAB];
-        
+
         lblDate.setText(dateFormat.format(date));
         selectionModel = tabPane.getSelectionModel();
         initializeDemographics();
@@ -389,10 +415,10 @@ public class BowlerController implements Initializable {
 
         radMale.selectedProperty().bindBidirectional(radMale2.selectedProperty());
         radFemale.selectedProperty().bindBidirectional(radFemale2.selectedProperty());
-        
+
         radDominanceRight.selectedProperty().bindBidirectional(radDominance2Right.selectedProperty());
         radDominanceLeft.selectedProperty().bindBidirectional(radDominance2Left.selectedProperty());
-        
+
         selectionModel.selectedIndexProperty().addListener((observable, oldVal, newVal) -> {
             validateTabs(oldVal.intValue());
         });
@@ -1064,10 +1090,13 @@ public class BowlerController implements Initializable {
 
     @FXML
     private void finishDataCollection(ActionEvent e) {
-        
+
         //Try with a catch if you get exceptions.
         //Athlete temp = createAthlete();
         createAthlete();
+        createFMS();
+        createYBalance();
+        
         System.out.println("Did Stuff");
     }
 
@@ -1081,7 +1110,7 @@ public class BowlerController implements Initializable {
         txfAddress.setText("Address potato");
         //txfCity.setText("Potatoland");
         //txfSchool.setText("Potato High");
-       // txfZip.setText("66666");
+        // txfZip.setText("66666");
         //txfPhone.setText("9999999999");
         txfHeight.setText("5");
         txfWeight.setText("1");
@@ -1116,29 +1145,24 @@ public class BowlerController implements Initializable {
          * **************Athlete Creation********************
          */
         Calendar cal = Calendar.getInstance();
-        
-        
-        
-        
-        
-        
+
         String name = txfName.getText();
         String date = lblDate.getText();
-       
+
         String address = txfAddress.getText();
         String city = txfCity.getText();
-        String state = (cbState.getValue()!=null)?"No State Selected":cbState.getValue().toString();
+        String state = (cbState.getValue() == null) ? "No State Selected" : cbState.getValue().toString();
         int zip = (txfZip.getText().equals("") ? 0 : Integer.parseInt(txfZip.getText()));
         String phone = txfPhone.getText();
         String school = txfSchool.getText();
         double height = (txfHeight.getText().equals("") ? 0 : Double.parseDouble(txfHeight.getText()));
         double weight = (txfWeight.getText().equals("") ? 0 : Double.parseDouble(txfWeight.getText()));
         int age = (txfAge.getText().equals("") ? 0 : Integer.parseInt(txfAge.getText()));
-        cal.add(Calendar.YEAR, (age *-1));
+        cal.add(Calendar.YEAR, (age * -1));
         cal.set(Calendar.MONTH, 1);
         cal.set(Calendar.DAY_OF_MONTH, 1);
         String dateOfBirth = dateFormat.format(cal.getTime());
-        dateOfBirth = (dpDate.getValue() != null)?dpDate.getValue().toString():dateOfBirth;
+        dateOfBirth = (dpDate.getValue() != null) ? dpDate.getValue().toString() : dateOfBirth;
         String gender = (tgGender.getSelectedToggle() != null) ? ((ToggleButton) tgGender.getSelectedToggle()).getText() : "-";
         String handDominance = (dominance.getSelectedToggle() != null) ? ((ToggleButton) dominance.getSelectedToggle()).getText() : "-";
         String legDominance = (dominance.getSelectedToggle() != null) ? ((ToggleButton) dominance.getSelectedToggle()).getText() : "-";
@@ -1153,25 +1177,76 @@ public class BowlerController implements Initializable {
         System.out.println("Created Athlete");
 
     }
-
+    
+    
+    
+    
     private void createFMS() {
+        int deepSquatRaw = Integer.parseInt(((ToggleButton) tgDeepSquat.getSelectedToggle()).getText());
+        int hurdleStepRawL=Integer.parseInt(((ToggleButton) tgHurdleStepL.getSelectedToggle()).getText());
+        int hurdleStepRawR=Integer.parseInt(((ToggleButton) tgHurdleStepR.getSelectedToggle()).getText());
+        int inlineLoungeRawL=Integer.parseInt(((ToggleButton) tgInlineLoungeL.getSelectedToggle()).getText());
+        int inlineLoungeRawR=Integer.parseInt(((ToggleButton) tgInlineLoungeR.getSelectedToggle()).getText());
+        int shoulderMobilityRawL=Integer.parseInt(((ToggleButton) tgShoulderMobilityL.getSelectedToggle()).getText());
+        int shoulderMobilityRawR=Integer.parseInt(((ToggleButton) tgShoulderMobilityR.getSelectedToggle()).getText());
+        boolean shoulderClearingL=((ToggleButton) tgShoulderClearingR.getSelectedToggle()).getText().equals("+");
+        boolean shoulderClearingR=((ToggleButton) tgShoulderClearingR.getSelectedToggle()).getText().equals("+");
+        int legRaiseRawL=Integer.parseInt(((ToggleButton) tgActiveStraightL.getSelectedToggle()).getText());
+        int legRaiseRawR=Integer.parseInt(((ToggleButton) tgActiveStraightR.getSelectedToggle()).getText());
+        int trunkStabilityRaw=Integer.parseInt(((ToggleButton) tgTrunkStability.getSelectedToggle()).getText());
+        boolean extensionClearing=((ToggleButton) tgExtensionClearing.getSelectedToggle()).getText().equals("+");
+        int rotaryRawL=Integer.parseInt(((ToggleButton) tgRotaryStabilityL.getSelectedToggle()).getText());
+        int rotaryRawR=Integer.parseInt(((ToggleButton) tgRotaryStabilityR.getSelectedToggle()).getText());
+        boolean flexionClearing=((ToggleButton) tgFlexionClearing.getSelectedToggle()).getText().equals("+");
+        int total = Integer.parseInt(txfFMSTotal.getText());
+        
+        FMS temp = new FMS(deepSquatRaw, hurdleStepRawL, hurdleStepRawR, inlineLoungeRawL, inlineLoungeRawR,
+            shoulderMobilityRawL, shoulderMobilityRawR, shoulderClearingL, shoulderClearingR,
+            legRaiseRawL, legRaiseRawR, trunkStabilityRaw, extensionClearing, rotaryRawL, rotaryRawR,
+            flexionClearing, total);
+        
+        temp.setComments(txfDeepSquatComment.getText(), txfHurdleStepComment.getText(), txfInlineLoungeComment.getText(), 
+                txfShoulderMobilityComment.getText(), txfShoulderClearingComment.getText(), txfLegRaiseComment.getText(), 
+                txfTrunkStabilityComment.getText(), txfExtensionClearingComment.getText(),
+                txfRotaryComment.getText(), txfFlexionComment.getText());
+        
+        
+        
         
     }
 
     private void createYBalance() {
-        double rightLimbLength,
-            antRightMean, antLeftMean,
-            pmRightMean, pmLeftMean,
-            plRightMean, plLeftMean, antR1, antR2, antR3, antL1, antL2, antL3, pmR1, pmR2, pmR3,
-            pmL1, pmL2, pmL3, plR1, plR2, plR3, plL1, plL2, plL3;
-        
-        
-        
-        
+        double rightLimbLength, antR1, antR2, antR3, antL1, antL2, antL3, pmR1, pmR2, pmR3,
+                pmL1, pmL2, pmL3, plR1, plR2, plR3, plL1, plL2, plL3;
+
+        //At this point all the data has been validated by the TextFieldRequired. No need to check for invalid input.
+        rightLimbLength = Double.parseDouble(txfRightLimbLength.getText());
+        antR1 = Double.parseDouble(txfA1Right.getText());
+        antR2 = Double.parseDouble(txfA2Right.getText());
+        antR3 = Double.parseDouble(txfA3Right.getText());
+        antL1 = Double.parseDouble(txfA1Left.getText());
+        antL2 = Double.parseDouble(txfA2Left.getText());
+        antL3 = Double.parseDouble(txfA3Left.getText());
+        pmR1 = Double.parseDouble(txfPM1Right.getText());
+        pmR2 = Double.parseDouble(txfPM2Right.getText());
+        pmR3 = Double.parseDouble(txfPM3Right.getText());
+        pmL1 = Double.parseDouble(txfPM1Left.getText());
+        pmL2 = Double.parseDouble(txfPM2Left.getText());
+        pmL3 = Double.parseDouble(txfPM3Left.getText());
+        plL1 = Double.parseDouble(txfPL1Left.getText());
+        plL2 = Double.parseDouble(txfPL2Left.getText());
+        plL3 = Double.parseDouble(txfPL3Left.getText());
+        plR1 = Double.parseDouble(txfPL1Right.getText());
+        plR2 = Double.parseDouble(txfPL2Right.getText());
+        plR3 = Double.parseDouble(txfPL3Right.getText());
+
+        YBalance temp = new YBalance(rightLimbLength, antR1, antR2, antR3, antL1, antL2, antL3, pmR1, pmR2, pmR3,
+                pmL1, pmL2, pmL3, plR1, plR2, plR3, plL1, plL2, plL3);
         
     }
     /**
-     * **********************Fitness Data injections********************************
+     * **********************Fitness Data
+     * injections********************************
      */
     @FXML
     TextField txfRestingHR;
@@ -1261,25 +1336,26 @@ public class BowlerController implements Initializable {
     TextField txfWalkDistance;
     @FXML
     TextField txfWalkVO2;
-    
+
     @FXML
     private void createFitnessData(ActionEvent e) {
         String regexNum = TextFieldRequired.NUMERIC;
         DecimalFormat df = new DecimalFormat("#.##");
+        boolean gender = (((RadioButton)tgGender.getSelectedToggle()).getText().equals("Male"));
         /**
          * ***************First Section********************
          */
-        double restingHR = 0;
-        double restingBPA=0;
-        double restingBPB=0;
-        double bmi=0;
-        double peakFlow=0;
-        double height=0;
-        double weight=0;
-        double age =0;
+        int restingHR = 0;
+        int restingBPA = 0;
+        int restingBPB = 0;
+        double bmi = 0;
+        double peakFlow = 0;
+        double height = 0;
+        double weight = 0;
+        int age = 0;
         try {
-            if(txfAge2.getText().matches(regexNum)){
-                age =Double.parseDouble(txfAge2.getText());
+            if (txfAge2.getText().matches(regexNum)) {
+                age = Integer.parseInt(txfAge2.getText());
             }
             if (txfHeight2.getText().matches(regexNum) && txfWeight2.getText().matches(regexNum)) {
                 height = Double.parseDouble(txfHeight2.getText());
@@ -1287,17 +1363,17 @@ public class BowlerController implements Initializable {
 
                 bmi = (weight / (Math.pow(height, 2))) * 10000;
                 txfBMI.setText(df.format(bmi));
-            }else{
+            } else {
                 txfBMI.setText("");
             }
 
             if (txfRestingHR.getText().matches(regexNum)) {
-                restingHR = Double.parseDouble(txfRestingHR.getText());
+                restingHR = Integer.parseInt(txfRestingHR.getText());
             }
 
             if (txfRestingBPA.getText().matches(regexNum) && txfRestingBPB.getText().matches(regexNum)) {
-                restingBPA = Double.parseDouble(txfRestingHR.getText());
-                restingBPB = Double.parseDouble(txfRestingHR.getText());
+                restingBPA = Integer.parseInt(txfRestingHR.getText());
+                restingBPB = Integer.parseInt(txfRestingHR.getText());
             }
             if (txfPeakFLow1.getText().matches(regexNum) && txfPeakFLow2.getText().matches(regexNum)) {
                 double pf1 = Double.parseDouble(txfHeight2.getText());
@@ -1312,68 +1388,68 @@ public class BowlerController implements Initializable {
         /**
          * ***************Anthropometrics Section********************
          */
-        double ant1=0;
-        double ant2=0;
-        double wCirc=0;
-        double hCirc=0;
-        double midCirc=0;
-        double fCirc=0;
-        double hamCSA=0;
-        double quadCSA=0;
-        double totalCSA=0;
-        
-        try{
-            if(txfAntThigh1.getText().matches(regexNum) && txfAntThigh2.getText().matches(regexNum)){
-                ant1=Double.parseDouble(txfAntThigh1.getText());
-                ant2=Double.parseDouble(txfAntThigh2.getText());
-                
-                double avg = (ant1+ant2)/2;
-                txfAntThighAVG.setText(""+df.format(avg));
-                
+        double ant1 = 0;
+        double ant2 = 0;
+        double wCirc = 0;
+        double hCirc = 0;
+        double midCirc = 0;
+        double fCirc = 0;
+        double hamCSA = 0;
+        double quadCSA = 0;
+        double totalCSA = 0;
+
+        try {
+            if (txfAntThigh1.getText().matches(regexNum) && txfAntThigh2.getText().matches(regexNum)) {
+                ant1 = Double.parseDouble(txfAntThigh1.getText());
+                ant2 = Double.parseDouble(txfAntThigh2.getText());
+
+                double avg = (ant1 + ant2) / 2;
+                txfAntThighAVG.setText("" + df.format(avg));
+
                 //Calculate CSA variables
-                if(txfMidTCirc.getText().matches(regexNum)){
+                if (txfMidTCirc.getText().matches(regexNum)) {
                     midCirc = Double.parseDouble(txfMidTCirc.getText());
-                    
-                    quadCSA = (2.52 * midCirc) - (1.25*avg) - 45.13;
-                    hamCSA = (1.08 * midCirc) - (0.64*avg) - 22.69;
-                    totalCSA = (4.68 * midCirc) - (2.09*avg) - 80.99;
-                    
+
+                    quadCSA = (2.52 * midCirc) - (1.25 * avg) - 45.13;
+                    hamCSA = (1.08 * midCirc) - (0.64 * avg) - 22.69;
+                    totalCSA = (4.68 * midCirc) - (2.09 * avg) - 80.99;
+
                     txfHamCSA.setText(df.format(hamCSA));
                     txfQuadCSA.setText(df.format(quadCSA));
                     txfTotalCSA.setText(df.format(totalCSA));
-                }else{
-                    midCirc =0;
-                    hamCSA=0;
-                    quadCSA=0;
-                    totalCSA=0;
+                } else {
+                    midCirc = 0;
+                    hamCSA = 0;
+                    quadCSA = 0;
+                    totalCSA = 0;
                     txfHamCSA.setText("");
                     txfQuadCSA.setText("");
                     txfTotalCSA.setText("");
                 }
-                
-                if(txfWCirc.getText().matches(regexNum)){
-                    wCirc = Double.parseDouble(txfWCirc.getText());  
-                }else{
-                    wCirc=0;
+
+                if (txfWCirc.getText().matches(regexNum)) {
+                    wCirc = Double.parseDouble(txfWCirc.getText());
+                } else {
+                    wCirc = 0;
                 }
-                
-                if(txfHipCirc.getText().matches(regexNum)){
-                    hCirc = Double.parseDouble(txfHipCirc.getText());  
-                }else{
-                    hCirc=0;
+
+                if (txfHipCirc.getText().matches(regexNum)) {
+                    hCirc = Double.parseDouble(txfHipCirc.getText());
+                } else {
+                    hCirc = 0;
                 }
-                
-                if(txfFlexArmCirc.getText().matches(regexNum)){
-                    fCirc = Double.parseDouble(txfFlexArmCirc.getText());  
-                }else{
-                    fCirc=0;
+
+                if (txfFlexArmCirc.getText().matches(regexNum)) {
+                    fCirc = Double.parseDouble(txfFlexArmCirc.getText());
+                } else {
+                    fCirc = 0;
                 }
-                                
-            }else{
-                
-                hamCSA=0;
-                quadCSA=0;
-                totalCSA=0;
+
+            } else {
+
+                hamCSA = 0;
+                quadCSA = 0;
+                totalCSA = 0;
                 txfHamCSA.setText("");
                 txfQuadCSA.setText("");
                 txfTotalCSA.setText("");
@@ -1383,30 +1459,30 @@ public class BowlerController implements Initializable {
             System.out.println("Antrhopometrics section of fitness data has errors");
             exception.printStackTrace();
         }
-        
+
         /**
-         * ***************Anthropometrics Section********************
+         * ***************Sit & Reach Section********************
          */
-        
-        double startDist=0;
-        double endDist1=0;
-        double endDist2=0;
-        double endDist3=0;
-        double endDist=0;
-        try{
-            if(txfStartDist.getText().matches(regexNum)){
+        double startDist = 0;
+        double endDist1 = 0;
+        double endDist2 = 0;
+        double endDist3 = 0;
+        double endDist = 0;
+        try {
+            if (txfStartDist.getText().matches(regexNum)) {
                 startDist = Double.parseDouble(txfStartDist.getText());
-                boolean flag=true;
-                if(txfEndDist1.getText().matches(regexNum)&&txfEndDist1.getText().matches(regexNum)&&txfEndDist1.getText().matches(regexNum)){
+                boolean flag = true;
+                if (txfEndDist1.getText().matches(regexNum) && txfEndDist1.getText().matches(regexNum) && txfEndDist1.getText().matches(regexNum)) {
                     endDist1 = Double.parseDouble(txfEndDist1.getText());
                     endDist2 = Double.parseDouble(txfEndDist2.getText());
                     endDist3 = Double.parseDouble(txfEndDist3.getText());
-                    
+
                     endDist = (Math.max(endDist1, Math.max(endDist2, endDist3))) - startDist;
-                }else{
+                    txfFinalDist.setText(df.format(endDist));
+                } else {
                     txfFinalDist.setText("");
                 }
-            }else{
+            } else {
                 txfStartDist.setText("");
 
                 txfFinalDist.setText("");
@@ -1415,154 +1491,165 @@ public class BowlerController implements Initializable {
             System.out.println("Sit & Reach section of fitness data has errors");
             exception.printStackTrace();
         }
-        
+
         /**
-         * ***************Anthropometrics Section********************
+         * ***************Muscle & Strength Section********************
          */
-        double hgR1=0;
-        double hgR2=0;
-        double hgR3=0;
-        double hgR=0;
-        
-        double hgL1=0;
-        double hgL2=0;
-        double hgL3=0;
-        double hgL=0;
-        
-        double proneTime=0;
-        double kneeExtForceR1=0;
-        double kneeExtForceR2=0;
-        double kneeExtForceL1=0;
-        double kneeExtForceL2=0;
-        
-        double jh1=0;
-        double jh2=0;
-        double medPass1=0;
-        double medPass2=0;
-        
-        try{
-           if(txfHGR1.getText().matches(regexNum)&&txfHGR2.getText().matches(regexNum)&&txfHGR2.getText().matches(regexNum)){
-               hgR1=Double.parseDouble(txfHGR1.getText());
-               hgR2=Double.parseDouble(txfHGR2.getText());
-               hgR3=Double.parseDouble(txfHGR3.getText());
-               
-               hgR= Math.max(hgR1, Math.max(hgR2, hgR3));
-           }else{
-               hgR=0;
-               hgR1=0;
-               hgR2=0;
-               hgR3=0;
-           }
-           
-           if(txfHGL1.getText().matches(regexNum)&&txfHGL2.getText().matches(regexNum)&&txfHGL2.getText().matches(regexNum)){
-               hgL1=Double.parseDouble(txfHGL1.getText());
-               hgL2=Double.parseDouble(txfHGL2.getText());
-               hgL3=Double.parseDouble(txfHGL3.getText());
-               
-               hgL= Math.max(hgL1, Math.max(hgL2, hgL3));
-           }else{
-               hgL=0;
-               hgL1=0;
-               hgL2=0;
-               hgL3=0;
-           }
-           
-           if(txfProneTime.getText().matches(regexNum)){
-               proneTime = Double.parseDouble(txfProneTime.getText());
-           }else{
-               proneTime=0;
-           }
-           
-           if(txfKneeExtForceR1.getText().matches(regexNum)&&txfKneeExtForceR2.getText().matches(regexNum)){
-               kneeExtForceR1 = Double.parseDouble(txfKneeExtForceR1.getText());
-               kneeExtForceR2 = Double.parseDouble(txfKneeExtForceR2.getText());        
-           }else{
-               kneeExtForceR1=0;
-               kneeExtForceR2=0;
-           }
-           if(txfKneeExtForceL1.getText().matches(regexNum)&&txfKneeExtForceL2.getText().matches(regexNum)){
-               kneeExtForceL1 = Double.parseDouble(txfKneeExtForceL1.getText());
-               kneeExtForceL2 = Double.parseDouble(txfKneeExtForceL2.getText()); 
-           }else{
-               kneeExtForceL1=0;
-               kneeExtForceL2=0;
-           }
-           if(txfJH1.getText().matches(regexNum)&&txfJH2.getText().matches(regexNum)){
-               jh1 = Double.parseDouble(txfJH1.getText());
-               jh2 = Double.parseDouble(txfJH2.getText());
-           }else{
-               jh1 =0;
-               jh2=0;
-           }
-           if(txfMedPass1.getText().matches(regexNum)&&txfMedPass2.getText().matches(regexNum)){
-               medPass1 = Double.parseDouble(txfMedPass1.getText());
-               medPass2 = Double.parseDouble(txfMedPass2.getText());
-           }else{
-               medPass1 = 0;
-               medPass2 = 0;
-           }
-           
+        double hgR1 = 0;
+        double hgR2 = 0;
+        double hgR3 = 0;
+        double hgR = 0;
+
+        double hgL1 = 0;
+        double hgL2 = 0;
+        double hgL3 = 0;
+        double hgL = 0;
+
+        double proneTime = 0;
+        double kneeExtForceR1 = 0;
+        double kneeExtForceR2 = 0;
+        double kneeExtForceL1 = 0;
+        double kneeExtForceL2 = 0;
+
+        double jh1 = 0;
+        double jh2 = 0;
+        double medPass1 = 0;
+        double medPass2 = 0;
+
+        try {
+            if (txfHGR1.getText().matches(regexNum) && txfHGR2.getText().matches(regexNum) && txfHGR2.getText().matches(regexNum)) {
+                hgR1 = Double.parseDouble(txfHGR1.getText());
+                hgR2 = Double.parseDouble(txfHGR2.getText());
+                hgR3 = Double.parseDouble(txfHGR3.getText());
+
+                hgR = Math.max(hgR1, Math.max(hgR2, hgR3));
+            } else {
+                hgR = 0;
+                hgR1 = 0;
+                hgR2 = 0;
+                hgR3 = 0;
+            }
+
+            if (txfHGL1.getText().matches(regexNum) && txfHGL2.getText().matches(regexNum) && txfHGL2.getText().matches(regexNum)) {
+                hgL1 = Double.parseDouble(txfHGL1.getText());
+                hgL2 = Double.parseDouble(txfHGL2.getText());
+                hgL3 = Double.parseDouble(txfHGL3.getText());
+
+                hgL = Math.max(hgL1, Math.max(hgL2, hgL3));
+            } else {
+                hgL = 0;
+                hgL1 = 0;
+                hgL2 = 0;
+                hgL3 = 0;
+            }
+
+            if (txfProneTime.getText().matches(regexNum)) {
+                proneTime = Double.parseDouble(txfProneTime.getText());
+            } else {
+                proneTime = 0;
+            }
+
+            if (txfKneeExtForceR1.getText().matches(regexNum) && txfKneeExtForceR2.getText().matches(regexNum)) {
+                kneeExtForceR1 = Double.parseDouble(txfKneeExtForceR1.getText());
+                kneeExtForceR2 = Double.parseDouble(txfKneeExtForceR2.getText());
+            } else {
+                kneeExtForceR1 = 0;
+                kneeExtForceR2 = 0;
+            }
+            if (txfKneeExtForceL1.getText().matches(regexNum) && txfKneeExtForceL2.getText().matches(regexNum)) {
+                kneeExtForceL1 = Double.parseDouble(txfKneeExtForceL1.getText());
+                kneeExtForceL2 = Double.parseDouble(txfKneeExtForceL2.getText());
+            } else {
+                kneeExtForceL1 = 0;
+                kneeExtForceL2 = 0;
+            }
+            if (txfJH1.getText().matches(regexNum) && txfJH2.getText().matches(regexNum)) {
+                jh1 = Double.parseDouble(txfJH1.getText());
+                jh2 = Double.parseDouble(txfJH2.getText());
+            } else {
+                jh1 = 0;
+                jh2 = 0;
+            }
+            if (txfMedPass1.getText().matches(regexNum) && txfMedPass2.getText().matches(regexNum)) {
+                medPass1 = Double.parseDouble(txfMedPass1.getText());
+                medPass2 = Double.parseDouble(txfMedPass2.getText());
+            } else {
+                medPass1 = 0;
+                medPass2 = 0;
+            }
+
         } catch (Exception exception) {
             System.out.println("Sit & Reach section of fitness data has errors");
             exception.printStackTrace();
         }
-        
+
         /**
-         * ***************Anthropometrics Section********************
+         * ***************Rock Port Section********************
          */
-        
-        double postHR=0;
-        double postVO2Max=0;
-        double vO2Max=0;
-        double rockHR=0;
-        double walkTime =0;
-        double rockVO2Max=0;
-        double walkDistance=0;
-        double walkVO2Max=0;
-        try{
-            vO2Max = ((0.046*height) - (0.021*age)-4.93)*1000;//ml/min
+        int postHR = 0;
+        double postVO2Max = 0;
+        double vO2Max = 0;
+        int rockHR = 0;
+        double walkTime = 0;
+        double rockVO2Max = 0;
+        double walkDistance = 0;
+        double walkVO2Max = 0;
+        double ageRating=0;
+        double ACSMpercentile=0;
+        try {
+            vO2Max = ((0.046 * height) - (0.021 * age) - 4.93) * 1000;//ml/min
             vO2Max = vO2Max / weight; //ml/kg/min
             txfVO2Max.setText(df.format(vO2Max));
-            
-            if(txfPostHR.getText().matches(regexNum)){
-                postHR = Double.parseDouble(txfPostHR.getText());
-                postVO2Max = (-0.9675 * postHR)+77.643;
+
+            if (txfPostHR.getText().matches(regexNum)) {
+                postHR = Integer.parseInt(txfPostHR.getText());
+                postVO2Max = (-0.9675 * postHR) + 77.643;
                 txfPostVO2Max.setText(df.format(postVO2Max));
-            }else{
+            } else {
                 txfPostVO2Max.setText("");
             }
-            
+
             //Rockport Test
-            if(txfRockportHR.getText().matches(regexNum)&&txfRockportTime.getText().matches("^[0-9]+(:\\d+)+$")){
+            if (txfRockportHR.getText().matches(regexNum) && txfRockportTime.getText().matches("^[0-9]+(:\\d+)+$")) {
                 String time[] = txfRockportTime.getText().split(":");
                 
-                rockHR=Double.parseDouble(txfRockportHR.getText());
-                walkTime=Double.parseDouble(time[0])+ (Double.parseDouble(time[1]) / 60);//convert seconds to minutes.
+                rockHR = Integer.parseInt(txfRockportHR.getText());
+                walkTime = Double.parseDouble(time[0]) + (Double.parseDouble(time[1]) / 60);//convert seconds to minutes.
                 //Just doing Male for now.
-                if(age>=30 && age <=65){
-                    rockVO2Max= (139.168 - (0.3877 * age) - (0.1692*(weight*2.20462)) - (3.2649*walkTime) - (0.1565 * rockHR));
-                }else if(age>=18 && age <=29){
-                    rockVO2Max= (97.660 - (0.0957 * age) - (0.1692*(weight*2.20462)) - (1.4537*walkTime) - (0.1194 * rockHR));
+                if (age >= 30 && age <= 65) {
+                    rockVO2Max = (139.168 - (0.3877 * age) - (0.1692 * (weight * 2.20462)) - (3.2649 * walkTime) - (0.1565 * rockHR));
+                } else if (age >= 18 && age <= 29) {
+                    rockVO2Max = (97.660 - (0.0957 * age) - (0.1692 * (weight * 2.20462)) - (1.4537 * walkTime) - (0.1194 * rockHR));
                 }
-                
+
                 txfRockportVO2Max.setText(df.format(rockVO2Max));
-            }else{
+            } else {
                 txfRockportVO2Max.setText("");
             }
-            
+
             //12-Minute Walk Test
-            if(txfWalkDistance.getText().matches(regexNum)){
-                walkDistance=Double.parseDouble(txfWalkDistance.getText());
+            if (txfWalkDistance.getText().matches(regexNum)) {
+                walkDistance = Double.parseDouble(txfWalkDistance.getText());
                 //VO2max(mL/kg/min)= (distance covered in meters - 504.9)/44.73
                 walkVO2Max = (walkDistance - 504.9) / 44.73;
-                txfWalkVO2.setText(df.format(walkVO2Max));   
-            }else{
+                txfWalkVO2.setText(df.format(walkVO2Max));
+            } else {
                 txfWalkVO2.setText("");
             }
-            
+
         } catch (Exception exception) {
             System.out.println("Estimated Aerobic thing of fitness data has errors");
             exception.printStackTrace();
         }
+        
+        FitnessTest temp = new FitnessTest();
+        temp.setVitals(age, restingHR , restingBPA , restingBPB, height, weight, bmi, gender,peakFlow);
+        temp.setAnthro(ant1,ant2,wCirc, hCirc, midCirc, fCirc, hamCSA, quadCSA, totalCSA);
+        temp.setSitAndReach(startDist, endDist1, endDist2, endDist3,endDist);
+        temp.setMuscleAndStrength(hgR1, hgR2, hgR3, hgL1, hgL2, hgL3, proneTime, kneeExtForceR1, kneeExtForceR2, kneeExtForceL1, kneeExtForceL2, jh1, jh2, medPass1, medPass2);
+        temp.setAerobicCapacity(vO2Max, postHR, postVO2Max, ageRating, rockHR, walkTime, rockVO2Max, walkDistance, walkVO2Max, ACSMpercentile);
+        
+        
+        
     }
 }
