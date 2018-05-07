@@ -5,6 +5,8 @@
  */
 package main.formObjects;
 
+import main.java.Database;
+
 /**
  *
  * @author Nick Bentzen
@@ -145,4 +147,22 @@ public class YBalance {
         return plLeftMean;
     }
    
+    public void addRow() {
+        String sql;
+            sql = "INSERT INTO YBALANCE VALUES ("
+                + "null,"
+                + rightLimbLength +","
+                    + antRightMean +","+antLeftMean +","
+                    + pmRightMean +","+pmLeftMean +","
+                    + plRightMean +","+plLeftMean +","
+                    + antR1 +","+antR2 +","+antR3 +","
+                    + antL1 +","+antL2 +","+antL3 +","
+                    + pmR1 +","+pmR2 +","+pmR3 +","
+                    + pmL1 +","+pmL2 +","+pmL3 +","
+                    + plR1 +","+plR2 +","+plR3 +","
+                    + plL1 +","+plL2 +","+plL3 +","
+                    + compositeLeft +","+compositeRight +");";
+            
+        Database.executeUpdate(sql);
+    }
 }

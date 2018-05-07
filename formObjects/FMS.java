@@ -5,6 +5,8 @@
  */
 package main.formObjects;
 
+import main.java.Database;
+
 /**
  * FMS Score Sheet Model Object.
  *
@@ -36,8 +38,8 @@ public class FMS {
      *
      */
     public FMS(int deepSquatRaw, int hurdleStepRawL, int hurdleStepRawR, int inlineLoungeRawL, int inlineLoungeRawR,
-            int shoulderMobilityRawL, int shoulderMobilityRawR, boolean shoulderClearingL, boolean shoulderClearingR,
-            int legRaiseRawL, int legRaiseRawR, int trunkStabilityRaw, boolean extensionClearing, int rotaryRawL, int rotaryRawR,
+            int shoulderMobilityRawL, int shoulderMobilityRawR,boolean shoulderClearingL,boolean shoulderClearingR,
+            int legRaiseRawL, int legRaiseRawR, int trunkStabilityRaw,boolean extensionClearing, int rotaryRawL, int rotaryRawR,
             boolean flexionClearing, int total) {
             
         this.deepSquatRaw = deepSquatRaw;
@@ -72,6 +74,24 @@ public class FMS {
     public void setComments(String deepSquatComment,String hurdleStepComment,String inlineLoungeComment,String shoulderMobilityComment,String shoulderClearingComment,
             String legRaiseComment,String trunkStabilityComment,String extensionClearingComment,String rotaryComment,String flexionComment){
         
+    }
+    
+    
+    public void addRow() {
+        String sql;
+            sql = "INSERT INTO FMS VALUES ("
+                + "null,"
+                    + deepSquatRaw+","+ deepSquatFinal+","
+                    + hurdleStepRawL+","+ hurdleStepRawR+","+ hurdleStepFinal+","
+                    + inlineLoungeRawL+","+ inlineLoungeRawR+","+ inlineLoungeFinal+","
+                    + shoulderMobilityRawL+","+ shoulderMobilityRawR+","+ shoulderMobilityFinal+","
+                    + shoulderClearingL+","+ shoulderClearingR+","
+                    + legRaiseRawL+","+ legRaiseRawR+","+ legRaiseFinal+","
+                    + trunkStabilityRaw+","+ trunkStabilityFinal+","
+                    + extensionClearing+","
+                    + rotaryRawL+","+ rotaryRawR+","+ rotaryFinal+","
+                    + flexionClearing+","+total+");";
+        Database.executeUpdate(sql);
     }
 
 }

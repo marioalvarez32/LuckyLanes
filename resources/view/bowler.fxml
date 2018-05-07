@@ -144,13 +144,10 @@
                                        <children>
                                           <RadioButton fx:id="radMale" mnemonicParsing="false" text="Male">
                                              <toggleGroup>
-                                                <ToggleGroup fx:id="gender" />
+                                                <ToggleGroup fx:id="tgGender" />
                                              </toggleGroup>
                                           </RadioButton>
-                                          <RadioButton fx:id="radFemale" mnemonicParsing="false" text="Female">
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="tgGender" />
-                                             </toggleGroup></RadioButton>
+                                          <RadioButton fx:id="radFemale" mnemonicParsing="false" text="Female" toggleGroup="$tgGender" />
                                        </children>
                                        <HBox.margin>
                                           <Insets right="10.0" />

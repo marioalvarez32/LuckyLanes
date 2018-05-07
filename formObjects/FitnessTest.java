@@ -5,6 +5,8 @@
  */
 package main.formObjects;
 
+import main.java.Database;
+
 /**
  *
  * @author bentz
@@ -15,7 +17,7 @@ public class FitnessTest {
     //vitals
     private int age, restingHR, restingHR1, restingHR2;
     private double height, bodyWeight, bmi, peakFlow;
-    private boolean gender;
+    private String gender;
 
     //anthropomeetrics
     private double ant1, ant2, antAvg, waistCirc, hipCirc, midThighCirc, flexArmCirc, hamCSA,
@@ -23,13 +25,11 @@ public class FitnessTest {
 
     //sit&reach
     private double startDist, endDist1, endDist2, endDist3, finalDist;
-
+    
     //Muscle strength & Endurance Power
     private double hgR1, hgR2, hgR3, hgL1, hgL2, hgL3,
             proneTime, kneeExtForceR1, kneeExtForceR2, kneeExtForceL1, kneeExtForceL2,
             jh1, jh2, medPass1, medPass2;
-
-    private boolean dominantHandLeg;
 
     //Estimated Aerobic Capacity
     ////Ymca step test
@@ -51,7 +51,7 @@ public class FitnessTest {
      * ******************* MASS SETTERS **********************
      */
     //sets all variables under "Vitals"
-    public void setVitals(int age, int restingHR, int restingHR1, int restingHR2, double height, double bodyWeight, double bmi, boolean gender, double peakFlow) {
+    public void setVitals(int age, int restingHR, int restingHR1, int restingHR2, double height, double bodyWeight, double bmi, String gender, double peakFlow) {
         this.age = age;
         this.restingHR = restingHR;
         this.restingHR1 = restingHR1;
@@ -125,4 +125,17 @@ public class FitnessTest {
 
     }
 
+    public void addRow() {
+        String sql;
+            sql = "INSERT INTO FITNESSDATA VALUES ("
+                + "null,"
+                + age +","+ restingHR +","+ restingHR1 +","+ restingHR2 +","+ height +","+ bodyWeight +","+ bmi +","+ peakFlow +",'"+ gender +"',"
+                + ant1 +","+ ant2 +","+ antAvg +","+ waistCirc +","+ hipCirc +","+ midThighCirc +","+ flexArmCirc +","+ hamCSA +","+quadCSA +","+ totalThighCSA +","
+                + startDist +","+ endDist1 +","+ endDist2 +","+ endDist3 +","+ finalDist +","
+                + hgR1 +","+ hgR2 +","+ hgR3 +","+ hgL1 +","+ hgL2 +","+ hgL3 +","+proneTime +","+ kneeExtForceR1 +","+ kneeExtForceR2 +","+ kneeExtForceL1 +","+ kneeExtForceL2 +","+jh1 +","+ jh2 +","+ medPass1 +","+ medPass2 +","
+                + vO2Max +","+ postVO2Max +","+ ageRating +","+postHR +","
+                + walkTime +","+ rockVO2Max +","+ rockHR +","
+                + walkDistance +","+ walkVO2Max +","+ ACSMpercentile+ ");";
+        Database.executeUpdate(sql);
+    }
 }

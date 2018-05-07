@@ -60,6 +60,7 @@ public class Database {
             Trace.print("Connecting to the database...");
             conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             Trace.print("Connected...");
+            close();
             return true;
         } catch (SQLException ex) {
             Trace.print("Connection was unsuccessful.");
@@ -135,15 +136,60 @@ public class Database {
                     + "height double, weight double, age int, gender VARCHAR(255), handDominance "
                     + "VARCHAR(255), legDominance VARCHAR(255), primarySport VARCHAR(255), primaryPosition VARCHAR(255));";
             state.execute(sql);
-            System.out.println("Created a table...");
+            System.out.println("Created a Athlete table.");
+            
+            sql = "CREATE TABLE FMS (ID INT PRIMARY KEY AUTO_INCREMENT, "
+                    + "deepSquatRaw int, deepSquatFinal int,"
+                    + "hurdleStepRawL int, hurdleStepRawR int, hurdleStepFinal int,"
+                    + "inlineLoungeRawL int, inlineLoungeRawR int, inlineLoungeFinal int,"
+                    + "shoulderMobilityRawL int, shoulderMobilityRawR int, shoulderMobilityFinal int,"
+                    + "shoulderClearingL boolean, shoulderClearingR boolean,"
+                    + "legRaiseRawL int, legRaiseRawR int, legRaiseFinal int,"
+                    + "trunkStabilityRaw int, trunkStabilityFinal int,"
+                    + "extensionClearing boolean,"
+                    + "rotaryRawL int, rotaryRawR int, rotaryFinal int,"
+                    + "flexionClearing boolean,"
+                    + "total int);";
+                    
+            state.execute(sql);
+            System.out.println("Created a FMS table.");
+            
+            sql = "CREATE TABLE YBALANCE (ID INT PRIMARY KEY AUTO_INCREMENT, "
+                    + "rightLimbLength double,"
+                    + "antRightMean double, antLeftMean double,"
+                    + "pmRightMean double, pmLeftMean double,"
+                    + "plRightMean double, plLeftMean double,"
+                    + "antR1 double, antR2 double, antR3 double,"
+                    + "antL1 double, antL2 double, antL3 double,"
+                    + "pmR1 double, pmR2 double, pmR3 double,"
+                    + "pmL1 double, pmL2 double, pmL3 double,"
+                    + "plR1 double, plR2 double, plR3 double,"
+                    + "plL1 double, plL2 double, plL3 double,"
+                    + "compositeLeft double,compositeRight double);";
+            
+            state.execute(sql);
+            System.out.println("Created a YBalance table.");
+            
+            sql = "CREATE TABLE FITNESSDATA (ID INT PRIMARY KEY AUTO_INCREMENT, "
+                    + "age int, restingHR int, restingHR1 int, restingHR2 int, height double, bodyWeight double, bmi double, peakFlow double, gender VARCHAR(255),"
+                    + "ant1 double, ant2 double, antAvg double, waistCirc double, hipCirc double, midThighCirc double, flexArmCirc double, hamCSA double,quadCSA double, totalThighCSA double,"
+                    + "startDist double, endDist1 double, endDist2 double, endDist3 double, finalDist double,"
+                    + "hgR1 double, hgR2 double, hgR3 double, hgL1 double, hgL2 double, hgL3 double,proneTime double, kneeExtForceR1 double, kneeExtForceR2 double, kneeExtForceL1 double, kneeExtForceL2 double,jh1 double, jh2 double, medPass1 double, medPass2 double,"
+                    + "vO2Max double, postVO2Max double, ageRating double,postHR int,"
+                    + "walkTime double, rockVO2Max double, rockHR int,"
+                    + "walkDistance double, walkVO2Max double, ACSMpercentile double);";
+            
+            state.execute(sql);
+            System.out.println("Created a Fitness Data table.");
+                       
             //more Nicoles muahahah
-            for (int i = 0; i < 10000; i++) {
+            /*for (int i = 0; i < 10000; i++) {
                 sql = "INSERT INTO ATHLETE VALUES (null, 'Nicole', '2/3/19', '12/11/1994',"
                         + "'a box', 'whitewater', 'wi', 53045, '208-5039', 'UW-Whitewater',"
                         + "5.3, 10000000, 23, 'female', 'right', 'left', 'eating', 'front end');";
                 state.executeUpdate(sql);
-            }
-
+            }*/
+            
             sql = "SELECT name, school, zip FROM ATHLETE;";
             ResultSet rs = state.executeQuery(sql);
             ResultSetMetaData rsmd = rs.getMetaData();
@@ -203,7 +249,7 @@ public class Database {
             // call the sql query, place in RS.
             state = conn.createStatement();
             rs = state.executeQuery(sql);
-
+            
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }

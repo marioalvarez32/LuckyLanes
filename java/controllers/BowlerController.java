@@ -320,7 +320,7 @@ public class BowlerController implements Initializable {
     private boolean[] errors;
     DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     Date date = new Date();
-
+    private FitnessTest tmp;//Only this form object is a class variable because data is not being validated on input.
     /**
      * Initializes the controller class.
      *
@@ -1096,8 +1096,9 @@ public class BowlerController implements Initializable {
         createAthlete();
         createFMS();
         createYBalance();
+        tmp.addRow();
+        System.out.println("Inserted Objects to tables");
         
-        System.out.println("Did Stuff");
     }
 
     @FXML
@@ -1210,7 +1211,7 @@ public class BowlerController implements Initializable {
                 txfTrunkStabilityComment.getText(), txfExtensionClearingComment.getText(),
                 txfRotaryComment.getText(), txfFlexionComment.getText());
         
-        
+        temp.addRow();
         
         
     }
@@ -1243,6 +1244,7 @@ public class BowlerController implements Initializable {
         YBalance temp = new YBalance(rightLimbLength, antR1, antR2, antR3, antL1, antL2, antL3, pmR1, pmR2, pmR3,
                 pmL1, pmL2, pmL3, plR1, plR2, plR3, plL1, plL2, plL3);
         
+        temp.addRow();
     }
     /**
      * **********************Fitness Data
@@ -1341,7 +1343,8 @@ public class BowlerController implements Initializable {
     private void createFitnessData(ActionEvent e) {
         String regexNum = TextFieldRequired.NUMERIC;
         DecimalFormat df = new DecimalFormat("#.##");
-        boolean gender = (((RadioButton)tgGender.getSelectedToggle()).getText().equals("Male"));
+        String gender = (((RadioButton)tgGender.getSelectedToggle()).getText().equals("Male"))? "Male" : "Female";
+        
         /**
          * ***************First Section********************
          */
@@ -1642,13 +1645,12 @@ public class BowlerController implements Initializable {
             exception.printStackTrace();
         }
         
-        FitnessTest temp = new FitnessTest();
-        temp.setVitals(age, restingHR , restingBPA , restingBPB, height, weight, bmi, gender,peakFlow);
-        temp.setAnthro(ant1,ant2,wCirc, hCirc, midCirc, fCirc, hamCSA, quadCSA, totalCSA);
-        temp.setSitAndReach(startDist, endDist1, endDist2, endDist3,endDist);
-        temp.setMuscleAndStrength(hgR1, hgR2, hgR3, hgL1, hgL2, hgL3, proneTime, kneeExtForceR1, kneeExtForceR2, kneeExtForceL1, kneeExtForceL2, jh1, jh2, medPass1, medPass2);
-        temp.setAerobicCapacity(vO2Max, postHR, postVO2Max, ageRating, rockHR, walkTime, rockVO2Max, walkDistance, walkVO2Max, ACSMpercentile);
-        
+        tmp = new FitnessTest();
+        tmp.setVitals(age, restingHR , restingBPA , restingBPB, height, weight,bmi,gender,peakFlow);
+        tmp.setAnthro(ant1,ant2,wCirc, hCirc, midCirc, fCirc, hamCSA, quadCSA, totalCSA);
+        tmp.setSitAndReach(startDist, endDist1, endDist2, endDist3,endDist);
+        tmp.setMuscleAndStrength(hgR1, hgR2, hgR3, hgL1, hgL2, hgL3, proneTime, kneeExtForceR1, kneeExtForceR2, kneeExtForceL1, kneeExtForceL2, jh1, jh2, medPass1, medPass2);
+        tmp.setAerobicCapacity(vO2Max, postHR, postVO2Max, ageRating, rockHR, walkTime, rockVO2Max, walkDistance, walkVO2Max, ACSMpercentile);
         
         
     }

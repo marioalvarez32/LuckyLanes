@@ -36,6 +36,12 @@
                            <children>
                               <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0">
                                  <children>
+                                    <Label text="ID:" />
+                                    <TextField fx:id="txtID" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0">
+                                 <children>
                                     <Label text="Name: " />
                                     <TextField fx:id="txtName" />
                                  </children>
@@ -76,13 +82,12 @@
                                     <TextField fx:id="txtSport" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0">
-                                 <children>
-                                    <Label text="ID:" />
-                                    <TextField fx:id="txtID" />
-                                 </children>
-                              </HBox>
                               <Button fx:id="buttonSubmit" mnemonicParsing="false" onAction="#buildData" text="Submit" />
+                              <Button mnemonicParsing="false" onAction="#printReport" text="Print Reports">
+                                 <VBox.margin>
+                                    <Insets top="25.0" />
+                                 </VBox.margin>
+                              </Button>
                            </children>
                            <padding>
                               <Insets right="10.0" top="50.0" />

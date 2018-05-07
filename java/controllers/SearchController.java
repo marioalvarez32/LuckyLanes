@@ -26,6 +26,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -33,6 +34,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import main.java.Database;
+import main.java.Report;
 
 /**
  * FXML Controller class
@@ -57,6 +59,8 @@ public class SearchController implements Initializable {
     private ObservableList<ObservableList> data;
     private Executor exec ;
     private ResultSet rs;
+    private Report report;
+    
     /**
      * Initializes the controller class.
      */
@@ -69,28 +73,30 @@ public class SearchController implements Initializable {
             t.setDaemon(true);
             return t ;
         });
+        table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         
-        progressIndicator.progressProperty().addListener((observable,oldValue,newValue)->{
-          /*  
-            if(newValue.intValue() >0){
-                progressIndicator.setVisible(true);
-            }else if(newValue.intValue()== 100){
-                progressIndicator.setVisible(false);
-            }else{
-                progressIndicator.setVisible(false);
-            }*/
-        });
+        
+        
     }    
-    
+    @FXML
+    public void printReport(ActionEvent e){
+        Report p =new Report();
+        
+        for(Object item:table.getSelectionModel().getSelectedItems()){
+            ObservableList<String> row=(ObservableList<String>) item;
+            
+        }
+        
+    }
     @FXML 
     public void buildData(ActionEvent e) {
-
+        
         //table.getItems().clear();
         table.getColumns().clear();
         
         System.out.println("Running");
         // prepare SQL statement
-        String SQL= "SELECT name, address, school FROM ATHLETE WHERE "
+        String SQL= "SELECT ID,name, address, school,age, gender FROM athlete WHERE "
                 + "(UPPER(name) LIKE UPPER('%" +txtName.getText() +"%') or name is null) "
                 + "and (UPPER(address) LIKE UPPER('%" +txtAddress.getText() +"%') or address is null) "
                 + "and (UPPER(state) LIKE UPPER('%" +txtState.getText() +"%') or state is null) "
@@ -155,7 +161,7 @@ public class SearchController implements Initializable {
                 return null;
             }   
         };
-
+        
         progressIndicator.progressProperty().bind(databaseQuery.progressProperty());
         databaseQuery.setOnFailed(error -> {
            //databaseQuery.getException().printStackTrace();
