@@ -183,12 +183,17 @@ public class Database {
             System.out.println("Created a Fitness Data table.");
                        
             //more Nicoles muahahah
-            /*for (int i = 0; i < 10000; i++) {
+            for (int i = 0; i < 10000; i++) {
                 sql = "INSERT INTO ATHLETE VALUES (null, 'Nicole', '2/3/19', '12/11/1994',"
                         + "'a box', 'whitewater', 'wi', 53045, '208-5039', 'UW-Whitewater',"
                         + "5.3, 10000000, 23, 'female', 'right', 'left', 'eating', 'front end');";
                 state.executeUpdate(sql);
-            }*/
+            }
+            for (int i = 0; i < 10000; i++) {
+                sql = "INSERT INTO FMS VALUES (null,3,3,2,2,2,3,3,3,2,3,2,false,false,3,1,1,3,3,false,2,3,2,false,14);";
+                state.executeUpdate(sql);
+            }
+            
             
             sql = "SELECT name, school, zip FROM ATHLETE;";
             ResultSet rs = state.executeQuery(sql);

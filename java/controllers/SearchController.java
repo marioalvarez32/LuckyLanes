@@ -31,6 +31,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import main.java.Database;
@@ -84,8 +85,39 @@ public class SearchController implements Initializable {
         
         for(Object item:table.getSelectionModel().getSelectedItems()){
             ObservableList<String> row=(ObservableList<String>) item;
-            
+            p.addID(Integer.parseInt(row.get(0)));
         }
+        
+        Task<Void> print = new Task<Void>() {
+            @Override
+            public Void call() throws Exception {
+                progressIndicator.setVisible(true);//FUCK YES!!!!
+                System.out.println("Creating Objets to print");
+                p.createObjects();
+                p.toDocs();
+                return null;
+            }
+        };
+        progressIndicator.progressProperty().bind(print.progressProperty());
+        progressIndicator.setStyle(" -fx-progress-color: green;");
+        
+        progressIndicator.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent arg0) {
+                if (progressIndicator.getProgress() == 1) {
+                    progressIndicator.setVisible(false);
+                }
+            }
+        });
+        print.setOnSucceeded(error -> {
+            //this.rs=databaseQuery.getValue();
+            System.out.println("It's Alive!!!");
+            progressIndicator.progressProperty().unbind();
+            progressIndicator.setProgress(1);
+        });
+        
+        exec.execute(print);
+        
         
     }
     @FXML 
@@ -105,7 +137,6 @@ public class SearchController implements Initializable {
                 + "and (UPPER(school) LIKE UPPER('%" +txtSchool.getText() +"%') or school is null) "
                 + "and (UPPER(primarysport) LIKE UPPER('%" +txtSport.getText() +"%') or primarysport is null) "
                 + "and (ID LIKE ('%" +txtID.getText() +"') or ID is null) "; // data to grab
-        
         
         // grab the result set of the equation
         //ResultSet rs = Database.searchQuery(SQL);

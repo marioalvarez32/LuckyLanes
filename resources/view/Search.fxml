@@ -83,7 +83,7 @@
                                  </children>
                               </HBox>
                               <Button fx:id="buttonSubmit" mnemonicParsing="false" onAction="#buildData" text="Submit" />
-                              <Button mnemonicParsing="false" onAction="#printReport" text="Print Reports">
+                              <Button mnemonicParsing="false" onAction="#printReport" prefHeight="60.0" prefWidth="133.0" text="Print ALL Reports">
                                  <VBox.margin>
                                     <Insets top="25.0" />
                                  </VBox.margin>

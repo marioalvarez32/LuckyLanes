@@ -68,13 +68,34 @@ public class FMS {
         this.rotaryFinal= (flexionClearing)? 0 : Math.min(rotaryRawL, rotaryRawR);
         this.total = total;
         
-                
+               
+        this.deepSquatComment ="none";// deepSquatComment;
+        this.hurdleStepComment ="none";// hurdleStepComment;
+        this.inlineLoungeComment ="none";// inlineLoungeComment;
+        this.shoulderMobilityComment ="none";// shoulderMobilityComment;
+        this.shoulderClearingComment ="none";// shoulderClearingComment;
+        this.legRaiseComment ="none";// legRaiseComment;
+        this.trunkStabilityComment ="none";// trunkStabilityComment;
+        this.extensionClearingComment ="none";// extensionClearingComment;
+        this.rotaryComment ="none";// rotaryComment;
+        this.flexionComment ="none";// flexionComment;
     }
     
-    public void setComments(String deepSquatComment,String hurdleStepComment,String inlineLoungeComment,String shoulderMobilityComment,String shoulderClearingComment,
-            String legRaiseComment,String trunkStabilityComment,String extensionClearingComment,String rotaryComment,String flexionComment){
-        
+    public void setComments(String deepSquatComment, String hurdleStepComment, String inlineLoungeComment, String shoulderMobilityComment, String shoulderClearingComment,
+            String legRaiseComment, String trunkStabilityComment, String extensionClearingComment, String rotaryComment, String flexionComment) {
+
+        this.deepSquatComment ="";// deepSquatComment;
+        this.hurdleStepComment ="";// hurdleStepComment;
+        this.inlineLoungeComment ="";// inlineLoungeComment;
+        this.shoulderMobilityComment ="";// shoulderMobilityComment;
+        this.shoulderClearingComment ="";// shoulderClearingComment;
+        this.legRaiseComment ="";// legRaiseComment;
+        this.trunkStabilityComment ="";// trunkStabilityComment;
+        this.extensionClearingComment ="";// extensionClearingComment;
+        this.rotaryComment ="";// rotaryComment;
+        this.flexionComment ="";// flexionComment;
     }
+    
     
     
     public void addRow() {
@@ -92,6 +113,29 @@ public class FMS {
                     + rotaryRawL+","+ rotaryRawR+","+ rotaryFinal+","
                     + flexionClearing+","+total+");";
         Database.executeUpdate(sql);
+    }
+    
+    public String toHTML(){
+        String html = "<br><br><br><h2>Functional Movement Screen</h2>"
+                + "<table>"
+                + "<tr><th>Test</th><th></th><th>Raw Score</th><th>Final Score</th><th>Comments</th></tr>"
+                + "<tr><th>DEEP SQUAT:</th><th></th><td>"+deepSquatRaw+"</td><td>"+deepSquatFinal+"</td><td>"+deepSquatComment+"</td></tr>"
+                + "<tr><th rowspan='2'>HURDLE STEP:</th><th>L</th><td>"+hurdleStepRawL+"</td><td rowspan='2'>"+hurdleStepFinal+"</td><td rowspan='2'>"+hurdleStepComment+"</td></tr><tr><th>R</th><td>"+hurdleStepRawR+"</td></tr>"
+                + "<tr><th rowspan='2'>INLINE LUNGE:</th><th>L</th><td>"+inlineLoungeRawL+"</td><td rowspan='2'>"+inlineLoungeFinal+"</td><td rowspan='2'>"+inlineLoungeComment+"</td></tr><tr><th>R</th><td>"+inlineLoungeRawR+"</td></tr>"
+                + "<tr><th rowspan='2'>SHOULDER MOBILITY:</th><th>L</th><td>"+shoulderMobilityRawL+"</td><td rowspan='4'>"+shoulderMobilityFinal+"</td><td rowspan='2'>"+shoulderMobilityComment+"</td></tr><tr><th>R</th><td>"+shoulderMobilityRawR+"</td></tr>"
+                + "<tr><th rowspan='2'>SHOULDER CLEARING  TEST:</th><th>L</th><td>"+((shoulderClearingL)?"+":"-")+"</td><td rowspan='2'>"+shoulderClearingComment+"</td></tr><tr><th>R</th><td>"+((shoulderClearingR)?"+":"-")+"</td></tr>"
+                + "<tr><th rowspan='2'>ACTIVE STRAIGHT-LEG RAISE:</th><th>L</th><td>"+legRaiseRawL+"</td><td rowspan='2'>"+legRaiseFinal+"</td><td rowspan='2'>"+legRaiseComment+"</td></tr><tr><th>R</th><td>"+legRaiseRawR+"</td></tr>"
+                + "<tr><th>TRUNK STABILITY PUSHUP:</th><th></th><td>"+trunkStabilityRaw+"</td><td rowspan='2'>"+trunkStabilityFinal+"</td><td>"+trunkStabilityComment+"</td></tr>"
+                + "<tr><th>EXTENSION CLEARING TEST:</th><th></th><td>"+((extensionClearing)?"+":"-")+"</td><td>"+extensionClearingComment+"</td></tr>"
+                + "<tr><th rowspan='2'>ROTARY STABILITY:</th><th>L</th><td>"+rotaryRawL+"</td><td rowspan='3'>"+rotaryFinal+"</td><td rowspan='2'>"+rotaryComment+"</td></tr><tr><th>R</th><td>"+rotaryRawR+"</td></tr>"
+                + "<tr><th>FLEXION CLEARING TEST:</th><th></th><td>"+((flexionClearing)?"+":"-")+"</td><td>"+flexionComment+"</td></tr>"
+                + "<tr><th>TOTAL:</th><th></th><td colspan='2'>"+total+"</td><td></td></tr>"
+                + "</table>";
+                
+        
+        
+        
+        return html;
     }
 
 }
