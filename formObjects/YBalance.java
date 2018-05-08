@@ -162,7 +162,6 @@ public class YBalance {
                     + plR1 +","+plR2 +","+plR3 +","
                     + plL1 +","+plL2 +","+plL3 +","
                     + compositeLeft +","+compositeRight +");";
-            
         Database.executeUpdate(sql);
     }
 }
