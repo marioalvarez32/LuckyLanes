@@ -35,6 +35,7 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Optional;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.TextArea;
@@ -45,6 +46,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.WindowEvent;
 import main.formObjects.YBalance;
 import main.formObjects.Athlete;
 import main.formObjects.FMS;
@@ -320,6 +322,8 @@ public class BowlerController implements Initializable {
     private boolean[] errors;
     DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     Date date = new Date();
+    
+    private boolean successful;
     private FitnessTest tmp;//Only this form object is a class variable because data is not being validated on input.
     /**
      * Initializes the controller class.
@@ -335,6 +339,7 @@ public class BowlerController implements Initializable {
         URL xd =this.getClass().getResource("index.html"); 
         webEngine.load(xd.toExternalForm());
          */
+        setSuccessful(false);
         errors = new boolean[NUM_TAB];
 
         lblDate.setText(dateFormat.format(date));
@@ -422,7 +427,17 @@ public class BowlerController implements Initializable {
         selectionModel.selectedIndexProperty().addListener((observable, oldVal, newVal) -> {
             validateTabs(oldVal.intValue());
         });
+        stage.setOnCloseRequest((WindowEvent we) -> {
+            //((Stage) (((Node) (event.getSource())).getScene().getWindow())).show();
+            if (!isSuccessful()) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Data wasn't created");
+                alert.setHeaderText(null);
+                alert.setContentText("The user cancelled the bowler addition.");
 
+                alert.showAndWait();
+            }
+        });
     }
 
     /**
@@ -1096,9 +1111,22 @@ public class BowlerController implements Initializable {
         createAthlete();
         createFMS();
         createYBalance();
+        if(tmp == null){
+            createFitnessData(null);
+        }
         tmp.addRow();
         System.out.println("Inserted Objects to tables");
+        setSuccessful(true);
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Data was created");
+        alert.setHeaderText(null);
+        alert.setContentText("Bowler was added to the database.");
         
+        Optional<ButtonType> result = alert.showAndWait();
+        
+        if (!result.isPresent() || result.get() == ButtonType.OK) {
+            this.stage.close();
+        }
     }
 
     @FXML
@@ -1178,10 +1206,7 @@ public class BowlerController implements Initializable {
         System.out.println("Created Athlete");
 
     }
-    
-    
-    
-    
+
     private void createFMS() {
         int deepSquatRaw = Integer.parseInt(((ToggleButton) tgDeepSquat.getSelectedToggle()).getText());
         int hurdleStepRawL=Integer.parseInt(((ToggleButton) tgHurdleStepL.getSelectedToggle()).getText());
@@ -1653,5 +1678,19 @@ public class BowlerController implements Initializable {
         tmp.setAerobicCapacity(vO2Max, postHR, postVO2Max, ageRating, rockHR, walkTime, rockVO2Max, walkDistance, walkVO2Max, ACSMpercentile);
         
         
+    }
+
+    /**
+     * @return the successful
+     */
+    public boolean isSuccessful() {
+        return successful;
+    }
+
+    /**
+     * @param successful the successful to set
+     */
+    public void setSuccessful(boolean successful) {
+        this.successful = successful;
     }
 }

@@ -54,7 +54,7 @@ public class Database {
         Trace.print("URL ON CONNECT:" + URL);
         try {
             Trace.print("Grabbing driver...");
-            
+
             Class.forName(DRIVER);
 
             Trace.print("Connecting to the database...");
@@ -115,10 +115,10 @@ public class Database {
     public static void createDatabase(String url) {
         // declare variables
         String sql;
-       // url = "C\:\\Users\\HomePC\\Desktop\\Database files\\database";
-        
+        // url = "C\:\\Users\\HomePC\\Desktop\\Database files\\database";
+
         URL = "jdbc:h2:file:" + url;
-        
+
         System.out.println("The url upon creating: " + URL);
 
         try {
@@ -137,7 +137,7 @@ public class Database {
                     + "VARCHAR(255), legDominance VARCHAR(255), primarySport VARCHAR(255), primaryPosition VARCHAR(255));";
             state.execute(sql);
             System.out.println("Created a Athlete table.");
-            
+
             sql = "CREATE TABLE FMS (ID INT PRIMARY KEY AUTO_INCREMENT, "
                     + "deepSquatRaw int, deepSquatFinal int,"
                     + "hurdleStepRawL int, hurdleStepRawR int, hurdleStepFinal int,"
@@ -150,10 +150,10 @@ public class Database {
                     + "rotaryRawL int, rotaryRawR int, rotaryFinal int,"
                     + "flexionClearing boolean,"
                     + "total int);";
-                    
+
             state.execute(sql);
             System.out.println("Created a FMS table.");
-            
+
             sql = "CREATE TABLE YBALANCE (ID INT PRIMARY KEY AUTO_INCREMENT, "
                     + "rightLimbLength double,"
                     + "antRightMean double, antLeftMean double,"
@@ -166,10 +166,10 @@ public class Database {
                     + "plR1 double, plR2 double, plR3 double,"
                     + "plL1 double, plL2 double, plL3 double,"
                     + "compositeLeft double,compositeRight double);";
-            
+
             state.execute(sql);
             System.out.println("Created a YBalance table.");
-            
+
             sql = "CREATE TABLE FITNESSDATA (ID INT PRIMARY KEY AUTO_INCREMENT, "
                     + "age int, restingHR int, restingHR1 int, restingHR2 int, height double, bodyWeight double, bmi double, peakFlow double, gender VARCHAR(255),"
                     + "ant1 double, ant2 double, antAvg double, waistCirc double, hipCirc double, midThighCirc double, flexArmCirc double, hamCSA double,quadCSA double, totalThighCSA double,"
@@ -178,10 +178,10 @@ public class Database {
                     + "vO2Max double, postVO2Max double, ageRating double,postHR int,"
                     + "walkTime double, rockVO2Max double, rockHR int,"
                     + "walkDistance double, walkVO2Max double, ACSMpercentile double);";
-            
+
             state.execute(sql);
             System.out.println("Created a Fitness Data table.");
-                       
+
             //more Nicoles muahahah
             for (int i = 0; i < 10000; i++) {
                 sql = "INSERT INTO ATHLETE VALUES (null, 'Nicole', '2/3/19', '12/11/1994',"
@@ -193,8 +193,7 @@ public class Database {
                 sql = "INSERT INTO FMS VALUES (null,3,3,2,2,2,3,3,3,2,3,2,false,false,3,1,1,3,3,false,2,3,2,false,14);";
                 state.executeUpdate(sql);
             }
-            
-            
+
             sql = "SELECT name, school, zip FROM ATHLETE;";
             ResultSet rs = state.executeQuery(sql);
             ResultSetMetaData rsmd = rs.getMetaData();
@@ -254,7 +253,7 @@ public class Database {
             // call the sql query, place in RS.
             state = conn.createStatement();
             rs = state.executeQuery(sql);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -268,8 +267,8 @@ public class Database {
 
         try {
 
-            output = new FileOutputStream(new File("").getAbsolutePath()+"/config.properties");
-            
+            output = new FileOutputStream(new File("").getAbsolutePath() + "/config.properties");
+
             prop.setProperty("url", url);
 
             prop.store(output, null);
@@ -293,8 +292,8 @@ public class Database {
         InputStream input = null;
         String url = "";
         try {
-            
-            input = new FileInputStream(new File("").getAbsolutePath()+"/config.properties");
+
+            input = new FileInputStream(new File("").getAbsolutePath() + "/config.properties");
             prop.load(input);
             url = prop.getProperty("url");
             System.out.println("Changed database path.");

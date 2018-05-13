@@ -52,8 +52,10 @@ public class AdminController implements Initializable {
     private Stage stage;
 
     @FXML
-    Button btnNewBowler;
-
+    Button btnNewAthlete;
+    @FXML
+    Button btnSearch;
+    
     @FXML
     Button btnTesting;
     @FXML
@@ -122,10 +124,14 @@ public class AdminController implements Initializable {
             
             if (Database.connect(url)) {
                 imgDatabase.setImage(new Image("/main/resources/icons/dbConnected.png"));
+                btnSearch.setDisable(false);
+                btnNewAthlete.setDisable(false);
             } else {
                 //lblTest.setText("Couldn't connect with that url");
                 showDatabaseAlert();
                 imgDatabase.setImage(new Image("/main/resources/icons/dbDisconnected.png"));
+                btnSearch.setDisable(true);
+                btnNewAthlete.setDisable(true);
             }
         }
     }

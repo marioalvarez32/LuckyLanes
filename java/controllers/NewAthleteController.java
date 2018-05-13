@@ -16,6 +16,8 @@ import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -74,9 +76,7 @@ public class NewAthleteController implements Initializable {
             BowlerController newBowler = (BowlerController)((Initializable) loader.getController());
             newBowler.setStage(stage);
             newBowler.createListeners();
-            stage.setOnCloseRequest((WindowEvent we) -> {
-                ((Stage) (((Node) (event.getSource())).getScene().getWindow())).show();
-            });
+            
             // Hide this current window (if this is what you want)
             //((Node) (event.getSource())).getScene().getWindow().hide();
         } catch (IOException e) {

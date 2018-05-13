@@ -25,98 +25,109 @@ import main.formObjects.YBalance;
  * @author Mario
  */
 public class Report {
+
     ArrayList<Integer> ids;
     ArrayList<FMS> fms;
     ArrayList<Athlete> athlete;
     ArrayList<YBalance> yBalance;
     ArrayList<FitnessTest> fitnessData;
-    private Executor exec ;
-    public Report(){
+    private Executor exec;
+
+    public Report() {
         ids = new ArrayList<>();
+        fms =new ArrayList<>();
+        athlete = new ArrayList<>();
+        yBalance =new ArrayList<>();
+        fitnessData =new ArrayList<>();
+        
         exec = Executors.newCachedThreadPool(runnable -> {
             Thread t = new Thread(runnable);
             t.setDaemon(true);
-            return t ;
+            return t;
         });
     }
-    
-    public void addID(int id){
+
+    public void addID(int id) {
         ids.add(id);
     }
-    
-    public void toDocs(){
-        System.out.println("Printing Documents");
-        int i=0;
+
+    public void toDocs() {
+        System.out.println("Saving Documents");
+        int i = 0;
         HTML.mkdir();
-        
-        for(FMS test:fms){
-            HTML.createFile("FMS-"+i++);
+
+        for (FMS test : fms) {
+            HTML.createFile("FMS-" + i++);
             HTML.print(test.toHTML());
         }
     }
-    
-    public void createObjects(){
-        
-        ResultSet rsFMS = Database.searchQuery("SELECT * FROM FMS;");
-        ResultSet rsAth = Database.searchQuery("SELECT * FROM Athlete;");
-        ResultSet rsYBal = Database.searchQuery("SELECT * FROM YBalance;");
-        ResultSet rsFitData = Database.searchQuery("SELECT * FROM FitnessData;");
-        
-        
-        fms=fetchFMS(rsFMS);
-        System.out.println("Fetched Data Succesfully");
+
+    public void createObjects() {
+
+        for (int id : ids) {
+            
+            ResultSet rsFMS = Database.searchQuery("SELECT * FROM FMS WHERE ID=" + id + ";");
+            ResultSet rsAth = Database.searchQuery("SELECT * FROM Athlete WHERE ID=" + id + ";");
+            ResultSet rsYBal = Database.searchQuery("SELECT * FROM YBalance WHERE ID=" + id + ";");
+            ResultSet rsFitData = Database.searchQuery("SELECT * FROM FitnessData WHERE ID=" + id + ";");
+            
+            fms.add(fetchFMS(rsFMS));
+            System.out.println("Fetched Data Succesfully");
+
+        }
+
         //fetchAthlete(rsAth);
         //fetchFitnessTest(rsFitData);
         //fetchYBalance(rsYBal);
     }
-    
-    
-    private ArrayList<FMS> fetchFMS(ResultSet rs) {
-        ArrayList<FMS> temp = new ArrayList<>();
+
+    private FMS fetchFMS(ResultSet rs) {
+        FMS temp = null;
 
         try {
-            while (rs.next()) {
-
-                int deepSquatRaw = Integer.parseInt(rs.getString("deepSquatRaw"));
-                //int deepSquatFinal = Integer.parseInt(rs.getString("deepSquatFinal"));
-                int hurdleStepRawL = Integer.parseInt(rs.getString("hurdleStepRawL"));
-                int hurdleStepRawR = Integer.parseInt(rs.getString("hurdleStepRawR"));
-                //int hurdleStepFinal=Integer.parseInt(rs.getString("hurdleStepFinal"));
-                int inlineLoungeRawL = Integer.parseInt(rs.getString("inlineLoungeRawL"));
-                int inlineLoungeRawR = Integer.parseInt(rs.getString("inlineLoungeRawR"));
-                //int inlineLoungeFinal =Integer.parseInt(rs.getString("inlineLoungeFinal"));
-                int shoulderMobilityRawL = Integer.parseInt(rs.getString("shoulderMobilityRawL"));
-                int shoulderMobilityRawR = Integer.parseInt(rs.getString("shoulderMobilityRawR"));
-                //If clearing test are true 
-                boolean shoulderClearingL = (rs.getString("shoulderClearingL").equals("True"));
-                boolean shoulderClearingR = (rs.getString("shoulderClearingR").equals("True"));
-                //int shoulderMobilityFinal =Integer.parseInt(rs.getString("shoulderMobilityFinal"));
-                int legRaiseRawL = Integer.parseInt(rs.getString("legRaiseRawL"));
-                int legRaiseRawR = Integer.parseInt(rs.getString("legRaiseRawR"));
-                //int legRaiseFinal =Integer.parseInt(rs.getString("legRaiseFinal"));
-                int trunkStabilityRaw = Integer.parseInt(rs.getString("trunkStabilityRaw"));
-                boolean extensionClearing = (rs.getString("extensionClearing").equals("True"));
-                // int trunkStabilityFinal =Integer.parseInt(rs.getString("trunkStabilityFinal"));
-                int rotaryRawL = Integer.parseInt(rs.getString("rotaryRawL"));
-                int rotaryRawR = Integer.parseInt(rs.getString("rotaryRawR"));
-                boolean flexionClearing = (rs.getString("flexionClearing").equals("True"));
-                //int rotaryFinal= Integer.parseInt(rs.getString("rotaryFinal"));
-                int total = Integer.parseInt(rs.getString("total"));;
-
-                temp.add(new FMS(deepSquatRaw, hurdleStepRawL, hurdleStepRawR, inlineLoungeRawL, inlineLoungeRawR,
-                        shoulderMobilityRawL, shoulderMobilityRawR, shoulderClearingL, shoulderClearingR,
-                        legRaiseRawL, legRaiseRawR, trunkStabilityRaw, extensionClearing, rotaryRawL, rotaryRawR,
-                        flexionClearing, total));
+            if (!rs.next()) {
 
             }
+
+            int deepSquatRaw = Integer.parseInt(rs.getString("deepSquatRaw"));
+            //int deepSquatFinal = Integer.parseInt(rs.getString("deepSquatFinal"));
+            int hurdleStepRawL = Integer.parseInt(rs.getString("hurdleStepRawL"));
+            int hurdleStepRawR = Integer.parseInt(rs.getString("hurdleStepRawR"));
+            //int hurdleStepFinal=Integer.parseInt(rs.getString("hurdleStepFinal"));
+            int inlineLoungeRawL = Integer.parseInt(rs.getString("inlineLoungeRawL"));
+            int inlineLoungeRawR = Integer.parseInt(rs.getString("inlineLoungeRawR"));
+            //int inlineLoungeFinal =Integer.parseInt(rs.getString("inlineLoungeFinal"));
+            int shoulderMobilityRawL = Integer.parseInt(rs.getString("shoulderMobilityRawL"));
+            int shoulderMobilityRawR = Integer.parseInt(rs.getString("shoulderMobilityRawR"));
+            //If clearing test are true 
+            boolean shoulderClearingL = (rs.getString("shoulderClearingL").equals("True"));
+            boolean shoulderClearingR = (rs.getString("shoulderClearingR").equals("True"));
+            //int shoulderMobilityFinal =Integer.parseInt(rs.getString("shoulderMobilityFinal"));
+            int legRaiseRawL = Integer.parseInt(rs.getString("legRaiseRawL"));
+            int legRaiseRawR = Integer.parseInt(rs.getString("legRaiseRawR"));
+            //int legRaiseFinal =Integer.parseInt(rs.getString("legRaiseFinal"));
+            int trunkStabilityRaw = Integer.parseInt(rs.getString("trunkStabilityRaw"));
+            boolean extensionClearing = (rs.getString("extensionClearing").equals("True"));
+            // int trunkStabilityFinal =Integer.parseInt(rs.getString("trunkStabilityFinal"));
+            int rotaryRawL = Integer.parseInt(rs.getString("rotaryRawL"));
+            int rotaryRawR = Integer.parseInt(rs.getString("rotaryRawR"));
+            boolean flexionClearing = (rs.getString("flexionClearing").equals("True"));
+            //int rotaryFinal= Integer.parseInt(rs.getString("rotaryFinal"));
+            int total = Integer.parseInt(rs.getString("total"));;
+
+            temp = (new FMS(deepSquatRaw, hurdleStepRawL, hurdleStepRawR, inlineLoungeRawL, inlineLoungeRawR,
+                    shoulderMobilityRawL, shoulderMobilityRawR, shoulderClearingL, shoulderClearingR,
+                    legRaiseRawL, legRaiseRawR, trunkStabilityRaw, extensionClearing, rotaryRawL, rotaryRawR,
+                    flexionClearing, total));
+
         } catch (SQLException ex) {
             Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
         }
         return temp;
     }
-    private ArrayList<Athlete> fetchAthlete(ResultSet rs){
-        ArrayList<Athlete> temp = new ArrayList<>();
 
+    private ArrayList<Athlete> fetchAthlete(ResultSet rs) {
+        ArrayList<Athlete> temp = new ArrayList<>();
 
         try {
             while (rs.next()) {
@@ -140,14 +151,15 @@ public class Report {
                 String primaryPosition = rs.getString("primaryPosition");
 
                 temp.add(new Athlete(name, date, dateOfBirth, address, city, state, zip, phone, school, height, weight, age, gender, handDominance, legDominance, primarySport, primaryPosition));
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
         }
         return temp;
     }
-    private ArrayList<YBalance> fetchYBalance(ResultSet rs){
+
+    private ArrayList<YBalance> fetchYBalance(ResultSet rs) {
         ArrayList<YBalance> temp = new ArrayList<>();
 
         try {
@@ -174,10 +186,9 @@ public class Report {
                 plR1 = Double.parseDouble(rs.getString("plR1"));
                 plR2 = Double.parseDouble(rs.getString("plR2"));
                 plR3 = Double.parseDouble(rs.getString("plR3"));
-                
+
                 temp.add(new YBalance(rightLimbLength, antR1, antR2, antR3, antL1, antL2, antL3, pmR1, pmR2, pmR3,
-                pmL1, pmL2, pmL3, plR1, plR2, plR3, plL1, plL2, plL3));
-                
+                        pmL1, pmL2, pmL3, plR1, plR2, plR3, plL1, plL2, plL3));
 
             }
         } catch (SQLException ex) {
@@ -185,7 +196,8 @@ public class Report {
         }
         return temp;
     }
-    private ArrayList<FitnessTest> fetchFitnessTest(ResultSet rs){
+
+    private ArrayList<FitnessTest> fetchFitnessTest(ResultSet rs) {
         ArrayList<FitnessTest> temp = new ArrayList<>();
 
         try {
@@ -196,7 +208,7 @@ public class Report {
                 int restingBPB = Integer.parseInt("restingBPB");
                 double bmi = Double.parseDouble("bmi");
                 double peakFlow = Double.parseDouble("peakFlow");
-                double height =Double.parseDouble("height");
+                double height = Double.parseDouble("height");
                 double weight = Double.parseDouble("weight");
                 int age = Integer.parseInt("restingHR");
                 double ant1 = Double.parseDouble("ant1");
@@ -233,38 +245,31 @@ public class Report {
                 double jh2 = Double.parseDouble("jh2");
                 double medPass1 = Double.parseDouble("medPass1");
                 double medPass2 = Double.parseDouble("medPass2");
-                int postHR =Integer.parseInt("postHR");
+                int postHR = Integer.parseInt("postHR");
                 double postVO2Max = Double.parseDouble("postVO2Max");
                 double vO2Max = Double.parseDouble("vO2Max");
-                int rockHR =Integer.parseInt("rockHR");
+                int rockHR = Integer.parseInt("rockHR");
                 double walkTime = Double.parseDouble("walkTime");
                 double rockVO2Max = Double.parseDouble("rockVO2Max");
                 double walkDistance = Double.parseDouble("walkDistance");
                 double walkVO2Max = Double.parseDouble("walkVO2Max");
-                double ageRating=Double.parseDouble("ageRating");
-                double ACSMpercentile=Double.parseDouble("ACSMpercentiles");
-                
+                double ageRating = Double.parseDouble("ageRating");
+                double ACSMpercentile = Double.parseDouble("ACSMpercentiles");
+
                 FitnessTest tmp = new FitnessTest();
-                tmp.setVitals(age, restingHR , restingBPA , restingBPB, height, weight,bmi,gender,peakFlow);
-                tmp.setAnthro(ant1,ant2,wCirc, hCirc, midCirc, fCirc, hamCSA, quadCSA, totalCSA);
-                tmp.setSitAndReach(startDist, endDist1, endDist2, endDist3,endDist);
+                tmp.setVitals(age, restingHR, restingBPA, restingBPB, height, weight, bmi, gender, peakFlow);
+                tmp.setAnthro(ant1, ant2, wCirc, hCirc, midCirc, fCirc, hamCSA, quadCSA, totalCSA);
+                tmp.setSitAndReach(startDist, endDist1, endDist2, endDist3, endDist);
                 tmp.setMuscleAndStrength(hgR1, hgR2, hgR3, hgL1, hgL2, hgL3, proneTime, kneeExtForceR1, kneeExtForceR2, kneeExtForceL1, kneeExtForceL2, jh1, jh2, medPass1, medPass2);
                 tmp.setAerobicCapacity(vO2Max, postHR, postVO2Max, ageRating, rockHR, walkTime, rockVO2Max, walkDistance, walkVO2Max, ACSMpercentile);
-                
-                
+
                 temp.add(tmp);
-                
-                
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
         }
         return temp;
     }
-    
-    
-    
-    
-    
+
 }

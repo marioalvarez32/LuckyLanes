@@ -131,9 +131,6 @@ public class FMS {
                 + "<tr><th>FLEXION CLEARING TEST:</th><th></th><td>"+((flexionClearing)?"+":"-")+"</td><td>"+flexionComment+"</td></tr>"
                 + "<tr><th>TOTAL:</th><th></th><td colspan='2'>"+total+"</td><td></td></tr>"
                 + "</table>";
-                
-        
-        
         
         return html;
     }

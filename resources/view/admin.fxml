@@ -66,7 +66,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button fx:id="btnNewBowler" mnemonicParsing="false" onAction="#showSearch" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <Button fx:id="btnSearch" disable="true" mnemonicParsing="false" onAction="#showSearch" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <graphic>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                                              <children>
@@ -84,7 +84,7 @@
                                           </HBox>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btnNewBowler1" mnemonicParsing="false" onAction="#showNewAthlete" GridPane.rowIndex="1">
+                                    <Button fx:id="btnNewAthlete" disable="true" mnemonicParsing="false" onAction="#showNewAthlete" GridPane.rowIndex="1">
                                        <graphic>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                                              <children>
