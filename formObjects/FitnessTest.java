@@ -139,6 +139,12 @@ public class FitnessTest {
                 + walkDistance +","+ walkVO2Max +","+ ACSMpercentile+ ");";
         Database.executeUpdate(sql);
     }
+    
+    public String toHTML(){
+        String html = "<br><br><br><h2>Functional Movement Screen</h2>"
+                + "<table><tr><th>";
+        return html;
+    }
 
     /***
      * gets/sets each individual variable. 
