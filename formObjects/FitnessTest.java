@@ -87,6 +87,7 @@ public class FitnessTest {
         this.finalDist = finalDist;
     }
 
+    //sets all vars under Muscle and Strength
     public void setMuscleAndStrength(double hgR1, double hgR2, double hgR3, double hgL1, double hgL2, double hgL3, double proneTime,
             double kneeExtForceR1, double kneeExtForceR2, double kneeExtForceL1, double kneeExtForceL2, double jh1, double jh2, double medPass1, double medPass2) {
 
@@ -106,7 +107,8 @@ public class FitnessTest {
         this.medPass1 = medPass1;
         this.medPass2 = medPass2;
     }
-
+    
+    //sets all vars in Aerobic Capacity
     public void setAerobicCapacity(double vO2Max, int postHR, double postVO2Max,
             double ageRating, int rockHR, double walkTime, double rockVO2Max,
             double walkDistance, double walkVO2Max, double ACSMpercentile) {
@@ -125,7 +127,7 @@ public class FitnessTest {
 
     }
 
-    
+    //adds row into db
     public void addRow() {
         String sql;
             sql = "INSERT INTO FITNESSDATA VALUES ("
@@ -140,6 +142,7 @@ public class FitnessTest {
         Database.executeUpdate(sql);
     }
     
+    //
     public String toHTML(){
         String rowStart = "<tr><td>";
         String rowMid = "</td><td>";
@@ -171,26 +174,38 @@ public class FitnessTest {
                 + rowStart + "Ending Distance 2" + rowMid + this.endDist2 + rowEnd
                 + rowStart + "Ending Distance 3" + rowMid + this.endDist3 + rowEnd
                 + rowStart + "Final Distance" + rowMid + this.finalDist + rowEnd
-                + "</table>";//<table><tr><th></th><th></th></tr>";
+                + "</table>";
         
-                
-        /*
-            this.hgR1 = hgR1;
-        this.hgR2 = hgR2;
-        this.hgR3 = hgR3;
-        this.hgL1 = hgL1;
-        this.hgL2 = hgL2;
-        this.hgL3 = hgL3;
-        this.proneTime = proneTime;
-        this.kneeExtForceR1 = kneeExtForceR1;
-        this.kneeExtForceR2 = kneeExtForceR2;
-        this.kneeExtForceL1 = kneeExtForceL1;
-        this.kneeExtForceL2 = kneeExtForceL2;
-        this.jh1 = jh1;
-        this.jh2 = jh2;
-        this.medPass1 = medPass1;
-        this.medPass2 = medPass2;
-        */
+        html+= "<table><tr><th>Muscle & Strength</th><th></th></tr>"
+                + rowStart + "Right Hand Grip 1" + rowMid + this.hgR1 + rowEnd
+                + rowStart + "Right Hand Grip 2" + rowMid + this.hgR2 + rowEnd
+                + rowStart + "Right Hand Grip 3" + rowMid + this.hgR3 + rowEnd
+                + rowStart + "Left Hand Grip 1" + rowMid + this.hgL1 + rowEnd
+                + rowStart + "Left Hand Grip 2" + rowMid + this.hgL2 + rowEnd
+                + rowStart + "Left Hand Grip 3" + rowMid + this.hgL3 + rowEnd
+                + rowStart + "Prone Time" + rowMid + this.proneTime + rowEnd
+                + rowStart + "Right Knee Extension Force 1" + rowMid + this.kneeExtForceR1 + rowEnd
+                + rowStart + "Right Knee Extension Force 2" + rowMid + this.kneeExtForceR2 + rowEnd
+                + rowStart + "Left Knee Extension Force 1" + rowMid + this.kneeExtForceL1 + rowEnd
+                + rowStart + "Left Knee Extension Force 2" + rowMid + this.kneeExtForceL2 + rowEnd
+                + rowStart + "J H 1" + rowMid + this.jh1 + rowEnd
+                + rowStart + "J H 2" + rowMid + this.jh2 + rowEnd
+                + rowStart + "Medical Pass 1" + this.medPass1 + rowEnd
+                + rowStart + "Medical Pass 2" + this.medPass2 + rowEnd
+                + "</table>";
+        
+        html+= "<table><tr><th>Aerobic Capacity</th><th></th></tr>"
+                + rowStart + "VO2 Max" + rowMid + this.vO2Max + rowEnd
+                + rowStart + "Post Heart Rate" + rowMid + this.postHR + rowEnd
+                + rowStart + "Post VO2 Max" + rowMid + this.postVO2Max + rowEnd
+                + rowStart + "Age Rating" + rowMid + this.ageRating + rowEnd
+                + rowStart + "Rockwell Heart Rate" + rowMid + this.rockHR + rowEnd
+                + rowStart + "Walk Time" + rowMid + this.walkTime + rowEnd
+                + rowStart + "Rockewell VO2 Max" + rowMid + this.rockVO2Max + rowEnd
+                + rowStart + "Walk Distance" + rowMid + this.walkDistance + rowEnd
+                + rowStart + "Walk VO2 Max" + rowMid + this.walkVO2Max + rowEnd
+                + rowStart + "ACSM Percentile" + rowMid + this.ACSMpercentile + rowEnd
+                + "</table";
         return html;
     }
 
