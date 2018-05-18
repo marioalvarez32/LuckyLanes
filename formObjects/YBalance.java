@@ -54,6 +54,47 @@ public class YBalance {
         this.compositeRight=((this.antRightMean + this.pmRightMean + this.plRightMean) / (3 * this.rightLimbLength)) * 100;
     }
 
+    public String toHTML(){
+        String rowStart = "<tr><td>";
+        String rowMid = "</td><td>";
+        String rowEnd = "</td></tr>";
+        String html = "</br></br></br><table><tr><th>Y-Balance</th><th></th></tr>";
+        html += rowStart + "Left Posteromedial 1" + rowMid + this.pmL1 + rowEnd
+                + rowStart + "Left Posteromedial 2" + rowMid + this.pmL2 + rowEnd
+                + rowStart + "Left Posteromedial 3" + rowMid + this.pmL3 + rowEnd
+                + rowStart + "Right Posteromedial 1" + rowMid + this.pmR1 + rowEnd
+                + rowStart + "Right Posteromedial 2" + rowMid + this.pmR2 + rowEnd
+                + rowStart + "Right Posteromedial 3" + rowMid + this.pmR3 + rowEnd
+                + rowStart + "Left Posterolateral 1" + rowMid + this.plL1 + rowEnd
+                + rowStart + "Left Posterolateral 2" + rowMid + this.plL2 + rowEnd
+                + rowStart + "Left Posterolateral 3" + rowMid + this.plL3 + rowEnd
+                + rowStart + "Right Posterolateral 1" + rowMid + this.plR1 + rowEnd
+                + rowStart + "Right Posterolateral 2" + rowMid + this.plR2 + rowEnd
+                + rowStart + "Right Posterolateral 3" + rowMid + this.plR3 + rowEnd
+                + rowStart + "Left Anterior 1" + rowMid + this.antL1 + rowEnd
+                + rowStart + "Left Anterior 2" + rowMid + this.antL2 + rowEnd
+                + rowStart + "Left Anterior 3" + rowMid + this.antL3 + rowEnd
+                + rowStart + "Right Anterior 1" + rowMid + this.antR1 + rowEnd
+                + rowStart + "Right Anterior 2" + rowMid + this.antR2 + rowEnd
+                + rowStart + "Right Anterior 3" + rowMid + this.antR3 + rowEnd
+                + rowStart + "Right Limb Length" + rowMid + this.rightLimbLength + rowEnd
+                + rowStart + "Right Anterior Mean " + rowMid + this.antRightMean + rowEnd
+                + rowStart + "Left Anterior Mean " + rowMid + this.antLeftMean + rowEnd
+                + rowStart + "Left Posteromedial Mean" + rowMid + this.pmLeftMean + rowEnd
+                + rowStart + "Right Posteromedial Mean" + rowMid + this.pmRightMean + rowEnd
+                + rowStart + "Left Posterolateral Mean" + rowMid + this.plLeftMean + rowEnd
+                + rowStart + "Right Posterolateral Mean" + rowMid + this.plRightMean + rowEnd
+                        +"</table>";
+                /*
+                this.antRightMean = Math.max(Math.max(antR1, antR2), antR3);
+        this.antLeftMean = Math.max(Math.max(antL1, antL2), antL3);
+        this.pmRightMean = Math.max(Math.max(pmR1, pmR2), pmR3);
+        this.pmLeftMean = Math.max(Math.max(pmL1, pmL2), pmL3);
+        this.plRightMean = Math.max(Math.max(plR1, plR2), plR3);
+        this.plLeftMean = Math.max(Math.max(plL1, plL2), plL3);        
+                */
+        return html;
+    }
     //empty constructor
     public YBalance() {
 

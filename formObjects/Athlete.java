@@ -33,7 +33,32 @@ public class Athlete {
     
     
     
-    
+ public String toHTML(){
+     String rowStart = "<tr><td>";
+     String rowMid = "</td><td>";
+     String rowEnd = "</td></tr>";
+     
+     String html = "</br></br></br><table><tr><th>Bowler Information</th><th></th></tr>";
+     html+= rowStart + "Name" + rowMid + this.name + rowEnd
+             + rowStart + "Date" + rowMid + this.date + rowEnd
+             + rowStart + "Date of Birth" + rowMid + this.dateOfBirth + rowEnd
+             + rowStart + "Address" + rowMid + this.address + rowEnd
+             + rowStart + "City" + rowMid + this.city + rowEnd
+             + rowStart + "State" + rowMid + this.state + rowEnd
+             + rowStart + "Zip Code" + rowMid + this.zip + rowEnd
+             + rowStart + "Phone" + rowMid + this.phone + rowEnd
+             + rowStart + "School" + rowMid + this.school + rowEnd
+             + rowStart + "Height" + rowMid + this.height + rowEnd
+             + rowStart + "Weight" + rowMid + this.weight + rowEnd
+             + rowStart + "Age" + rowMid + this.age + rowEnd
+             + rowStart + "Sex" + rowMid + this.gender + rowEnd
+             + rowStart + "Hand Dominance" + rowMid + this.handDominance + rowEnd
+             + rowStart + "Leg Dominance" + rowMid + this.legDominance + rowEnd
+             + rowStart + "Primary Sport" + rowMid + this.primarySport + rowEnd
+             + rowStart + "Primary Position" + rowMid + this.primaryPosition + rowEnd + "</table>";
+     return html;
+ }
+ 
  public Athlete(String name,String date,String dateOfBirth,String address,String city,String state,int zip,String phone,String school,double height,double weight,int age,String gender,String handDominance,String legDominance,String primarySport,String primaryPosition){
         this.name = name;
         this.date = date;
