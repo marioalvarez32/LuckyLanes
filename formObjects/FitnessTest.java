@@ -141,8 +141,56 @@ public class FitnessTest {
     }
     
     public String toHTML(){
+        String rowStart = "<tr><td>";
+        String rowMid = "</td><td>";
+        String rowEnd = "</td></tr>";
         String html = "<br><br><br><h2>Functional Movement Screen</h2>"
-                + "<table><tr><th>";
+                + "<table><tr><th>Vitals</th><th></th></tr>"
+                + "<tr><td>Age</td><td>" + this.age + "</td></tr>"
+                +"<tr><td>Resting HeartRate</td><td>"+restingHR1+"</td></tr>"
+                +"<tr><td>Resting HeartRate 1:</td><td>"+this.restingHR1+"</td></tr>"
+                +"<tr><td>Resting HeartRate 2:</td><td>"+this.restingHR2+"</td></tr>"
+                +rowStart +"Height:" + rowMid + this.height + rowEnd
+                +rowStart + "Body Weight" + rowMid + this.bodyWeight + rowEnd
+                +rowStart + "Body Mass Index (BMI)" + rowMid + this.bmi + rowEnd
+                + rowStart + "Peak Flow" + rowMid + this.peakFlow + rowEnd
+                + "</table>"+"<table><tr><th>Anthropometrics</th><th></th></tr>"
+                + rowStart + "Anterior 1" + rowMid + this.ant1 + rowEnd
+                + rowStart + "Anterior 2" + rowMid + this.ant2 + rowEnd
+                + rowStart + "Anterior Average" + rowMid + this.antAvg + rowEnd
+                + rowStart + "Waist Circumference" + rowMid + this.waistCirc + rowEnd
+                + rowStart + "Hip Circumference" + rowMid + this.hipCirc + rowEnd
+                + rowStart + "Mid Thigh Circumference " + rowMid + this.midThighCirc + rowEnd
+                + rowStart + "Flexed Arm Circumference" + rowMid + this.flexArmCirc + rowEnd
+                + rowStart + "Hamstring CSA" + rowMid + this.hamCSA + rowEnd
+                + rowStart + "Quadriceps CSA" + rowMid + this.quadCSA + rowEnd
+                + rowStart + "Total Thigh CSA" + rowMid + this.totalThighCSA + rowEnd
+                + "</table><table><tr><th>Sit & Reach</th><th></th></tr>"
+                + rowStart + "Start Distance" + rowMid + this.startDist + rowEnd
+                + rowStart + "Ending Distance 1" + rowMid + this.endDist1 + rowEnd
+                + rowStart + "Ending Distance 2" + rowMid + this.endDist2 + rowEnd
+                + rowStart + "Ending Distance 3" + rowMid + this.endDist3 + rowEnd
+                + rowStart + "Final Distance" + rowMid + this.finalDist + rowEnd
+                + "</table>";//<table><tr><th></th><th></th></tr>";
+        
+                
+        /*
+            this.hgR1 = hgR1;
+        this.hgR2 = hgR2;
+        this.hgR3 = hgR3;
+        this.hgL1 = hgL1;
+        this.hgL2 = hgL2;
+        this.hgL3 = hgL3;
+        this.proneTime = proneTime;
+        this.kneeExtForceR1 = kneeExtForceR1;
+        this.kneeExtForceR2 = kneeExtForceR2;
+        this.kneeExtForceL1 = kneeExtForceL1;
+        this.kneeExtForceL2 = kneeExtForceL2;
+        this.jh1 = jh1;
+        this.jh2 = jh2;
+        this.medPass1 = medPass1;
+        this.medPass2 = medPass2;
+        */
         return html;
     }
 
