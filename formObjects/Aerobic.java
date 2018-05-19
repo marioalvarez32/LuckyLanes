@@ -20,6 +20,13 @@ public class Aerobic {
     private String sex, benchRating;
    
     //constructor takes an integer age, and string sex.
+
+    /**
+     *
+     * @param age
+     * @param sex
+     * @throws FileNotFoundException
+     */
     public Aerobic(int age, String sex) throws FileNotFoundException{
         this.age = age;
         if(sex == "male") this.sexInt = 1;
@@ -27,16 +34,33 @@ public class Aerobic {
     }
     
     //sets the v02max for the benchtest.(15 second test)
+
+    /**
+     *
+     * @param heartRate
+     */
     public void setBench(int heartRate){
         this.v02bench = (-0.9675 * heartRate) + 76.710;
     }
     
     //returns the v02max for the benchtest.
+
+    /**
+     *
+     * @return
+     */
     public double getBench(){
         return this.v02bench;
     }
     
     //determines the bench rating. Ex: poor, very poor, excellent, etc.
+
+    /**
+     *
+     * @param heartRate
+     * @param fileName
+     * @throws FileNotFoundException
+     */
     public void setBenchRating(int heartRate, String fileName) throws FileNotFoundException{
         int[] ageRange = {18, 26, 36, 46, 56, 65};
         int ageGroup = this.calcIndex(this.age, ageRange);
@@ -53,11 +77,23 @@ public class Aerobic {
     }
     
     //returns the rating, Ex: Excellent, Good, etc.
+
+    /**
+     *
+     * @return
+     */
     public String getBenchRating(){
         return this.benchRating;
     }
     
     //sets the v02max for the RockPort test
+
+    /**
+     *
+     * @param weight
+     * @param walkTime
+     * @param heartRate
+     */
     public void setRockport(double weight, double walkTime, int heartRate){
         double a, b, c, d, e;
         if(this.age <= 25){
@@ -78,16 +114,31 @@ public class Aerobic {
     
     
     //returns the v02max for the rockport test
+
+    /**
+     *
+     * @return
+     */
     public double getRockport(){
         return this.v02Rockport;
     }
     
     //calculates 12 min walk in meters
+
+    /**
+     *
+     * @param distance
+     */
     public void set12minWalk(double distance){
         this.v02walk = (distance - 504.9)/44.73;
     }
     
     //returns the v02max for the 12 min walk test
+
+    /**
+     *
+     * @return
+     */
     public double get12minWalk(){
         return this.v02walk;
     }

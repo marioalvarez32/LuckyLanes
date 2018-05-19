@@ -6,14 +6,10 @@
 package main.java.controllers;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
 import java.util.Optional;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,9 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -71,7 +65,7 @@ public class AdminController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         Trace.createFile();
     }
-
+    //Creates an alert when the program is loaded to let the user know if a database is laoded.
     private void showDatabaseAlert() {
         imgDatabase.setImage(new Image("/main/resources/icons/dbDisconnected.png"));
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -105,14 +99,19 @@ public class AdminController implements Initializable {
         this.app = app;
     }
 
+    /**
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-
-    public void test() {
-
-    }
-
+    
+    /**
+     * Used to test the connection of a database using the properites file. 
+     * If the database is loaded, an icon showing success will appear. 
+     * Otherwise it will change to red "X".
+     */
     public void loadDatabase() {
         imgDatabase.setVisible(true);
         String url = Database.loadProperties();
@@ -136,11 +135,19 @@ public class AdminController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param e
+     */
     @FXML
     public void testThis(ActionEvent e) {
 
     }
 
+    /**
+     *  Creates a database in the location specified by the user. 
+     * @param e
+     */
     @FXML
     public void createDatabase(ActionEvent e) {
         FileChooser fileChooser = new FileChooser();
@@ -156,6 +163,10 @@ public class AdminController implements Initializable {
 
     }
 
+    /**
+     * Opens the database specified by the user. 
+     * @param e
+     */
     @FXML
     public void openDatabase(ActionEvent e) {
         FileChooser fileChooser = new FileChooser();
@@ -167,7 +178,11 @@ public class AdminController implements Initializable {
             loadDatabase();
         }
     }
-
+    /**
+     * This is an injected method used by JAVAFX,
+     * It creates a new stage to display the form to add new athletes.
+     * @param event 
+     */
     @FXML
     private void showNewAthlete(ActionEvent event) {
         String fxml = "/main/resources/view/newAthlete.fxml";
@@ -203,7 +218,11 @@ public class AdminController implements Initializable {
             e.printStackTrace();
         }
     }
-
+    /**
+     * This is an injected method used by JAVAFX,
+     * It creates a new stage to display the search functionality.
+     * @param event 
+     */
     @FXML
     private void showSearch(ActionEvent event) {
         String fxml = "/main/resources/view/Search.fxml";

@@ -32,7 +32,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import java.text.DecimalFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Optional;
@@ -41,10 +40,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.WindowEvent;
 import main.formObjects.YBalance;
@@ -61,6 +58,9 @@ import main.java.scene.control.TextFieldRequired;
  * It shows the forms needed to register a new bowler. Athlete information, FMS
  * Score Sheet, etc.
  *
+ * 
+ * This class requires refacotring. It contains most of the data used for this program 
+ * 
  * @author Mario
  */
 public class BowlerController implements Initializable {
@@ -356,7 +356,11 @@ public class BowlerController implements Initializable {
          */
 
     }
-
+    /**
+     * Initializes all the required fields for the demographics tabs. 
+     * It sets all the regex expressions for the textfields to avoid invalid input.
+     * 
+     */
     private void initializeDemographics() {
         ObservableList<String> options = FXCollections.observableArrayList("Wisconsin");
         cbState.getItems().setAll(options);
@@ -382,7 +386,10 @@ public class BowlerController implements Initializable {
         txfWeight.setRequired(true);
         txfHeight.setRequired(true);
     }
-
+    /**
+     *
+     * Initializes regex expressions and all the required textfields are set to true.
+     */
     private void initializeYBalance() {
         //Initialize all YBalanace textfield boxes to be required and to validate to only digits.
 
@@ -391,7 +398,10 @@ public class BowlerController implements Initializable {
             txf.setRequired(true);
         }
     }
-
+    /**
+     *
+     * Initializes regex expressions and all the required textfields are set to true.
+     */
     private void initializeFMS() {
         //Initialize all YBalanace textfield boxes to be required and to validate to only digits.
 
@@ -401,10 +411,19 @@ public class BowlerController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Creates event handlers to provide a better user experience:
+     * It binds properties like the title of the form to the name of the user. 
+     * 
+     */
     public void createListeners() {
 
         //validateTabs();
@@ -507,6 +526,10 @@ public class BowlerController implements Initializable {
      * Auxiliary methods
      * ************************************************************************
      */
+    /**
+     *
+     * Returns maxValue of three strings
+     */
     private String maxValue(String t1, String t2, String t3) {
         double a, b, c;
         try {
@@ -524,7 +547,10 @@ public class BowlerController implements Initializable {
             return "";
         }
     }
-
+    /**
+     *
+     * Returns minimum value of three strings
+     */
     private String minValue(String t1, String t2) {
         double a, b;
         try {
@@ -540,7 +566,10 @@ public class BowlerController implements Initializable {
             return "";
         }
     }
-
+    /**
+     *
+     * Returns the difference between two strings.
+     */
     private String difValue(String t1, String t2) {
         double a, b;
         try {
@@ -551,7 +580,10 @@ public class BowlerController implements Initializable {
             return "";
         }
     }
-
+    /**
+     *
+     * Returns the composite score used in YBalance between two strings.
+     */
     private String compositeValue(String rightLimbLength, String t1, String t2, String t3) {
         double a, b, c, dblRightLimbLength;
         try {
@@ -566,7 +598,10 @@ public class BowlerController implements Initializable {
             return "";
         }
     }
-
+    /**
+     *
+     * Event Handlers that calculate the values when the user enters any information.
+     */
     private void setYBalanceHandlers() {
         //Composite Scores
 
@@ -959,6 +994,11 @@ public class BowlerController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param root
+     * @return
+     */
     public static ArrayList<TextFieldRequired> getAllTextFieldRequired(Parent root) {
         ArrayList<TextFieldRequired> nodes = new ArrayList<>();
         addAllTextFIeldRequired(root, nodes);
@@ -975,7 +1015,11 @@ public class BowlerController implements Initializable {
             }
         }
     }
-
+    /**
+     *
+     *Validates allt he textfields in the tab and returns true ifk
+     * if the information entered is correct.
+     */
     private boolean validateDemographics() {
         boolean flag = true;
         Parent root = (Parent) tabDemographics.getContent();
@@ -1005,7 +1049,11 @@ public class BowlerController implements Initializable {
          */
         return flag;
     }
-
+/**
+     *
+     *Validates allt he textfields in the tab and returns true ifk
+     * if the information entered is correct.
+     */
     private boolean validateTabYBalanceTest() {
         boolean flag = true;
 
@@ -1036,7 +1084,11 @@ public class BowlerController implements Initializable {
         }*/
         return flag;
     }
-
+/**
+     *
+     *Validates allt he textfields in the tab and returns true ifk
+     * if the information entered is correct.
+     */ 
     private boolean validateFMS() {
         boolean flag = true;
 
@@ -1057,7 +1109,11 @@ public class BowlerController implements Initializable {
         }
         return flag;
     }
-
+/**
+     *
+     *Validates all the tabs and lets the user save the bolwer, if all the 
+     * tabs are validated correctly.
+     */
     private boolean validateTabs(int index) {
         if (index == -1) {
             index = selectionModel.getSelectedIndex();
@@ -1092,7 +1148,7 @@ public class BowlerController implements Initializable {
 
         return flag;
     }
-
+    
     private boolean validateTabs() {
 
         if (validateDemographics() && validateTabYBalanceTest() && validateFMS()) {

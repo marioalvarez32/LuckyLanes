@@ -14,8 +14,9 @@ import java.io.PrintWriter;
 import java.io.Writer;
 
 /**
- *
- * @author HomePC
+ * This class was used to debug the deployed program. 
+ * It creates a medium to print to a text file errors or steps in a method. 
+ * @author Mario
  */
 public class Trace {
     static File file;

@@ -24,7 +24,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import main.java.LuckyLanes;
 
-/**
+/**@deprecated 
  * FXML Controller class
  *
  * This class handles the interaction from the user in the Administration scene.

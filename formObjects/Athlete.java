@@ -31,9 +31,11 @@ public class Athlete {
     private String primarySport;
     private String primaryPosition;
     
-    
-    
- public String toHTML(){
+    /**
+     * Creates an html table representation of this object. 
+     * @return
+     */
+    public String toHTML(){
      String rowStart = "<tr><td>";
      String rowMid = "</td><td>";
      String rowEnd = "</td></tr>";
@@ -59,7 +61,28 @@ public class Athlete {
      return html;
  }
  
- public Athlete(String name,String date,String dateOfBirth,String address,String city,String state,int zip,String phone,String school,double height,double weight,int age,String gender,String handDominance,String legDominance,String primarySport,String primaryPosition){
+    /**
+     * Constructor of the Athlete class. 
+     * 
+     * @param name
+     * @param date
+     * @param dateOfBirth
+     * @param address
+     * @param city
+     * @param state
+     * @param zip
+     * @param phone
+     * @param school
+     * @param height
+     * @param weight
+     * @param age
+     * @param gender
+     * @param handDominance
+     * @param legDominance
+     * @param primarySport
+     * @param primaryPosition
+     */
+    public Athlete(String name,String date,String dateOfBirth,String address,String city,String state,int zip,String phone,String school,double height,double weight,int age,String gender,String handDominance,String legDominance,String primarySport,String primaryPosition){
         this.name = name;
         this.date = date;
         this.dateOfBirth = dateOfBirth;
@@ -79,6 +102,10 @@ public class Athlete {
         this.primaryPosition = primaryPosition;
  
     }
+
+    /**
+     *
+     */
     public Athlete(){
         this.name = "";
         this.date = null;
@@ -341,7 +368,9 @@ public class Athlete {
     }
 
     /**
-     * 
+     * Adds a row to the database class. 
+     * It is used in conjunction with the other forms, since the value for 
+     * each table is autoincremented. 
      */
     public void addRow() {
         String sql;

@@ -45,6 +45,11 @@ public class NewAthleteController implements Initializable {
         // TODO
         
     }    
+
+    /**
+     *
+     * @param stage
+     */
     public void setStage(Stage stage){
         this.stage=stage;
     }

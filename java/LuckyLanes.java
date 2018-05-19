@@ -44,6 +44,7 @@ public class LuckyLanes extends Application {
         System.out.println(ar.getBenchRating());
         */
         try {
+            
             //Sets the data field to the primaryStage of the application.
             stage = primaryStage;
             stage.setTitle("FXML Login");

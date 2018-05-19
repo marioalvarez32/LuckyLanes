@@ -12,15 +12,20 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- *
+ *This class is used to generate html files using the objects the user selects.
+ * It creates a directory and then saves all the docs representing the 
+ * bowlers.
  * @author Mario
  */
 public class HTML {
+    
     static File file;
     static String text;
     static String directory;
+    
+    //Creates a direcotry to save the files
     public static void mkdir(){
-        directory ="FMS Files";
+        directory ="Output Files";
         file = new File(directory);
         
         if (!file.exists()) {
@@ -31,6 +36,7 @@ public class HTML {
             }
         }
     }
+    //Creates a file to be able to write to it. 
     public static void createFile(String name){
         
         try {
@@ -48,12 +54,15 @@ public class HTML {
 	        e.printStackTrace();
 	  }
     }
+    //Open tags for the html file
     public static void open(){
         text ="<!DOCTYPE html><html><head><style>table {font-family: arial, sans-serif;border-collapse: collapse;width: 100%;}td, th {border: 1px solid #dddddd;text-align: left;padding: 8px;}tr:nth-child(even) {background-color: #dddddd;}</style></head><body><H1>Lucky Lanes</H1>";
     }
+    //Closing tags for the html file
     public static void close(){
         text+="</body></html>";
     }
+    //Used to print the html report for each bowler. 
     public static void print(String html) {
         PrintWriter out = null;
         try {

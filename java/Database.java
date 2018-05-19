@@ -182,7 +182,7 @@ public class Database {
             state.execute(sql);
             System.out.println("Created a Fitness Data table.");
 
-            //more Nicoles muahahah
+            /*more Nicoles muahahah
             for (int i = 0; i < 10000; i++) {
                 sql = "INSERT INTO ATHLETE VALUES (null, 'Nicole', '2/3/19', '12/11/1994',"
                         + "'a box', 'whitewater', 'wi', 53045, '208-5039', 'UW-Whitewater',"
@@ -193,6 +193,7 @@ public class Database {
                 sql = "INSERT INTO FMS VALUES (null,3,3,2,2,2,3,3,3,2,3,2,false,false,3,1,1,3,3,false,2,3,2,false,14);";
                 state.executeUpdate(sql);
             }
+            */
 
             sql = "SELECT name, school, zip FROM ATHLETE;";
             ResultSet rs = state.executeQuery(sql);
@@ -246,21 +247,21 @@ public class Database {
 
     public static ResultSet searchQuery(String sql) {
         // connection to database
-        connect();
+        
         ResultSet rs = null;
 
         try {
             // call the sql query, place in RS.
             state = conn.createStatement();
             rs = state.executeQuery(sql);
-
+            // close the database
+            //close();
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         return rs;
     }
-
     public static void saveProperties(String url) {
         Properties prop = new Properties();
         OutputStream output = null;

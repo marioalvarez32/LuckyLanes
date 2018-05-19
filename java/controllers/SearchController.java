@@ -11,15 +11,12 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -34,7 +31,6 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import main.java.Database;
 import main.java.Report;
@@ -77,6 +73,8 @@ public class SearchController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -91,6 +89,10 @@ public class SearchController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param e
+     */
     @FXML
     public void printAllReport(ActionEvent e) {
         if (table.getItems().size() == 0) {
@@ -141,6 +143,10 @@ public class SearchController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param e
+     */
     @FXML
     public void printSelectedReport(ActionEvent e) {
         if (table.getSelectionModel().getSelectedItems().isEmpty()) {
@@ -190,6 +196,10 @@ public class SearchController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param e
+     */
     @FXML
     public void buildData(ActionEvent e) {
 
@@ -216,14 +226,16 @@ public class SearchController implements Initializable {
                 System.out.print("fasldfkj;asldfkj");
                 //BEHOLD
                 progressIndicator.setVisible(true);//FUCK YES!!!!
-
-                ResultSet rs = Database.searchQuery(SQL);
+                
                 //Platform.runlater is used to update an UI control inside a different thread.
+                Database.connect();
+                ResultSet rs = Database.searchQuery(SQL);
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
                         data = FXCollections.observableArrayList();
                         try {
+                            
                             // go through the columns and add them
                             for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
                                 final int j = i;
@@ -252,6 +264,7 @@ public class SearchController implements Initializable {
 
                             // add to the tableview
                             table.setItems(data);
+                            Database.close();
                         } catch (SQLException ex) {
 
                             //Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
@@ -259,6 +272,7 @@ public class SearchController implements Initializable {
 
                     }
                 });
+                
                 return null;
             }
         };

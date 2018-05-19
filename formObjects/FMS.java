@@ -36,6 +36,33 @@ public class FMS {
             legRaiseComment, trunkStabilityComment,extensionClearingComment,rotaryComment,flexionComment;
     /**
      *
+     * @param deepSquatRaw
+     * @param deepSquatRaw
+     * @param hurdleStepRawL
+     * @param hurdleStepRawR
+     * @param hurdleStepRawR
+     * @param inlineLoungeRawL
+     * @param inlineLoungeRawR
+     * @param shoulderMobilityRawL
+     * @param shoulderMobilityRawR
+     * @param shoulderMobilityRawR
+     * @param shoulderClearingR
+     * @param trunkStabilityRaw
+     * @param shoulderClearingL
+     * @param shoulderClearingR
+     * @param rotaryRawR
+     * @param legRaiseRawL
+     * @param legRaiseRawR
+     * @param legRaiseRawL
+     * @param legRaiseRawR
+     * @param trunkStabilityRaw
+     * @param extensionClearing
+     * @param rotaryRawL
+     * @param rotaryRawL
+     * @param rotaryRawR
+     * @param total
+     * @param flexionClearing
+     * @param total
      */
     public FMS(int deepSquatRaw, int hurdleStepRawL, int hurdleStepRawR, int inlineLoungeRawL, int inlineLoungeRawR,
             int shoulderMobilityRawL, int shoulderMobilityRawR,boolean shoulderClearingL,boolean shoulderClearingR,
@@ -81,6 +108,19 @@ public class FMS {
         this.flexionComment ="none";// flexionComment;
     }
     
+    /**
+     *
+     * @param deepSquatComment
+     * @param hurdleStepComment
+     * @param inlineLoungeComment
+     * @param shoulderMobilityComment
+     * @param shoulderClearingComment
+     * @param legRaiseComment
+     * @param trunkStabilityComment
+     * @param extensionClearingComment
+     * @param rotaryComment
+     * @param flexionComment
+     */
     public void setComments(String deepSquatComment, String hurdleStepComment, String inlineLoungeComment, String shoulderMobilityComment, String shoulderClearingComment,
             String legRaiseComment, String trunkStabilityComment, String extensionClearingComment, String rotaryComment, String flexionComment) {
 
@@ -96,8 +136,11 @@ public class FMS {
         this.flexionComment ="";// flexionComment;
     }
     
-    
-    
+    /**
+     *Adds a row to the database class. 
+     * It is used in conjunction with the other forms, since the value for 
+     * each table is autoincremented. 
+     */
     public void addRow() {
         String sql;
             sql = "INSERT INTO FMS VALUES ("
@@ -115,6 +158,10 @@ public class FMS {
         Database.executeUpdate(sql);
     }
     
+    /**
+     *
+     * @return
+     */
     public String toHTML(){
         String html = "<br><br><br><h2>Functional Movement Screen</h2>"
                 + "<table>"

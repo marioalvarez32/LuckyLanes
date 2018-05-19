@@ -22,6 +22,29 @@ public class YBalance {
     private double compositeRight;
 
     //constructor that takes in all required fields.
+
+    /**
+     *
+     * @param rightLimbLength
+     * @param antR1
+     * @param antR2
+     * @param antR3
+     * @param antL1
+     * @param antL2
+     * @param antL3
+     * @param pmR1
+     * @param pmR2
+     * @param pmR3
+     * @param pmL1
+     * @param pmL2
+     * @param pmL3
+     * @param plR1
+     * @param plR2
+     * @param plR3
+     * @param plL1
+     * @param plL2
+     * @param plL3
+     */
     public YBalance(double rightLimbLength, double antR1, double antR2, double antR3, double antL1, double antL2, double antL3, double pmR1, double pmR2, double pmR3,
             double pmL1, double pmL2, double pmL3, double plR1, double plR2, double plR3, double plL1, double plL2, double plL3) {
         this.pmL1=pmL1;
@@ -54,6 +77,10 @@ public class YBalance {
         this.compositeRight=((this.antRightMean + this.pmRightMean + this.plRightMean) / (3 * this.rightLimbLength)) * 100;
     }
 
+    /**
+     *
+     * @return
+     */
     public String toHTML(){
         String rowStart = "<tr><td>";
         String rowMid = "</td><td>";
@@ -96,98 +123,207 @@ public class YBalance {
         return html;
     }
     //empty constructor
+
+    /**
+     *
+     */
     public YBalance() {
 
     }
 
     //sets the rightLimbLength in cm
+
+    /**
+     *
+     * @param rightLimbLength
+     */
     public void setRightLimbLength(double rightLimbLength) {
         this.rightLimbLength = rightLimbLength;
     }
 
     //takes in three measurements for right anterior and sets the mean
+
+    /**
+     *
+     * @param ant1
+     * @param ant2
+     * @param ant3
+     */
     public void setRightAntMean(double ant1, double ant2, double ant3) {
         this.antRightMean = (ant1 + ant2 + ant3) / 3.0;
     }
 
     //takes in three measurements for left anterior and sets the mean
+
+    /**
+     *
+     * @param ant1
+     * @param ant2
+     * @param ant3
+     */
     public void setLeftAntMean(double ant1, double ant2, double ant3) {
         this.antLeftMean = (ant1 + ant2 + ant3) / 3.0;
     }
 
     //takes in 3 measurements for posteromedial and sets the mean
+
+    /**
+     *
+     * @param num1
+     * @param num2
+     * @param num3
+     */
     public void setPmRightMean(double num1, double num2, double num3) {
         this.pmRightMean = (num1 + num2 + num3) / 3.0;
     }
 
     //takes in 3 measurements for posteromedial and sets the mean
+
+    /**
+     *
+     * @param num1
+     * @param num2
+     * @param num3
+     */
     public void setPmLeftMean(double num1, double num2, double num3) {
         this.pmLeftMean = (num1 + num2 + num3) / 3.0;
     }
 
     //takes in 3 measurements for posteromedial and sets the mean
+
+    /**
+     *
+     * @param num1
+     * @param num2
+     * @param num3
+     */
     public void setPLRightMean(double num1, double num2, double num3) {
         this.plRightMean = (num1 + num2 + num3) / 3.0;
     }
 
     //takes in 3 measurements for posteromedial and sets the mean
+
+    /**
+     *
+     * @param num1
+     * @param num2
+     * @param num3
+     */
     public void setPLLeftMean(double num1, double num2, double num3) {
         this.plLeftMean = (num1 + num2 + num3) / 3.0;
     }
 
     //returns anterior difference.
+
+    /**
+     *
+     * @return
+     */
     public double getAntDiff() {
         return this.antRightMean - this.antLeftMean;
     }
 
     //returns posteromedial difference.
+
+    /**
+     *
+     * @return
+     */
     public double getPmDiff() {
         return this.pmRightMean - this.pmLeftMean;
     }
 
     //returns posterolateral difference.
+
+    /**
+     *
+     * @return
+     */
     public double getPlDiff() {
         return this.plRightMean - this.plLeftMean;
     }
 
     //returns composite right score
+
+    /**
+     *
+     * @return
+     */
     public double getRightScore() {
         return this.pmRightMean + this.plRightMean + this.antRightMean;
     }
 
     //returns composite left score
+
+    /**
+     *
+     * @return
+     */
     public double getLeftScore() {
         return this.pmLeftMean + this.plLeftMean + this.antLeftMean;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getRightLimbLength() {
         return rightLimbLength;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getAntRightMean() {
         return antRightMean;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getAntLeftMean() {
         return antLeftMean;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getPmRightMean() {
         return pmRightMean;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getPmLeftMean() {
         return pmLeftMean;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getPlRightMean() {
         return plRightMean;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getPlLeftMean() {
         return plLeftMean;
     }
    
+    /**
+     *Adds a row to the database class. 
+     * It is used in conjunction with the other forms, since the value for 
+     * each table is autoincremented. 
+     */
     public void addRow() {
         String sql;
             sql = "INSERT INTO YBALANCE VALUES ("

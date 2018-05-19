@@ -11,15 +11,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- *
+ *@deprecated 
  * @author Nicholas Bentzen
  * This class reads in a file of numbers associated with the range of heart rates
  * within a given ranking: Excellent, very good, good, etc.
+ * Not implemented.
  */
 public class HeartBeatFileReader {
     private ArrayList<ArrayList<Integer>> list;
     
     //constructor
+
+    /**
+     *
+     * @param fileName
+     * @throws FileNotFoundException
+     */
     public HeartBeatFileReader(String fileName) throws FileNotFoundException{
         this.list = new ArrayList<ArrayList<Integer>>();
         Scanner fileScanner = new Scanner(new File(fileName));
@@ -39,6 +46,12 @@ public class HeartBeatFileReader {
     }
     
     //returns the array of integers
+
+    /**
+     *
+     * @param index
+     * @return
+     */
     public int[] getArr(int index){
         ArrayList<Integer> list = this.list.get(index);
         int[] arr = new int[list.size()];
